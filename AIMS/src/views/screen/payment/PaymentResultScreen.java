@@ -1,4 +1,4 @@
-package screen.payment;
+package views.screen.payment;
 
 public class PaymentResultScreen {
 

@@ -1,4 +1,4 @@
-package view.screen.cart;
+package views.screen.cart;
 
 import controller.PlaceOrderController;
 import views.screen.BaseScreen;
