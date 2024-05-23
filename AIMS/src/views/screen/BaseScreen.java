@@ -17,6 +17,4 @@ public class BaseScreen {
 	public void setController(BaseController controller) {
 		this.controller = controller;
 	}
-	
-	
 }
