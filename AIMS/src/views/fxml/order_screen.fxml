@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.shipping.ShippingScreen">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="554.0" spacing="16.0" HBox.hgrow="ALWAYS">
          <children>
@@ -112,7 +112,7 @@
                   <ChoiceBox fx:id="selectCity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <VBox spacing="12.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <RadioButton fx:id="radioRushOrder" mnemonicParsing="false" selected="true" text="Rush Order">
+                        <RadioButton fx:id="radioRushOrder" mnemonicParsing="false" onAction="#deliveryCost" selected="true" text="Rush Order">
                            <font>
                               <Font name="FreeSans" size="18.0" />
                            </font>
@@ -120,7 +120,7 @@
                               <ToggleGroup fx:id="radioDeliInfo" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="radioNormalOrder" mnemonicParsing="false" selected="true" text="Normal Order" toggleGroup="$radioDeliInfo">
+                        <RadioButton fx:id="radioNormalOrder" mnemonicParsing="false" onAction="#deliveryCost" selected="true" text="Normal Order" toggleGroup="$radioDeliInfo">
                            <font>
                               <Font name="FreeSans" size="18.0" />
                            </font>
@@ -138,7 +138,7 @@
                   <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                </padding>
             </GridPane>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="320.0" style="-fx-background-color: #4384da; -fx-background-radius: 25px;" text="Confirm" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#handleConfirm" prefHeight="50.0" prefWidth="320.0" style="-fx-background-color: #4384da; -fx-background-radius: 25px;" text="Confirm" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="FreeSans Bold" size="18.0" />
                </font>

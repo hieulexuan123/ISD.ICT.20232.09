@@ -6,7 +6,12 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.order.Order;
 import entity.shipping.DeliveryInfo;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import views.screen.BaseScreen;
+import views.screen.invoice.InvoiceScreen;
 
 public class PlaceOrderController extends BaseController{
 	private static PlaceOrderController controllerInstance;
@@ -29,21 +34,44 @@ public class PlaceOrderController extends BaseController{
 		//call shipping screen
 	}
 	
-	public void validateDeliveryInfo(DeliveryInfo info) {
-		//info.validateInfo()
+	public boolean validateDeliveryInfo(DeliveryInfo info) throws Exception {
+		if (info.validateInfo()) {
+			
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
-	public void validateRushShipping(String province, List<CartMedia> cartMediaList) throws Exception{
+	public void validateRushShipping(String city, List<CartMedia> cartMediaList) throws Exception{
 		
     }
 	
-	public int calculateShippingFee(String province, List<CartMedia> cartMediaList, boolean isRush) {
+	public int calculateShippingFee(String city, List<CartMedia> cartMediaList, boolean isRush) {
 		return 0;
 	}
 	
 	public void requestInvoice(Order order) {
-		//call invoice screen
-	}
+        try {
+            // Load the InvoiceScreen.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("views/fxml/invoice_screen.fxml"));
+            Parent root = loader.load();
+            
+            // Get the controller instance
+            InvoiceScreen invoiceController = loader.getController();
+
+            // Set up the stage and scene
+            Stage invoiceStage = new Stage();
+            invoiceStage.setTitle("Invoice");
+            invoiceStage.setScene(new Scene(root));
+
+            // Show the invoice screen
+            invoiceStage.show();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception appropriately
+        }
+    }
 	
 	public void payOrder() {
 		//call payment screen
