@@ -49,7 +49,11 @@ public class PlaceOrderController extends BaseController{
     }
 	
 	public int calculateShippingFee(String city, List<CartMedia> cartMediaList, boolean isRush) {
-		return 0;
+		if (isRush) {
+			return 200;
+		}
+		else {
+			return 100;		}
 	}
 	
 	public void requestInvoice(Order order) {
