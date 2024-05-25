@@ -12,4 +12,6 @@ public class Order {
 	private int costVAT;
 	private int totalCost;
 	private DeliveryInfo info;
+	
+	
 }

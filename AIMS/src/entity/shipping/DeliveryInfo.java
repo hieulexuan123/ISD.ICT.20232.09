@@ -4,7 +4,7 @@ public class DeliveryInfo {
 	private String email;
     private String name;
     private String phone;
-    private String province;
+    private String city;
     private String address;
     private String normalInstruction;
     private boolean isRush;
