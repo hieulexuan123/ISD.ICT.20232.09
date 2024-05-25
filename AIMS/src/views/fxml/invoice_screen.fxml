@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.screen.invoice.InvoiceScreen">
    <left>
       <GridPane alignment="CENTER" prefHeight="433.0" prefWidth="640.0">
         <columnConstraints>
@@ -130,7 +129,7 @@
                   </Label>
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #4384da; -fx-background-radius: 25px;" text="Confirm Order" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleConfirmOrder" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #4384da; -fx-background-radius: 25px;" text="Confirm Order" textFill="WHITE">
                <font>
                   <Font name="FreeSans Bold" size="18.0" />
                </font>
