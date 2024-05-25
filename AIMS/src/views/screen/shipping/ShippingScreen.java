@@ -9,8 +9,13 @@ import views.screen.BaseScreen;
 public class ShippingScreen extends BaseScreen{
 	private List<CartMedia> cartMediaList;
 	private boolean isRush;
+	double costNoVAT = 0;
+	double costVAT = 0;
 	
-	public ShippingScreen(List<CartMedia> cartMediaList, int costNoVAT, int costVAT) {
+	public ShippingScreen(List<CartMedia> cartMediaList, double costNoVAT, double costVAT) {
+		this.cartMediaList = cartMediaList;
+		this.costNoVAT = costNoVAT;
+		this.costVAT = costVAT;
 		
 	}
 	

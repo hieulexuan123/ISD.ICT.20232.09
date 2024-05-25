@@ -10,7 +10,11 @@ public class Media {
     protected boolean isSupportRushShipping;
     protected int weight;
 
-    
+    public Media(int id, String title, int price, int quantity) {
+    	this.id = id;
+    	this.title = title;
+    	this.quantity = quantity;
+    }
     public String getTitle() {
         return title;
     }

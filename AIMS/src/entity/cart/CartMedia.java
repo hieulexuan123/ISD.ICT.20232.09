@@ -5,6 +5,11 @@ import entity.media.Media;
 public class CartMedia {
 	private Media media;
     private int quantity;
+    
+    public CartMedia(Media m, int quantity) {
+    	media = m;
+    	this.quantity = quantity;
+    }
 
     public int getQuantity() {
         return quantity;
