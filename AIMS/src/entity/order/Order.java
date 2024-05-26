@@ -7,12 +7,12 @@ import entity.shipping.DeliveryInfo;
 
 public class Order {
 	private List<CartMedia> cartMediaList;
-	private int shippingFee;
-	private int costNoVAT;
-	private int costVAT;
-	private int totalCost;
+	private double shippingFee;
+	private double costNoVAT;
+	private double costVAT;
+	private double totalCost;
 	private DeliveryInfo info;
-	public Order(List<CartMedia> cartMediaList, int shippingFee, int costNoVAT, int costVAT, int totalCost,
+	public Order(List<CartMedia> cartMediaList, double shippingFee, double costNoVAT, double costVAT, double totalCost,
 			DeliveryInfo info) {
 		super();
 		this.cartMediaList = cartMediaList;
@@ -28,28 +28,28 @@ public class Order {
 	public void setCartMediaList(List<CartMedia> cartMediaList) {
 		this.cartMediaList = cartMediaList;
 	}
-	public int getShippingFee() {
+	public double getShippingFee() {
 		return shippingFee;
 	}
 	public void setShippingFee(int shippingFee) {
 		this.shippingFee = shippingFee;
 	}
-	public int getCostNoVAT() {
+	public double getCostNoVAT() {
 		return costNoVAT;
 	}
-	public void setCostNoVAT(int costNoVAT) {
+	public void setCostNoVAT(double costNoVAT) {
 		this.costNoVAT = costNoVAT;
 	}
-	public int getCostVAT() {
+	public double getCostVAT() {
 		return costVAT;
 	}
-	public void setCostVAT(int costVAT) {
+	public void setCostVAT(double costVAT) {
 		this.costVAT = costVAT;
 	}
-	public int getTotalCost() {
+	public double getTotalCost() {
 		return totalCost;
 	}
-	public void setTotalCost(int totalCost) {
+	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
 	public DeliveryInfo getInfo() {

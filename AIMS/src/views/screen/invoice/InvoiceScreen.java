@@ -61,9 +61,9 @@ public class InvoiceScreen {
         labelCity.setText(order.getInfo().getCity());
         labelPhone.setText(order.getInfo().getPhone());
         labelInstruction.setText(order.getInfo().getNote());
-        labelSubTotal.setText(Integer.toString(order.getCostNoVAT()+order.getCostVAT()));
-        labelShippingFee.setText(Integer.toString(order.getShippingFee()));
-        labelTotal.setText(Integer.toString(order.getTotalCost()));
+        labelSubTotal.setText(Double.toString(order.getCostNoVAT()+order.getCostVAT()));
+        labelShippingFee.setText(Double.toString(order.getShippingFee()));
+        labelTotal.setText(Double.toString(order.getTotalCost()));
         
     }
 	@FXML
