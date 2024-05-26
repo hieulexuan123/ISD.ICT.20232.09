@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.screen.cart.CartScreen">
    <children>
       <Label text="Cart" textFill="#2c4ddd" VBox.vgrow="ALWAYS">
          <font>
@@ -24,12 +25,12 @@
       <HBox prefHeight="560.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
          <children>
             <ScrollPane fitToWidth="true" prefHeight="601.0" prefWidth="760.0" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
-               <content>
-                  <VBox fx:id="viewCartItems" nodeOrientation="LEFT_TO_RIGHT" prefHeight="134.0" prefWidth="720.0" />
-               </content>
                <padding>
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
+               <content>
+                  <ListView fx:id="titleListView" editable="true" prefHeight="174.0" prefWidth="514.0" />
+               </content>
             </ScrollPane>
             <VBox alignment="TOP_CENTER" prefHeight="601.0" prefWidth="445.0" spacing="64.0" HBox.hgrow="ALWAYS">
                <padding>
@@ -62,24 +63,24 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelPrice" text="Label" textFill="#2a60d3" GridPane.columnIndex="1">
+                        <Label fx:id="priceNoVAT" text="Label" textFill="#2a60d3" GridPane.columnIndex="1">
                            <font>
                               <Font name="FreeSans" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelVAT" layoutX="219.0" layoutY="17.0" text="Label" textFill="#2a60d3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="VATcost" layoutX="219.0" layoutY="17.0" text="Label" textFill="#2a60d3" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotal" layoutX="219.0" layoutY="47.0" text="Label" textFill="#2a60d3" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="totalPrice" layoutX="219.0" layoutY="47.0" text="Label" textFill="#2a60d3" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="FreeSans" size="18.0" />
                            </font>
                         </Label>
                      </children>
                   </GridPane>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="379.0" style="-fx-background-color: #2a60d3; -fx-background-radius: 24px;" text="Order" textAlignment="CENTER" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#placeOrder" prefHeight="47.0" prefWidth="379.0" style="-fx-background-color: #2a60d3; -fx-background-radius: 24px;" text="Order" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="FreeSans Bold" size="24.0" />
                      </font>

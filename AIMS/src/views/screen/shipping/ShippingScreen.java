@@ -6,7 +6,7 @@ import entity.cart.CartMedia;
 import entity.shipping.DeliveryInfo;
 import views.screen.BaseScreen;
 
-public class ShippingScreen extends BaseScreen{
+public class ShippingScreen {
 	private List<CartMedia> cartMediaList;
 	private boolean isRush;
 	double costNoVAT = 0;

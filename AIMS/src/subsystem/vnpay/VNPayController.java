@@ -16,8 +16,8 @@ public class VNPayController extends BaseController implements IPayment{
 	public void payOrder(int amount, String content) {
 		// TODO Auto-generated method stub
 		String payUrl = Request.createPayUrl(amount, content);
-		VNPayScreen vnpayScreen = new VNPayScreen();
-		vnpayScreen.setController(this);
+		//VNPayScreen vnpayScreen = new VNPayScreen();
+		//vnpayScreen.setController(this);
 	}
 	
 	private void processResponse(String query) {
