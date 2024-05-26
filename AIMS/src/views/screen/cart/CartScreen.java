@@ -71,6 +71,10 @@ public class CartScreen implements Initializable{
 		cartTest.addCartMedia(cm2);
 		cartTest.addCartMedia(cm1);
 		cartTest.addCartMedia(cm2);
+		cartTest.addCartMedia(cm1);
+		cartTest.addCartMedia(cm2);
+		cartTest.addCartMedia(cm1);
+		cartTest.addCartMedia(cm2);
 		cartItem = new ArrayList<HBox>();
 		
 		//add components to list view

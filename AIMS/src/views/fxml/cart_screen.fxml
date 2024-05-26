@@ -29,7 +29,7 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </padding>
                <content>
-                  <ListView fx:id="titleListView" editable="true" prefHeight="174.0" prefWidth="514.0" />
+                  <ListView fx:id="titleListView" editable="true" prefHeight="556.0" prefWidth="750.0" />
                </content>
             </ScrollPane>
             <VBox alignment="TOP_CENTER" prefHeight="601.0" prefWidth="445.0" spacing="64.0" HBox.hgrow="ALWAYS">
