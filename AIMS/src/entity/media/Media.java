@@ -15,6 +15,7 @@ public class Media {
     	this.title = title;
     	this.price = price;
     	this.quantity = quantity;
+    	this.price = price;
     }
     public String getTitle() {
         return title;

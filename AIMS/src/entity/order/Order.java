@@ -12,14 +12,14 @@ public class Order {
 	private double costVAT;
 	private double totalCost;
 	private DeliveryInfo info;
-	public Order(List<CartMedia> cartMediaList, double shippingFee, double costNoVAT, double costVAT, double totalCost,
+	public Order(List<CartMedia> cartMediaList, double shippingFee, double costNoVAT, double costVAT,
 			DeliveryInfo info) {
 		super();
 		this.cartMediaList = cartMediaList;
 		this.shippingFee = shippingFee;
 		this.costNoVAT = costNoVAT;
 		this.costVAT = costVAT;
-		this.totalCost = totalCost;
+		this.totalCost = costVAT+shippingFee;
 		this.info = info;
 	}
 	public List<CartMedia> getCartMediaList() {

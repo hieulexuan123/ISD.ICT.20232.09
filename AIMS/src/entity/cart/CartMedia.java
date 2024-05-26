@@ -26,4 +26,12 @@ public class CartMedia {
     public void setMedia(Media media) {
         this.media = media;
     }
+    @Override
+    public String toString() {
+        return "CartMedia{" +
+                "mediaTitle='" + media.getTitle() + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + media.getPrice() +
+                '}';
+    }
 }
