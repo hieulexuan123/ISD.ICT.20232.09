@@ -1,18 +1,4 @@
-//package entity.payment;
-//
-//import java.util.Date;
-//
-//public class PaymentTransaction {
-//	private String transactionId;
-//    private String transactionContent;
-//    private int amount;
-//    private int orderID;
-//    private Date createdAt;
-//    
-//    public void save(Integer orderId) {
-//    	
-//    }
-//}
+
 package entity.payment;
 
 public class PaymentTransaction {
@@ -21,6 +7,7 @@ public class PaymentTransaction {
 	private String transactionId;
 	private String transactionContent;
 	private int amount;
+	private int orderID;
 	private String createdAt;
 
 	public PaymentTransaction(){
@@ -34,20 +21,15 @@ public class PaymentTransaction {
 		this.card = card;
 		this.transactionId = transactionId;
 		this.transactionContent = transactionContent;
+		this.orderID= orderID;
 		this.amount = amount;
 		this.createdAt = createdAt;
 	}
 
-	public PaymentTransaction(String errorCode, String transactionId, String transactionContent, int amount, String createdAt) {
-		super();
-		this.errorCode = errorCode;
-		this.transactionId = transactionId;
-		this.transactionContent = transactionContent;
-		this.amount = amount;
-		this.createdAt = createdAt;
-	}
-
+	
 	public String getErrorCode() {
 		return errorCode;
 	}
-}
+	public void save(Integer orderId) {
+
+}}

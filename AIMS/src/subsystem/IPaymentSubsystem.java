@@ -29,13 +29,13 @@ public class IPaymentSubsystem implements IPayment {
 	public IPaymentSubsystem() {
 		this.controller = new VNPayController();
 	}
-
+	@Override
 	public PaymentTransaction getPaymentTransaction(Map<String, String> res) throws PaymentException, UnrecognizedException {
 		return controller.getPaymentTransaction(res);
 	}
 
 	@Override
-	public String generateURL(int amount, String content) throws IOException {
+	public String createPayUrl(int amount, String content) throws IOException {
 		return controller.generatePayUrl(amount, content);
 	}
 

@@ -12,6 +12,6 @@ public interface IPayment {
 	public abstract PaymentTransaction getPaymentTransaction(Map<String,String> res)
 			throws PaymentException, UnrecognizedException, IOException;
 
-	public abstract String generateURL(int amount, String content) throws IOException;
+	public abstract String createPayUrl(int amount, String content) throws IOException;
 
 }

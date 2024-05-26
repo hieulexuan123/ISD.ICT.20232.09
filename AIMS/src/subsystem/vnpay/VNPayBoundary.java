@@ -11,7 +11,7 @@ public class VNPayBoundary {
 
 	public String generatePayUrl(int amount, String content) throws IOException {
 		Request payRequestVNPay = new Request(amount, content);
-		return payRequestVNPay.generateURL();
+		return payRequestVNPay.createPayUrl(amount, content);
 	}
 
 	public PaymentTransaction getPaymentTransaction(Map<String,String> response) {

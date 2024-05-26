@@ -1,4 +1,4 @@
-package subsystem.vnpay;
+	package subsystem.vnpay;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -18,8 +18,8 @@ public class Request {
         this.amount = amount;
         this.content = content;
     }
-
-    public String generateURL() throws UnsupportedEncodingException {
+    public static String createPayUrl(int amount, String content) throws UnsupportedEncodingException {
+  
         String orderType = "other";
         long amountVNPay = amount * 100L;
 
