@@ -69,6 +69,12 @@ public class CartScreen implements Initializable{
 		cartTest = new Cart();
 		cartTest.addCartMedia(cm1);
 		cartTest.addCartMedia(cm2);
+		cartTest.addCartMedia(cm1);
+		cartTest.addCartMedia(cm2);
+		cartTest.addCartMedia(cm1);
+		cartTest.addCartMedia(cm2);
+		cartTest.addCartMedia(cm1);
+		cartTest.addCartMedia(cm2);
 		cartItem = new ArrayList<HBox>();
 		
 		//add components to list view
@@ -94,8 +100,8 @@ public class CartScreen implements Initializable{
 		costVAT = costNoVAT * 0.1;
 		
 		//create shipping form
-//		ShippingScreen ship = new ShippingScreen(cartTest.getListMedia(), costNoVAT, costVAT);
-//		controller.placeOrder(ship, cartTest);
+		ShippingScreen ship = new ShippingScreen(cartTest.getListMedia(), costNoVAT, costVAT);
+		controller.placeOrder(ship, cartTest);
 //		placeOrderController.placeOrder()
 	}
 	
@@ -105,7 +111,7 @@ public class CartScreen implements Initializable{
 		titleListView.getItems().remove(cartItemBox);
 		priceNoVAT.setText(Double.toString(costNoVAT));
 		VATcost.setText(Double.toString(costVAT));
-		totalPrice.setText(Double.toString(costNoVAT + costVAT));
+		totalPrice.setText(Double.toString( costVAT));
 		
 		
 	}
@@ -117,7 +123,7 @@ public class CartScreen implements Initializable{
 		
 		priceNoVAT.setText(Double.toString(costNoVAT));
 		VATcost.setText(Double.toString(costVAT));
-		totalPrice.setText(Double.toString(costNoVAT + costVAT));
+		totalPrice.setText(Double.toString(costVAT));
 	}
 	
 }
