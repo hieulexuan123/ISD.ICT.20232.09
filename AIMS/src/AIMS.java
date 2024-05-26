@@ -17,7 +17,7 @@ public class AIMS extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        VBox root = FXMLLoader.load(getClass().getResource("views/fxml/cart_screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/fxml/cart_screen.fxml"));
         Scene scene = new Scene(root, 1280, 720);
 
         stage.setScene(scene);
