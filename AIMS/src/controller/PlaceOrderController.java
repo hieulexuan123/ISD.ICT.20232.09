@@ -75,7 +75,7 @@ public class PlaceOrderController extends BaseController{
 		
     }
 	
-	public int calculateShippingFee(String city, List<CartMedia> cartMediaList, boolean isRush) {
+	public double calculateShippingFee(String city, List<CartMedia> cartMediaList, boolean isRush) {
 		if (isRush) {
 			return 200;
 		}
