@@ -19,7 +19,7 @@
          <children>
             <StackPane prefHeight="128.0" prefWidth="128.0">
                <children>
-                  <ImageView fx:id="imageItem" fitHeight="128.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image" fitHeight="128.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../assets/images/book/book5.jpg" />
                      </image>
@@ -36,13 +36,18 @@
                 <RowConstraints valignment="TOP" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <Label fx:id="labelItemName" text="Item name" textFill="#4384da">
+                  <Label fx:id="title" text="Item name" textFill="#4384da">
                      <font>
                         <Font name="FreeSans" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelQty" text="x1" GridPane.rowIndex="1" />
-                  <Label fx:id="labelItemPrice" text="10000d" textFill="#4384da" GridPane.columnIndex="1">
+                  <Label fx:id="numOfProd" text="x1" GridPane.rowIndex="1" />
+                  <Label fx:id="rushEligibility" text="Eligible for Rush Delivery" textFill="GREEN" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="FreeSans" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price" text="10000d" textFill="#4384da" GridPane.columnIndex="1">
                      <font>
                         <Font name="FreeSans" size="18.0" />
                      </font>

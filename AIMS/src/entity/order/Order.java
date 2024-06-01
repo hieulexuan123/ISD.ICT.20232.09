@@ -6,58 +6,73 @@ import entity.cart.CartMedia;
 import entity.shipping.DeliveryInfo;
 
 public class Order {
-	private List<CartMedia> cartMediaList;
-	private double shippingFee;
-	private double costNoVAT;
-	private double costVAT;
-	private double totalCost;
+	private List<CartMedia> mediaList;
+	private int shippingFee;
+	private int costNoVAT;
+	private int costVAT;
+	private int totalCost;
 	private DeliveryInfo info;
-	public Order(List<CartMedia> cartMediaList, double shippingFee, double costNoVAT, double costVAT,
-			DeliveryInfo info) {
-		super();
-		this.cartMediaList = cartMediaList;
-		this.shippingFee = shippingFee;
+	public Order(List<CartMedia> mediaList, int costNoVAT, int costVAT) {
+		this.mediaList = mediaList;
 		this.costNoVAT = costNoVAT;
 		this.costVAT = costVAT;
-		this.totalCost = costVAT+shippingFee;
-		this.info = info;
 	}
-	public List<CartMedia> getCartMediaList() {
-		return cartMediaList;
+	public List<CartMedia> getMediaList() {
+		return mediaList;
 	}
-	public void setCartMediaList(List<CartMedia> cartMediaList) {
-		this.cartMediaList = cartMediaList;
+	public void setCartMediaList(List<CartMedia> mediaList) {
+		this.mediaList = mediaList;
 	}
-	public double getShippingFee() {
+	public int getShippingFee() {
 		return shippingFee;
 	}
-	public void setShippingFee(int shippingFee) {
-		this.shippingFee = shippingFee;
-	}
-	public double getCostNoVAT() {
+	public int getCostNoVAT() {
 		return costNoVAT;
 	}
-	public void setCostNoVAT(double costNoVAT) {
-		this.costNoVAT = costNoVAT;
-	}
-	public double getCostVAT() {
+	public int getCostVAT() {
 		return costVAT;
 	}
-	public void setCostVAT(double costVAT) {
-		this.costVAT = costVAT;
-	}
-	public double getTotalCost() {
+	public int getTotalCost() {
 		return totalCost;
-	}
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
 	}
 	public DeliveryInfo getInfo() {
 		return info;
 	}
 	public void setInfo(DeliveryInfo info) {
 		this.info = info;
+		if (info.isRush()) shippingFee = calculateRushShippingFee(info.getProvince());
+		else shippingFee = calculateNormalShippingFee(info.getProvince());
+		totalCost = calculateTotal(shippingFee);
 	}
 	
+	@Override
+	public String toString() {
+		return "Order [mediaList=" + mediaList + ", shippingFee=" + shippingFee + ", costNoVAT=" + costNoVAT
+				+ ", costVAT=" + costVAT + ", totalCost=" + totalCost + ", info=" + info.toString() + "]";
+	}
+	public int calculateNormalShippingFee(String province) {
+		if (province == null) return 0;
+		else if (province.toLowerCase().contains("hà nội") || province.toLowerCase().contains("hồ chí minh")) {
+			return 30000;
+		}
+		else return 20000;
+	}
+	
+	public int calculateRushShippingFee(String province) {
+		if (province == null) return 0;
+		return 50000;
+	}
+	
+	public int calculateTotal(int shippingFee) {
+		return costVAT + shippingFee;
+	}
+	
+	public static int getNumberOfRushShippingProduct(List<CartMedia> cartMediaList){
+        int count = 0;
+        for(CartMedia cm : cartMediaList){
+            if(cm.getMedia().isSupportRushShipping()) count++;
+        }
+        return count;
+    }
 	
 }

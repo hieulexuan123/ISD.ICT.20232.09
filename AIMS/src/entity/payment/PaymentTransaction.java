@@ -9,7 +9,23 @@ public class PaymentTransaction {
     private int orderID;
     private Date createdAt;
     
-    public void save(Integer orderId) {
+    public PaymentTransaction(String transactionId, String transactionContent, int amount, int orderID,
+			Date createdAt) {
+		super();
+		this.transactionId = transactionId;
+		this.transactionContent = transactionContent;
+		this.amount = amount;
+		this.orderID = orderID;
+		this.createdAt = createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentTransaction [transactionId=" + transactionId + ", transactionContent=" + transactionContent
+				+ ", amount=" + amount + ", orderID=" + orderID + ", createdAt=" + createdAt + "]";
+	}
+
+	public void save(Integer orderId) {
     	
     }
 }

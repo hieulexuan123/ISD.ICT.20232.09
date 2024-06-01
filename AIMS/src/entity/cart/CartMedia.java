@@ -5,10 +5,17 @@ import entity.media.Media;
 public class CartMedia {
 	private Media media;
     private int quantity;
+    private int price;
     
-    public CartMedia(Media m, int quantity) {
-    	media = m;
+    public CartMedia(Media media, int quantity) {
+    	this.media = media;
     	this.quantity = quantity;
+    }
+    
+    public CartMedia(Media media, int quantity, int price) {
+    	this.media = media;
+    	this.quantity = quantity;
+    	this.price = price;
     }
 
     public int getQuantity() {
@@ -23,15 +30,15 @@ public class CartMedia {
         return media;
     }
 
-    public void setMedia(Media media) {
-        this.media = media;
-    }
-    @Override
-    public String toString() {
-        return "CartMedia{" +
-                "mediaTitle='" + media.getTitle() + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + media.getPrice() +
-                '}';
-    }
+	public int getPrice() {
+		return (price > 0) ? price : media.getPrice();
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	public int calculateTotal() {
+		return getPrice() * quantity;
+	}
 }

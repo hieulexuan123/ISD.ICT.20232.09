@@ -5,7 +5,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -13,6 +15,7 @@ import controller.PlaceOrderController;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import exception.MediaUnavailableException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,102 +31,83 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.shipping.ShippingScreen;
 
-public class CartScreen implements Initializable{
+public class CartScreen extends BaseScreen{
 	
-	@FXML 
-	ListView<HBox> titleListView;
-	@FXML
-	private Label mediaLabel;
+	@FXML private ImageView aimsImage;
+
+	@FXML private Label pageTitle;
+
+	@FXML VBox itemList;
+
+	@FXML private Label labelAmount;
+
+	@FXML private Label labelSubtotal;
+
+	@FXML private Label labelVAT;
+
+	@FXML private Button btnPlaceOrder;
 	
-	Cart cartTest;
-	List<HBox> cartItem;
-	List<Double> cartItemPrice;
-	List<String> mediaTitle;
+	private Cart cart;
 	
-	@FXML 
-	Label priceNoVAT;
-	@FXML 
-	Label VATcost;
-	@FXML 
-	Label totalPrice;
+	public CartScreen(String screenPath, Cart cart) throws IOException {
+		super(screenPath);
+		this.cart = cart;
+		
+		updateCart();
+		
+		// on mouse clicked, we back to home
+		aimsImage.setOnMouseClicked(e -> {
+			homeScreen.show();
+		});
+
+		// on mouse clicked, we start processing place order usecase
+		btnPlaceOrder.setOnMouseClicked(e -> {
+			placeOrder();			
+		});
+	}
 	
-	double costNoVAT = 0;
-	double costVAT = 0;
-	public void placeOrder() {
+	private void placeOrder() {
 		System.out.println("place order");
 		
-		PlaceOrderController controller = PlaceOrderController.GetInstance();
-		
-		//create cart 
-		
-		//functionality test with 2 Media instances
-		Media m1 = new Media(1, "Avatar CD",100, 10);
-		Media m2 = new Media (2, "Harry Potter CD",120, 10);
-		CartMedia cm1 = new CartMedia(m1, 1);
-		CartMedia cm2 = new CartMedia(m2, 2);
-		
-		//create test cart and add CartMedia object
-		cartTest = new Cart();
-		cartTest.addCartMedia(cm1);
-		cartTest.addCartMedia(cm2);
-		cartTest.addCartMedia(cm1);
-		cartTest.addCartMedia(cm2);
-		cartTest.addCartMedia(cm1);
-		cartTest.addCartMedia(cm2);
-		cartTest.addCartMedia(cm1);
-		cartTest.addCartMedia(cm2);
-		cartItem = new ArrayList<HBox>();
-		
-		//add components to list view
-		List<CartMedia> itemList = cartTest.getListMedia(); 
-		for (int i = 0; i < itemList.size(); i++) {
-			CartMedia tmpItem = itemList.get(i);
-			HBox hBoxTmp = new HBox();
-			TextField tmp = new TextField(tmpItem.getMedia().getTitle());
-			TextField quantityLabel = new TextField(Integer.toString(tmpItem.getQuantity()));
-			Button deleteBtn = new Button();
-			deleteBtn.setOnAction(e -> deleteItem(tmpItem, hBoxTmp));
-			deleteBtn.setText("Remove");
-			hBoxTmp.getChildren().add(tmp);
-			hBoxTmp.getChildren().add(quantityLabel);
-			hBoxTmp.getChildren().add(deleteBtn);
-			//Update price
-			System.out.println(tmpItem.getMedia().getPrice());
-			costNoVAT += tmpItem.getMedia().getPrice();
-			cartItem.add(hBoxTmp);
+		PlaceOrderController placeOrderController = new PlaceOrderController();
+		try {
+			placeOrderController.placeOrder(this.cart, this);
+		} catch (MediaUnavailableException e) {
+			System.out.println(e.getMessage());
 		}
-		
-		//calculate VAT cost
-		costVAT = costNoVAT * 0.1;
-		
-		//create shipping form
-		ShippingScreen ship = new ShippingScreen(cartTest.getListMedia(), costNoVAT, costVAT);
-		controller.placeOrder(ship, cartTest);
-//		placeOrderController.placeOrder()
 	}
 	
-	void deleteItem(CartMedia cartItem, HBox cartItemBox) {
-		costNoVAT -= cartItem.getMedia().getPrice();
-		costVAT = costNoVAT * 0.1;
-		titleListView.getItems().remove(cartItemBox);
-		priceNoVAT.setText(Double.toString(costNoVAT));
-		VATcost.setText(Double.toString(costVAT));
-		totalPrice.setText(Double.toString( costVAT));
+	public void updateCart() {
+		itemList.getChildren().clear();
 		
-		
+		try {
+			for (CartMedia cm : cart.getMediaList()) {
+				CartItemScreen itemScreen = new CartItemScreen(Config.CART_ITEM_SCREEN_PATH, this);
+				itemScreen.setCartMedia(cm);
+
+				// add spinner
+				itemList.getChildren().add(itemScreen.getRoot());
+			}
+			updateCartCost();
+		} catch (IOException e) {
+            e.printStackTrace();
+        }		
 	}
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		placeOrder();
-		titleListView.getItems().addAll(cartItem);
+	
+	public void updateCartCost() {
+		cart.updateCost();
 		
-		priceNoVAT.setText(Double.toString(costNoVAT));
-		VATcost.setText(Double.toString(costVAT));
-		totalPrice.setText(Double.toString(costVAT));
+		labelSubtotal.setText(cart.getCostNoVAT() + "VND");
+		labelVAT.setText(cart.calculateVAT() + "VND");
+		labelAmount.setText(cart.getCostVAT() + "VND");
+	}
+		
+	public Cart getCart() {
+		return this.cart;
 	}
 	
 }
