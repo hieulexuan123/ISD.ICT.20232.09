@@ -191,7 +191,7 @@ public class ShippingScreen extends BaseScreen {
 			//System.out.println(order.toString());
 			((PlaceOrderController) controller).requestInvoice(order);
 			
-		} catch (EmptyFieldsException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
