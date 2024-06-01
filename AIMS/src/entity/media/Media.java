@@ -4,13 +4,13 @@ public class Media {
 	protected int id;
     protected String title;
     protected String category;
-    protected double price;
+    protected int price;
     protected int quantity;
     protected String imageURL;
     protected boolean isSupportRushShipping;
     protected int weight;
 
-    public Media(int id, String title, double price, int quantity) {
+    public Media(int id, String title, int price, int quantity) {
     	this.id = id;
     	this.title = title;
     	this.price = price;
@@ -41,11 +41,11 @@ public class Media {
         this.category = category;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

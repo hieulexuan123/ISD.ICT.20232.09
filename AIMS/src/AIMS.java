@@ -1,3 +1,4 @@
+import entity.cart.Cart;
 import entity.cart.CartMedia;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utils.Config;
+import views.screen.BaseScreen;
+import views.screen.cart.CartScreen;
 
 
 public class AIMS extends Application {
@@ -16,11 +20,9 @@ public class AIMS extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
-        Parent root = FXMLLoader.load(getClass().getResource("views/fxml/cart_screen.fxml"));
-        Scene scene = new Scene(root, 1280, 720);
-
-        stage.setScene(scene);
-        stage.show();
+    	BaseScreen.setStage(stage);
+    	Cart cart = Cart.createCart();
+        BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
+        cartScreen.show();
     }
 }

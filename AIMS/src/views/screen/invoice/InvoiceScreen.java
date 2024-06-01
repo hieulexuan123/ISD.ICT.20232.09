@@ -1,32 +1,24 @@
 package views.screen.invoice;
 
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
+import controller.PayOrderController;
 import entity.order.Order;
 import views.screen.BaseScreen;
 import javafx.event.ActionEvent;
-
-//public class InvoiceScreen extends BaseScreen{
-//	private Order order;
-//	public void payOrder() {
-//		//PayOrderController payOrderController = new PayOrderController()
-//		//payOrderController.payOrder(screen)
-//	}
-//}
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class InvoiceScreen {
-	
-	public InvoiceScreen(Order order) {
-		this.order = order;
-	}
+public class InvoiceScreen extends BaseScreen{
 
     @FXML
     private Label labelAddress;
 
     @FXML
-    private Label labelCity;
+    private Label labelProvince;
 
     @FXML
     private Label labelInstruction;
@@ -45,30 +37,71 @@ public class InvoiceScreen {
 
     @FXML
     private Label labelTotal;
+    
+    @FXML
+    private Label labelTime;
+    
+    @FXML
+    private Label labelRushInstruction;
+    
+    @FXML
+    private Label labelTimeKey;
+    
+    @FXML
+    private Label labelRushInstructionKey;
 
     @FXML
     private VBox viewItems;
     
 	private Order order;
+	
+	public InvoiceScreen(String screenPath, Order order) throws IOException {
+		super(screenPath);
+		this.order = order;
+		setInvoiceInfo();
+	}
+	
 	public void payOrder() {
 		//PayOrderController payOrderController = new PayOrderController()
 		//payOrderController.payOrder(screen)
 	}
-	@FXML
-    private void initialize() {
+
+    private void setInvoiceInfo() {
 		labelName.setText(order.getInfo().getName());
         labelAddress.setText(order.getInfo().getAddress());
-        labelCity.setText(order.getInfo().getCity());
+        labelProvince.setText(order.getInfo().getProvince());
         labelPhone.setText(order.getInfo().getPhone());
-        labelInstruction.setText(order.getInfo().getNote());
-        labelSubTotal.setText(Double.toString(order.getCostVAT()));
-        labelShippingFee.setText(Double.toString(order.getShippingFee()));
-        labelTotal.setText(Double.toString(order.getTotalCost()));
-        
+        labelInstruction.setText(order.getInfo().getInstruction());
+        labelSubTotal.setText(order.getCostVAT() + " VND");
+        labelShippingFee.setText(order.getShippingFee() + " VND");
+        labelTotal.setText(order.getTotalCost() + " VND");
+        if (order.getInfo().isRush()) {
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        	labelTime.setText(order.getInfo().getRushTime().format(formatter));
+        	labelRushInstruction.setText(order.getInfo().getRushInstruction());
+        	showRushShippingFields();
+        } else {
+        	hideRushShippingFields();
+        } 
+    }
+    
+    private void showRushShippingFields() {
+        labelTime.setVisible(true);
+        labelRushInstruction.setVisible(true);
+        labelTimeKey.setVisible(true);
+        labelRushInstructionKey.setVisible(true);
+    }
+    
+    private void hideRushShippingFields() {
+        labelTime.setVisible(false);
+        labelRushInstruction.setVisible(false);
+        labelTimeKey.setVisible(false);
+        labelRushInstructionKey.setVisible(false);
     }
 	@FXML
-    void handleConfirmOrder(ActionEvent event) {
-		// go to PayOrder 
+    void confirmInvoice(ActionEvent event) {
+		PayOrderController payOrderController = new PayOrderController();
+		payOrderController.payOrder(order);
     }
 
 }

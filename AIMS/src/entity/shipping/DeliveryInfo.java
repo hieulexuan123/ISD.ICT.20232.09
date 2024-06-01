@@ -1,37 +1,35 @@
 package entity.shipping;
 
+import java.time.LocalDate;
+
+import exception.EmptyFieldsException;
+
 public class DeliveryInfo {
 	private String email;
     private String name;
     private String phone;
-    private String city;
+    private String province;
     private String address;
-    private String note;
+    private String instruction;
     private boolean isRush;
-    private String rushTime;
+    private LocalDate rushTime;
+    private String rushInstruction;
     
-    
-    public boolean validateInfo() throws Exception{
-    	if (validateName(name)&&validatePhone(phone) && validateEmail(email)) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+    public void validateInfo() throws EmptyFieldsException{
+    	if (!validateEmptyFields()) throw new EmptyFieldsException("All fields must be filled");
     }
     
-    public DeliveryInfo(String email, String name, String phone, String city, String address, 
-			boolean isRush, String rushTime, String rushInstruction) {
-		super();
+    public DeliveryInfo(String email, String name, String phone, String province, String address, 
+			String instruction, boolean isRush, LocalDate rushTime, String rushInstruction) {
 		this.email = email;
 		this.name = name;
 		this.phone = phone;
-		this.city = city;
+		this.province = province;
 		this.address = address;
-	
+		this.instruction = instruction;
 		this.isRush = isRush;
 		this.rushTime = rushTime;
-		this.note = rushInstruction;
+		this.rushInstruction = rushInstruction;
 	}
 
 	public String getEmail() {
@@ -53,8 +51,8 @@ public class DeliveryInfo {
 
 	
 
-	public String getCity() {
-		return city;
+	public String getProvince() {
+		return province;
 	}
 
 	
@@ -65,8 +63,8 @@ public class DeliveryInfo {
 
 	
 
-	public String getNote() {
-		return note;
+	public String getInstruction() {
+		return instruction;
 	}
 
 	
@@ -74,13 +72,20 @@ public class DeliveryInfo {
 		return isRush;
 	}
 
-	
-
-	public String getRushTime() {
+	public LocalDate getRushTime() {
 		return rushTime;
 	}
-
 	
+	public String getRushInstruction() {
+		return rushInstruction;
+	}
+
+	@Override
+	public String toString() {
+		return "DeliveryInfo [email=" + email + ", name=" + name + ", phone=" + phone + ", province=" + province
+				+ ", address=" + address + ", instruction=" + instruction + ", isRush=" + isRush + ", rushTime="
+				+ rushTime + ", rushInstruction=" + rushInstruction + "]";
+	}
 
 	private boolean validateName(String name) {
     	if (name.length()<50) {
@@ -107,7 +112,20 @@ public class DeliveryInfo {
     	return true;
     }
     
-    private boolean validateEmptyFields() {
+    private boolean validateTime(LocalDate time) {
     	return true;
+    }
+    
+    private boolean validateEmptyFields() {
+    	if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || province==null || province.isEmpty() || address.isEmpty() || instruction.isEmpty()) return false;
+    	if (isRush && (rushTime==null || rushInstruction.isEmpty())) return false;
+    	return true;
+    }
+    
+    
+    public static boolean validateRushAddress(String province) {
+    	if (province == null || province.isEmpty()) return false;
+    	if (province.toLowerCase().contains("hà nội") || province.toLowerCase().contains("hồ chí minh")) return true;
+        return false;
     }
 }
