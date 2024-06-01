@@ -12,9 +12,21 @@
 ## Technology
 Java + JavaFx
 
+## How to install
+1. Install JavaFx 22.0.1 .
+2. Create a new `User Library` under `Eclipse` -> `Window` -> `Preferences` -> `Java` -> `Build Path` -> `User Libraries` -> `New`
+3. Name it anything you want, and include all **_jars_** under the extracted folder (Ex: "C:\Users\Admin\javafx-sdk-22.0.1\lib") that you downloaded in step 1.
+4. Include the library into the classpath of the project (Right click on the project -> `Build path` -> `Configure Build Path` -> `Libraries` -> `Classpath`).
+
+### Add VM arguments
+Click on `Run` -> `Run Configurations...` -> `Java Application`, create a new launch configuration for your project and
+add these VM arguments:
+
+  > `--module-path <Your javafx lib folder address> --add-modules javafx.controls,javafx.graphics,javafx.fxml,javafx.media,javafx.web`
+
 ## Report Content
 <details>
-  <summary>From 20/05/2024 ~ to 26/05/2023 </summary>
+  <summary>From 20/05/2024 ~ to 26/05/2024 </summary>
 <br>
 <details>
 <summary>Team Member 1: Lê Xuân Hiếu</summary>
@@ -38,7 +50,7 @@ Java + JavaFx
 - Assigned tasks: Implement the shipping and home screen
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): https://github.com/hieulexuan123/ISD.ICT.20232.09/pull/1
   - Specific task details:
     - Edit PlaceOrderController, DeliveryInfo
     - Edit order_screen.fxml, invoice_screen.fxml
@@ -51,7 +63,7 @@ Java + JavaFx
 - Assigned tasks: Implement the VNPay Subsystem and payment result screen
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): Already merged in the main branch
   - Specific implementation details:
    - Edit classes inside package subsystem.
 </details>
@@ -63,7 +75,7 @@ Java + JavaFx
 - Assigned tasks: Implement the Cart page
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): Already merged in the main branch
   - Specific implementation details:
     - Create HomeScreen, FXMLScreenHandler.
     - Edit home.fxml, cart_screen.fxml, media_cart_screen.fxml, CartScreen.
@@ -75,7 +87,12 @@ Java + JavaFx
 
 - Assigned tasks: Set up JavaFx and create FXML pages
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): Already merge in the main branch
   - Specific implementation details:
     - Create all initial fxml files.
 </details>
+
+<details>
+  <summary>From 27/05/2024 ~ to 02/06/2024 </summary>
+<br>
+<details>
