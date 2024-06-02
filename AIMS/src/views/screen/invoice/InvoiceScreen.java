@@ -1,16 +1,20 @@
 package views.screen.invoice;
 
 import java.io.IOException;
+import views.screen.invoice.InvoiceItemScreen;
 import java.time.format.DateTimeFormatter;
 
 import controller.PayOrderController;
+import entity.cart.CartMedia;
 import entity.order.Order;
 import views.screen.BaseScreen;
+import views.screen.shipping.OrderItemScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import utils.Config;
 
 public class InvoiceScreen extends BaseScreen{
 
@@ -59,7 +63,23 @@ public class InvoiceScreen extends BaseScreen{
 		super(screenPath);
 		this.order = order;
 		setInvoiceInfo();
+		updateMediaItems();
+		
+		
 	}
+	
+	private void updateMediaItems() {
+    	viewItems.getChildren().clear();
+    	try {
+    		for (CartMedia m : order.getMediaList()) {
+        		InvoiceItemScreen invoiceItemScreen = new InvoiceItemScreen(Config.INVOICE_ITEM_SCREEN_PATH, m, order.getInfo().isRush());
+        		viewItems.getChildren().add(invoiceItemScreen.getRoot());
+        	}
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    	
+    }
 	
 	public void payOrder() {
 		//PayOrderController payOrderController = new PayOrderController()

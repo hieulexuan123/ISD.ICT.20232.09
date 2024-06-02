@@ -6,6 +6,7 @@ public class Config {
 	public static final String SHIPPING_SCREEN_PATH = "/views/fxml/order_screen.fxml";
 	public static final String ORDER_ITEM_SCREEN_PATH = "/views/fxml/order_item.fxml";
 	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice_screen.fxml";
+	public static final String INVOICE_ITEM_SCREEN_PATH = "/views/fxml/invoice_item.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
 	
 	public static String[] PROVINCES = { "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",

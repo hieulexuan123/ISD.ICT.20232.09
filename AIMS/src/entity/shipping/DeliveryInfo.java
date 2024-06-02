@@ -2,7 +2,11 @@ package entity.shipping;
 
 import java.time.LocalDate;
 
+import exception.AddressNotSupportRushOrderException;
 import exception.EmptyFieldsException;
+import exception.InvalidEmailException;
+import exception.InvalidNameException;
+import exception.InvalidNumberException;
 
 public class DeliveryInfo {
 	private String email;
@@ -15,8 +19,12 @@ public class DeliveryInfo {
     private LocalDate rushTime;
     private String rushInstruction;
     
-    public void validateInfo() throws EmptyFieldsException{
+    public void validateInfo() throws AddressNotSupportRushOrderException,EmptyFieldsException, InvalidNameException, InvalidEmailException, InvalidNumberException{
     	if (!validateEmptyFields()) throw new EmptyFieldsException("All fields must be filled");
+    	if (!validateName(name)) throw new InvalidNameException("Your name is invalid");
+    	if (!validateEmail(email)) throw new InvalidNameException("Your email is invalid");
+    	if (!validatePhone(phone)) throw new InvalidNameException("Your phone number is invalid");
+    	if (!validateRushAddress(province)) throw new AddressNotSupportRushOrderException("Your province is not supported by rush order");
     }
     
     public DeliveryInfo(String email, String name, String phone, String province, String address, 
@@ -109,7 +117,7 @@ public class DeliveryInfo {
     }
     
     private boolean validateEmail(String email) {
-    	return true;
+    	return email.contains("@gmail.com");
     }
     
     private boolean validateTime(LocalDate time) {
