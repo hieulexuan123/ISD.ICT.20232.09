@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import controller.BaseController;
+import controller.FailureUpdate;
 import controller.PayOrderController;
+import controller.SuccessUpdate;
 import entity.payment.PaymentTransaction;
 import subsystem.IPayment;
 import subsystem.vnpay.*;
@@ -20,7 +22,8 @@ public class VNPayController extends BaseController implements IPayment{
 	@Override
 	public void payOrder(int amount, String content) throws UnsupportedEncodingException {
 		Request request = new Request(amount, content);
-		String payUrl = request.createPayUrl();
+	
+		String payUrl = CreatePayUrl.createPayUrl(request);
 		try {
 			VNPayScreen vnpayScreen = new VNPayScreen(Config.PAYMENT_SCREEN_PATH, payUrl);
 			vnpayScreen.setController(this);
@@ -29,17 +32,6 @@ public class VNPayController extends BaseController implements IPayment{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
-	
-	public void processResponse(String query) {
-		Response response = new Response();
-		try {
-			PaymentTransaction transaction = response.processResponse(query);
-			client.onUpdateSuccess(transaction);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			client.onUpdateFailure(e.getMessage());
 		}
 	}
 

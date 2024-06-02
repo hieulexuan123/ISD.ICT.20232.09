@@ -18,11 +18,11 @@ public class PayOrderController extends BaseController{
 		}
 	}
 	
-	public void onUpdateSuccess(PaymentTransaction trans) {
-		System.out.println(trans.toString());
-	}
-	
-	public void onUpdateFailure(String message) {
-		System.out.println(message);
-	}
+//	public void onUpdateSuccess(PaymentTransaction trans) {
+//		System.out.println(trans.toString());
+//	}
+//	
+//	public void onUpdateFailure(String message) {
+//		System.out.println(message);
+//	}
 }
