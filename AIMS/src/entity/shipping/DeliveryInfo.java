@@ -24,7 +24,6 @@ public class DeliveryInfo {
     	if (!validateName(name)) throw new InvalidNameException("Your name is invalid");
     	if (!validateEmail(email)) throw new InvalidNameException("Your email is invalid");
     	if (!validatePhone(phone)) throw new InvalidNameException("Your phone number is invalid");
-    	if (!validateRushAddress(province)) throw new AddressNotSupportRushOrderException("Your province is not supported by rush order");
     }
     
     public DeliveryInfo(String email, String name, String phone, String province, String address, 
