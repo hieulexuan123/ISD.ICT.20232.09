@@ -9,3 +9,4 @@ AIMS/.classpath
 
 #Ignore project setting in IntelliJ IDEA
 **/*.iml
+/bin
