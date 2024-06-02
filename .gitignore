@@ -3,4 +3,9 @@ AIMS/bin
 AIMS/.classpath
 .classpath
 .project
-bin
+
+#Ignore .idea in all folder
+**/.idea
+
+#Ignore project setting in IntelliJ IDEA
+**/*.iml
