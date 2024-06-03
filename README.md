@@ -134,9 +134,9 @@ add these VM arguments:
 - Assigned tasks: Check coupling related to Vnpay subsystem
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): https://github.com/hieulexuan123/ISD.ICT.20232.09/pull/7 
   - Specific implementation details:
-   - ...
+   - Check coupling of PayOrderController, PlaceOrderController, PaymentTransaction and classes in subsystem package
 </details>
 
 <details>
@@ -146,9 +146,10 @@ add these VM arguments:
 - Assigned tasks: Check cohesion related to Vnpay subsystem
 
 - Implementation details:
-  - Pull Request(s): 
+  - Pull Request(s): https://github.com/hieulexuan123/ISD.ICT.20232.09/pull/6 
   - Specific implementation details:
-    - ...
+    - Check cohesion of PayOrderController, PaymentTransaction and classes in subsystem package
+    - Create FailureUpdate, SuccessUpdate inside controller package, CreatePayUrl and ResponseResult inside subsystem.vnpay package, new package subsystem.vnpay.utilities
 </details>
 
 <details>
