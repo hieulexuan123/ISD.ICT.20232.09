@@ -5,79 +5,96 @@ public class Media {
     protected String title;
     protected String category;
     protected int price;
+    protected int value;
     protected int quantity;
     protected String imageURL;
     protected boolean isSupportRushShipping;
     protected int weight;
+    
+	public Media(int id, String title, String category, int price, int value, int quantity, String imageURL,
+			boolean isSupportRushShipping, int weight) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.category = category;
+		this.price = price;
+		this.value = value;
+		this.quantity = quantity;
+		this.imageURL = imageURL;
+		this.isSupportRushShipping = isSupportRushShipping;
+		this.weight = weight;
+	}
 
-    public Media(int id, String title, int price, int quantity) {
-    	this.id = id;
-    	this.title = title;
-    	this.price = price;
-    	this.quantity = quantity;
-    	this.price = price;
-    }
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public int getPrice() {
+		return price;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-    public int getPrice() {
-        return price;
-    }
+	public int getValue() {
+		return value;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public void setValue(int value) {
+		this.value = value;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public String getImageURL() {
-        return imageURL;
-    }
+	public String getImageURL() {
+		return imageURL;
+	}
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
 
-    public boolean isSupportRushShipping() {
-        return isSupportRushShipping;
-    }
+	public boolean isSupportRushShipping() {
+		return isSupportRushShipping;
+	}
 
-    public void setSupportRushShipping(boolean supportRushShipping) {
-        isSupportRushShipping = supportRushShipping;
-    }
+	public void setSupportRushShipping(boolean isSupportRushShipping) {
+		this.isSupportRushShipping = isSupportRushShipping;
+	}
 
-    public int getWeight() {
-        return weight;
-    }
+	public int getWeight() {
+		return weight;
+	}
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+	@Override
+	public String toString() {
+		return "Media [id=" + id + ", title=" + title + ", category=" + category + ", price=" + price + ", value="
+				+ value + ", quantity=" + quantity + ", imageURL=" + imageURL + ", isSupportRushShipping="
+				+ isSupportRushShipping + ", weight=" + weight + "]";
+	}
+
+    
 }

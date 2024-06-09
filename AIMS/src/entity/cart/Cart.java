@@ -1,7 +1,11 @@
 package entity.cart;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dao.DAOFactory;
+import dao.IMediaDAO;
 import exception.MediaUnavailableException;
 import entity.media.Media;
 
@@ -14,16 +18,16 @@ public class Cart {
 	
 	public static Cart createCart() {
 		Cart cart = new Cart();
-		Media book = new Media(1, "HarryPotter", 10000, 5);
-		Media cd = new Media(2, "BreakingBad", 20000, 3);
-		book.setImageURL("assets/images/book/harry_potter");
-		cd.setImageURL("assets/images/cd/breaking_bad");
-		book.setSupportRushShipping(true);
-		cd.setSupportRushShipping(true);
-		CartMedia bookCart = new CartMedia(book, 2);
-		CartMedia cdCart = new CartMedia(cd, 1);
-		cart.addCartMedia(bookCart);
-		cart.addCartMedia(cdCart);
+		IMediaDAO mediaDao = DAOFactory.getInstance().getMediaDAO();
+    	try {
+			for (Media media : mediaDao.getAllMedia()) {
+				CartMedia bookCart = new CartMedia(media, 2);
+				cart.addCartMedia(bookCart);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return cart;
 	}
 	

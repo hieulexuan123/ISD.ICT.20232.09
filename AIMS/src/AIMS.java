@@ -1,5 +1,8 @@
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import entity.media.Media;
+import dao.*;
+import dao.sqlite.SqliteDAOFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +23,14 @@ public class AIMS extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    	BaseScreen.setStage(stage);
-    	Cart cart = Cart.createCart();
-        BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
-        cartScreen.show();
+    	try {
+    		BaseScreen.setStage(stage);
+        	DAOFactory.initialize(new SqliteDAOFactory());
+        	Cart cart = Cart.createCart();
+            BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
+            cartScreen.show();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 }
