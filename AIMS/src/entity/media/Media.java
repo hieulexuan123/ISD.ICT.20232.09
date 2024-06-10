@@ -25,6 +25,10 @@ public class Media {
 		this.weight = weight;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -96,5 +100,4 @@ public class Media {
 				+ isSupportRushShipping + ", weight=" + weight + "]";
 	}
 
-    
 }

@@ -8,28 +8,34 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class BaseScreen {
-	protected FXMLLoader loader;
-	protected AnchorPane root;
-	private static Stage stage;
+public class BaseScreen extends FXMLScreen{
+	protected Stage stage;
 	protected Scene scene;
 	
 	protected BaseScreen prev;
 	protected BaseScreen homeScreen;
 	protected BaseController controller;
-	
-	private String screenTitle;
 
 	public BaseScreen(String screenPath) throws IOException {
-		this.loader = new FXMLLoader(getClass().getResource(screenPath));
-		// Set handler
-		this.loader.setController(this);
-		this.root = (AnchorPane) loader.load();
+		super(screenPath);
 	}
 	
+	public Stage getStage() {
+		return stage;
+	}
+	
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
 	public void show() {
-		this.scene = new Scene(this.root);
-		stage.setScene(this.scene);
+		if (scene==null) {
+			scene = new Scene(root);
+		}
+		if (stage==null) {
+			stage = new Stage();
+		}
+		stage.setScene(scene);
 		stage.show();
 	}
 	
@@ -47,23 +53,14 @@ public class BaseScreen {
 		this.controller = controller;
 	}
 	
-	public void setScreenTitle(String title) {
-		this.screenTitle = title;
-		this.stage.setTitle(title);
-	}
-	
-	public static Stage getStage() {
-		return stage;
-	}
-	
-	public static void setStage(Stage newStage) {
-		stage = newStage;
-	}
-	
 	public BaseScreen getHomeScreen() {
 		return this.homeScreen;
 	}
 	public void setHomeScreen(BaseScreen homeScreen) {
 		this.homeScreen = homeScreen;
+	}
+	
+	public void setScreenTitle(String title) {
+		stage.setTitle(title);
 	}
 }

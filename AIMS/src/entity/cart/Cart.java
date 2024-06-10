@@ -9,9 +9,7 @@ import dao.IMediaDAO;
 import exception.MediaUnavailableException;
 import entity.media.Media;
 
-public class Cart {
-	
-	
+public class Cart {	
 	private List<CartMedia> cartMediaList;
 	private int costNoVAT;
 	private int costVAT;
@@ -50,7 +48,6 @@ public class Cart {
         return cartMediaList;
     }
     
-    
     public int getCostNoVAT() {
 		return costNoVAT;
 	}
@@ -75,21 +72,19 @@ public class Cart {
     	cartMediaList.clear();
     }
     
-    
-    
     public void checkProductAvai() throws MediaUnavailableException{
-    	boolean allAvai = true;
-        for (CartMedia object : cartMediaList) {
-            //CartMedia cartMedia = (CartMedia) object;
-        	// get quantity of products needed in the cart
-            int requiredQuantity = object.getQuantity();
-            // get quantity of products available
-            int availQuantity = object.getMedia().getQuantity();
-            if (requiredQuantity > availQuantity) allAvai = false;
+        for (CartMedia cartMedia : cartMediaList) {
+            int availQuantity = cartMedia.getMedia().getQuantity();
+            if (availQuantity < 0) throw new MediaUnavailableException("Only " + availQuantity + " of " + cartMedia.getMedia().getTitle() + " available!");
         }
-        //if quantity is insufficient, throw exception
-        if (!allAvai) throw new MediaUnavailableException("Some media not available");
     }
+
+	public CartMedia checkMediaInCart(Media media) {
+		for (CartMedia cartMedia : cartMediaList) {
+			if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
+		}
+		return null;
+	}
 
 
 }

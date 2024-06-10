@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import exception.AddressNotSupportRushOrderException;
 import exception.EmptyFieldsException;
+import exception.InvalidDateException;
 import exception.InvalidEmailException;
 import exception.InvalidNameException;
 import exception.InvalidNumberException;
@@ -19,11 +20,12 @@ public class DeliveryInfo {
     private LocalDate rushTime;
     private String rushInstruction;
     
-    public void validateInfo() throws AddressNotSupportRushOrderException,EmptyFieldsException, InvalidNameException, InvalidEmailException, InvalidNumberException{
+    public void validateInfo() throws AddressNotSupportRushOrderException,EmptyFieldsException, InvalidNameException, InvalidEmailException, InvalidNumberException, InvalidDateException{
     	if (!validateEmptyFields()) throw new EmptyFieldsException("All fields must be filled");
     	if (!validateName(name)) throw new InvalidNameException("Your name is invalid");
-    	if (!validateEmail(email)) throw new InvalidNameException("Your email is invalid");
-    	if (!validatePhone(phone)) throw new InvalidNameException("Your phone number is invalid");
+    	if (!validateEmail(email)) throw new InvalidEmailException("Your email is invalid");
+    	if (!validatePhone(phone)) throw new InvalidNumberException("Your phone number is invalid");
+    	if (isRush && !validateTime(rushTime)) throw new InvalidDateException("The delivery date must be after today");
     }
     
     public DeliveryInfo(String email, String name, String phone, String province, String address, 
@@ -116,11 +118,11 @@ public class DeliveryInfo {
     }
     
     private boolean validateEmail(String email) {
-    	return email.contains("@gmail.com");
+    	return email.contains("@mail.com");
     }
     
     private boolean validateTime(LocalDate time) {
-    	return true;
+    	return time.isAfter(LocalDate.now());
     }
     
     private boolean validateEmptyFields() {

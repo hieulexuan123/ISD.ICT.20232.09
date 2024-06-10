@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Config;
+import utils.CurrencyFormatter;
 
 public class InvoiceScreen extends BaseScreen{
 
@@ -63,8 +64,7 @@ public class InvoiceScreen extends BaseScreen{
 		super(screenPath);
 		this.order = order;
 		setInvoiceInfo();
-		updateMediaItems();
-		
+		updateMediaItems();	
 		
 	}
 	
@@ -80,11 +80,6 @@ public class InvoiceScreen extends BaseScreen{
     	}
     	
     }
-	
-	public void payOrder() {
-		//PayOrderController payOrderController = new PayOrderController()
-		//payOrderController.payOrder(screen)
-	}
 
     private void setInvoiceInfo() {
 		labelName.setText(order.getInfo().getName());
@@ -92,9 +87,9 @@ public class InvoiceScreen extends BaseScreen{
         labelProvince.setText(order.getInfo().getProvince());
         labelPhone.setText(order.getInfo().getPhone());
         labelInstruction.setText(order.getInfo().getInstruction());
-        labelSubTotal.setText(order.getCostVAT() + " VND");
-        labelShippingFee.setText(order.getShippingFee() + " VND");
-        labelTotal.setText(order.getTotalCost() + " VND");
+        labelSubTotal.setText(CurrencyFormatter.format(order.getCostVAT()));
+        labelShippingFee.setText(CurrencyFormatter.format(order.getShippingFee()));
+        labelTotal.setText(CurrencyFormatter.format(order.getTotalCost()));
         if (order.getInfo().isRush()) {
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         	labelTime.setText(order.getInfo().getRushTime().format(formatter));

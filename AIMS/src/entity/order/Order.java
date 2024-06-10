@@ -53,14 +53,14 @@ public class Order {
 	public int calculateNormalShippingFee(String province) {
 		if (province == null) return 0;
 		else if (province.toLowerCase().contains("hà nội") || province.toLowerCase().contains("hồ chí minh")) {
-			return 30000;
+			return 30;
 		}
-		else return 20000;
+		else return 20;
 	}
 	
 	public int calculateRushShippingFee(String province) {
 		if (province == null) return 0;
-		return 50000;
+		return 50;
 	}
 	
 	public int calculateTotal(int shippingFee) {
