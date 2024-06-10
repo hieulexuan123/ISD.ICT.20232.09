@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.Config;
+import utils.CurrencyFormatter;
 import views.screen.BaseScreen;
 import views.screen.shipping.ShippingScreen;
 
@@ -86,8 +87,7 @@ public class CartScreen extends BaseScreen{
 		
 		try {
 			for (CartMedia cm : cart.getMediaList()) {
-				CartItemScreen itemScreen = new CartItemScreen(Config.CART_ITEM_SCREEN_PATH, this);
-				itemScreen.setCartMedia(cm);
+				CartItemScreen itemScreen = new CartItemScreen(Config.CART_ITEM_SCREEN_PATH, this, cm);
 
 				// add spinner
 				itemList.getChildren().add(itemScreen.getRoot());
@@ -101,13 +101,18 @@ public class CartScreen extends BaseScreen{
 	public void updateCartCost() {
 		cart.updateCost();
 		
-		labelSubtotal.setText(cart.getCostNoVAT() + "VND");
-		labelVAT.setText(cart.calculateVAT() + "VND");
-		labelAmount.setText(cart.getCostVAT() + "VND");
+		labelSubtotal.setText(CurrencyFormatter.format(cart.getCostNoVAT()));
+		labelVAT.setText(CurrencyFormatter.format(cart.calculateVAT()));
+		labelAmount.setText(CurrencyFormatter.format(cart.getCostVAT()));
 	}
 		
 	public Cart getCart() {
 		return this.cart;
+	}
+	
+	@FXML
+	private void handleBackToHome() {
+		homeScreen.show();
 	}
 	
 }

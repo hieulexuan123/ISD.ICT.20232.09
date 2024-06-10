@@ -10,8 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import utils.CurrencyFormatter;
+import views.screen.FXMLScreen;
 
-public class OrderItemScreen {
+public class OrderItemScreen extends FXMLScreen{
 
 	    @FXML
 	    private ImageView image;
@@ -29,27 +31,18 @@ public class OrderItemScreen {
 	    private Label rushEligibility;
 	    
 	    private CartMedia orderMedia;
-	    private FXMLLoader loader;
-		private AnchorPane root;
 		private boolean isRush;
 	    
 	    public OrderItemScreen(String screenPath, CartMedia orderMedia, boolean isRush) throws IOException {
-			this.loader = new FXMLLoader(getClass().getResource(screenPath));
-			this.loader.setController(this);
-			this.root = (AnchorPane) loader.load();
-			
+	    	super(screenPath);
 			this.orderMedia = orderMedia;
 			this.isRush = isRush;
 			setMediaInfo();
 		}
-	    
-	    public AnchorPane getRoot() {
-			return this.root;
-		}
-	    
+	    	    
 	    private void setMediaInfo() {
 	    	title.setText(orderMedia.getMedia().getTitle());
-	        price.setText(orderMedia.getPrice() + " VND");
+	        price.setText(CurrencyFormatter.format(orderMedia.getPrice()));
 	        numOfProd.setText("x" + orderMedia.getQuantity());
 	        
 	        File file = new File(orderMedia.getMedia().getImageURL());

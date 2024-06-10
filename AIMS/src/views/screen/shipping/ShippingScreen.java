@@ -14,6 +14,7 @@ import exception.AddressNotSupportRushOrderException;
 import exception.EmptyFieldsException;
 import exception.MediaNotSupportRushOrderException;
 import views.screen.BaseScreen;
+import views.screen.popup.PopupScreen;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,6 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Config;
+import utils.CurrencyFormatter;
 
 public class ShippingScreen extends BaseScreen {
 	@FXML private Label pageTitle;
@@ -107,6 +109,11 @@ public class ShippingScreen extends BaseScreen {
 					updateMediaItems();
 				} catch (AddressNotSupportRushOrderException | MediaNotSupportRushOrderException e) {
 					e.printStackTrace();
+					try {
+						PopupScreen.error(e.getMessage());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}  
 					chooseNormalShip.setSelected(true);
             		chooseRushShip.setSelected(false);
 				}
@@ -153,18 +160,16 @@ public class ShippingScreen extends BaseScreen {
     }
     
     private void updateOrderCost() {
-    	noVAT.setText(order.getCostNoVAT() + " VND");
-    	VAT.setText(order.getCostVAT() + " VND");
-    	
+    	noVAT.setText(CurrencyFormatter.format(order.getCostNoVAT()));
+    	VAT.setText(CurrencyFormatter.format(order.getCostVAT()));
+    	int fee;
     	if (chooseNormalShip.isSelected()) {
-    		int fee = order.calculateNormalShippingFee(province.getValue());
-    		shippingFees.setText(fee + " VND");
-    		total.setText(order.calculateTotal(fee) + " VND");
+    		fee = order.calculateNormalShippingFee(province.getValue());
     	} else {
-    		int fee = order.calculateRushShippingFee(province.getValue());
-    		shippingFees.setText(fee + " VND");
-    		total.setText(order.calculateTotal(fee) + " VND");
-    	}    	
+    		fee = order.calculateRushShippingFee(province.getValue());
+    	}
+    	shippingFees.setText(CurrencyFormatter.format(fee));
+		total.setText(CurrencyFormatter.format(order.calculateTotal(fee)));
     }
     
     private void updateMediaItems() {
@@ -193,6 +198,11 @@ public class ShippingScreen extends BaseScreen {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}  
 		}
     }
 }
