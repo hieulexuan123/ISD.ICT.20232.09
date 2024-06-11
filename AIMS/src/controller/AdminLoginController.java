@@ -14,7 +14,7 @@ public class AdminLoginController extends BaseController{
 		try {
 			AdminMediaScreen adminMediaScreen = new AdminMediaScreen(Config.ADMIN_MEDIA_SCREEN_PATH);
 			adminMediaScreen.setStage(prevScreen.getStage());
-			adminMediaScreen.setHomeScreen(prevScreen);
+			adminMediaScreen.setHomeScreen(prevScreen.getHomeScreen());
 			adminMediaScreen.setController(new AdminMediaController());
 			adminMediaScreen.show();
 		} catch (IOException e) {

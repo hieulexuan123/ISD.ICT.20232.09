@@ -6,10 +6,12 @@ import java.sql.DriverManager;
 import dao.IDAOFactory;
 import dao.IMediaDAO;
 import dao.IOrderDAO;
+import dao.ISpecificMediaDAO;
 
 public class SqliteDAOFactory implements IDAOFactory{
 	private IMediaDAO mediaDAO;
 	private IOrderDAO orderDAO;
+	private ISpecificMediaDAO bookDAO;
 	private Connection connection;
 	
 	public SqliteDAOFactory() throws Exception{
@@ -35,6 +37,14 @@ public class SqliteDAOFactory implements IDAOFactory{
 			orderDAO = new SqliteOrderDAO(connection);
 		}
 		return orderDAO;
+	}
+	
+	@Override
+	public ISpecificMediaDAO getBookDAO() {
+		if (bookDAO==null) {
+			bookDAO = new SqliteBookDAO(connection);
+		}
+		return bookDAO;
 	}
 
 }

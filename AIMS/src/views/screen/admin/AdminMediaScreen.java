@@ -57,7 +57,12 @@ public class AdminMediaScreen extends BaseScreen{
     
 	public AdminMediaScreen(String screenPath) throws IOException {
 		super(screenPath);
+	}
+	
+	@Override
+	public void show() {
 		setMediaInfo();
+		super.show();
 	}
 	
 	@Override
@@ -89,58 +94,22 @@ public class AdminMediaScreen extends BaseScreen{
                 }
 
                 HBox buttonsHBox = new HBox(editButton, deleteButton);
-
-                switch (media.getCategory()) {
-                    case BOOK: {
-//                        editButton.setOnAction(e -> {
-//                            redirectToBookForm(media.getId());
-//                        });
-
-                        deleteButton.setOnAction(e -> {
-                            try {
-                                getController().deleteMediaById(media.getId(), media.getCategory());
-                                openMediaManage();
-                            } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        });
-
+                deleteButton.setOnAction(e -> {
+                    try {
+                        getController().deleteMedia(media);
+                        update();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
-//                    case CD: {
-//                        editButton.setOnAction(e -> {
-//                            redirectToCDForm(media.getId());
-//                        });
-//
-//                        deleteButton.setOnAction(e -> {
-//                            try {
-//                                cdController.deleteMediaById(media.getId());
-//                                openMediaManage();
-//                            } catch (SQLException ex) {
-//                                throw new RuntimeException(ex);
-//                            }
-//                        });
-//                    }
-//                    case DVD: {
-//                        editButton.setOnAction(e -> {
-//                            redirectToDVDForm(media.getId());
-//                        });
-//
-//                        deleteButton.setOnAction(e -> {
-//                            try {
-//                                dvdController.deleteMediaById(media.getId());
-//                                openMediaManage();
-//                            } catch (SQLException ex) {
-//                                throw new RuntimeException(ex);
-//                            }
-//                        });
-//                    }
-                }
-
+                });
                 setGraphic(buttonsHBox);
             }
         });
-
-        try {
+        update();   
+    }
+    
+    private void update() {
+    	try {
             mediaTableView.setItems(getController().getAllMedia());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,6 +120,11 @@ public class AdminMediaScreen extends BaseScreen{
     
     @FXML
     private void handleCreateMedia() {
-    	
+    	getController().requestCreateMedia(this);
+    }
+    
+    @FXML
+    private void handleLogoutAction() {
+    	homeScreen.show();
     }
 }

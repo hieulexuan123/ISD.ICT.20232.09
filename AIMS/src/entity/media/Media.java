@@ -1,16 +1,38 @@
 package entity.media;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import entity.media.category.Book;
+import entity.media.category.SpecificMedia;
+import exception.EmptyFieldsException;
+
 public class Media {
-	protected int id;
-    protected String title;
-    protected String category;
-    protected int price;
-    protected int value;
-    protected int quantity;
-    protected String imageURL;
-    protected boolean isSupportRushShipping;
-    protected int weight;
+	private int id;
+    private String title;
+    private String category;
+    private int price;
+    private int value;
+    private int quantity;
+    private String imageURL;
+    private boolean isSupportRushShipping;
+    private int weight;
+    private SpecificMedia specificMedia;
     
+	public Media(String title, String category, int price, int value, int quantity, String imageURL,
+			boolean isSupportRushShipping, int weight) {
+		super();
+		this.title = title;
+		this.category = category;
+		this.price = price;
+		this.value = value;
+		this.quantity = quantity;
+		this.imageURL = imageURL;
+		this.isSupportRushShipping = isSupportRushShipping;
+		this.weight = weight;
+		setSpecificMedia();
+	}
+
 	public Media(int id, String title, String category, int price, int value, int quantity, String imageURL,
 			boolean isSupportRushShipping, int weight) {
 		super();
@@ -23,6 +45,30 @@ public class Media {
 		this.imageURL = imageURL;
 		this.isSupportRushShipping = isSupportRushShipping;
 		this.weight = weight;
+		setSpecificMedia();
+	}
+	
+	public static List<String> getCategoryList(){
+		List<String> categoryList = new ArrayList<>();
+		categoryList.add("book");
+		categoryList.add("cd");
+		categoryList.add("dvd");
+		return categoryList;
+	}
+	
+	public void setSpecificMedia() {
+		switch (this.category){
+			case "book": 
+				this.specificMedia = new Book();
+		}
+	}
+	
+	public void setSpecificMedia(SpecificMedia specificMedia) {
+		this.specificMedia = specificMedia;
+	}
+
+	public SpecificMedia getSpecificMedia() {
+		return specificMedia;
 	}
 
 	public int getId() {
@@ -92,7 +138,20 @@ public class Media {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-
+	
+	public void validateInfo() throws EmptyFieldsException {
+		if (!validateEmptyFields()) throw new EmptyFieldsException("All fields must be filled!");
+	}
+	
+	private boolean validateEmptyFields() {
+		if (title.isEmpty() || category.isEmpty() || imageURL.isEmpty()) return false;
+		return true;
+	}
+	
+	private boolean validateTitle(String title) {
+		return true;
+	}
+	
 	@Override
 	public String toString() {
 		return "Media [id=" + id + ", title=" + title + ", category=" + category + ", price=" + price + ", value="

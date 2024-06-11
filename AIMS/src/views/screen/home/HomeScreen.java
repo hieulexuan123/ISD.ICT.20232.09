@@ -53,7 +53,12 @@ public class HomeScreen extends BaseScreen{
         setController(new HomeController());
         initializeCategories();
         updateNumMediaInCart();
-        setHomeInfo();
+    }
+    
+    @Override
+    public void show() {
+    	setHomeInfo();
+    	super.show();
     }
     
     @Override

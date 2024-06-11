@@ -41,9 +41,4 @@ public class AdminLoginScreen extends BaseScreen{
         }
     }
 
-    @FXML
-    void backToHomeScreen(MouseEvent event) {
-        homeScreen.show();
-    }
-
 }
