@@ -11,7 +11,9 @@ import entity.cart.CartMedia;
 import entity.media.Media;
 import utils.Config;
 import views.screen.BaseScreen;
+import views.screen.admin.AdminLoginScreen;
 import views.screen.cart.CartScreen;
+import views.screen.home.HomeScreen;
 
 public class HomeController extends BaseController{
 	private IMediaDAO mediaDAO = DAOFactory.getInstance().getMediaDAO();
@@ -40,5 +42,19 @@ public class HomeController extends BaseController{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void requestToAdmin(BaseScreen prevScreen) {
+		AdminLoginScreen adminLoginScreen;
+		try {
+			adminLoginScreen = new AdminLoginScreen(Config.ADMIN_LOGIN_SCREEN_PATH);
+			adminLoginScreen.setStage(prevScreen.getStage());
+			adminLoginScreen.setHomeScreen(prevScreen);
+			adminLoginScreen.setController(new AdminLoginController());
+			adminLoginScreen.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

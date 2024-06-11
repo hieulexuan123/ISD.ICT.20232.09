@@ -52,6 +52,6 @@ public class OrderItemScreen extends FXMLScreen{
 			image.setFitHeight(90);
 			image.setFitWidth(83);
 			
-			rushEligibility.setVisible(isRush && orderMedia.getMedia().isSupportRushShipping());
+			rushEligibility.setVisible(isRush && orderMedia.getMedia().getIsSupportRushShipping());
 	    }
 }

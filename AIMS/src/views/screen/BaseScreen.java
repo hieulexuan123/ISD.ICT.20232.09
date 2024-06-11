@@ -6,6 +6,7 @@ import controller.BaseController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class BaseScreen extends FXMLScreen{

@@ -1,8 +1,12 @@
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+
+import java.util.List;
+
 import controller.HomeController;
 import dao.*;
+import dao.sqlite.SqliteBookDAO;
 import dao.sqlite.SqliteDAOFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +20,7 @@ import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.cart.CartScreen;
 import views.screen.home.HomeScreen;
+import entity.media.category.*;
 
 
 public class AIMS extends Application {
