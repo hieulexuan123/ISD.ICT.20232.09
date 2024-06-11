@@ -70,7 +70,7 @@ public class Order {
 	public static int getNumberOfRushShippingProduct(List<CartMedia> cartMediaList){
         int count = 0;
         for(CartMedia cm : cartMediaList){
-            if(cm.getMedia().isSupportRushShipping()) count++;
+            if(cm.getMedia().getIsSupportRushShipping()) count++;
         }
         return count;
     }

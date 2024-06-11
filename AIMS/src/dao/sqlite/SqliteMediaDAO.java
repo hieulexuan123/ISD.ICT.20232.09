@@ -1,6 +1,7 @@
 package dao.sqlite;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,6 +39,14 @@ public class SqliteMediaDAO implements IMediaDAO{
             mediaList.add(media);
 		}
 		return mediaList;
+	}
+	
+	@Override
+	public void deleteMediaById(int id) throws SQLException {
+		String query = "delete from media where id = ?";
+		PreparedStatement stmt = connection.prepareStatement(query);
+		stmt.setInt(1, id);
+		stmt.executeUpdate();
 	}
 
 	@Override

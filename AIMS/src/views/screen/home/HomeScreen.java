@@ -185,6 +185,10 @@ public class HomeScreen extends BaseScreen{
     @FXML
     private void handleCartRequest() {
     	getController().requestToCart(cart, this);
-    	
+    }
+    
+    @FXML
+    private void handleAdminRequest() {
+    	getController().requestToAdmin(this);
     }
 }

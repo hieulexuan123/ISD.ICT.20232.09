@@ -13,6 +13,8 @@ public class Config {
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
 	public static final String SUCCESS_IMAGE_PATH = "assets/images/tickgreen.png";
 	public static final String FAILURE_IMAGE_PATH = "assets/images/tickerror.png";
+	public static final String ADMIN_LOGIN_SCREEN_PATH = "/views/fxml/admin_login_screen.fxml";
+	public static final String ADMIN_MEDIA_SCREEN_PATH = "/views/fxml/admin_media_screen.fxml";
 	
 	public static String[] PROVINCES = { "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
 			"Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình", "Lai Châu", "Sơn La",

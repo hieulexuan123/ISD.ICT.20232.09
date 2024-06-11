@@ -77,11 +77,11 @@ public class Media {
 		this.imageURL = imageURL;
 	}
 
-	public boolean isSupportRushShipping() {
+	public boolean getIsSupportRushShipping() {
 		return isSupportRushShipping;
 	}
 
-	public void setSupportRushShipping(boolean isSupportRushShipping) {
+	public void setIsSupportRushShipping(boolean isSupportRushShipping) {
 		this.isSupportRushShipping = isSupportRushShipping;
 	}
 
