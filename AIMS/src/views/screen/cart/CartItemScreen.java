@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import entity.cart.Cart;
 import entity.cart.CartMedia;
+import exception.MediaUnavailableException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,9 +21,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import utils.CurrencyFormatter;
+import views.screen.FXMLScreen;
+import views.screen.popup.PopupScreen;
 
 
-public class CartItemScreen{	
+public class CartItemScreen extends FXMLScreen{	
 	@FXML
 	protected HBox hboxMedia;
 
@@ -50,34 +54,21 @@ public class CartItemScreen{
 	@FXML
 	protected Button btnDelete;
 	
-	private FXMLLoader loader;
-	private AnchorPane root;
 	private CartMedia cartMedia;
 	private Spinner<Integer> spinner;
 	private CartScreen cartScreen;
 
-	public CartItemScreen(String screenPath, CartScreen cartScreen) throws IOException {
-		this.loader = new FXMLLoader(getClass().getResource(screenPath));
-		this.loader.setController(this);
-		this.root = (AnchorPane) loader.load();
-		
+	public CartItemScreen(String screenPath, CartScreen cartScreen, CartMedia cartMedia) throws IOException {
+		super(screenPath);		
 		this.cartScreen = cartScreen;
-		hboxMedia.setAlignment(Pos.CENTER);
-	}
-	
-	public void setCartMedia(CartMedia cartMedia) {
 		this.cartMedia = cartMedia;
+		hboxMedia.setAlignment(Pos.CENTER);
 		setMediaInfo();
 	}
 	
-	public AnchorPane getRoot() {
-		return this.root;
-	}
-
-
 	private void setMediaInfo() {
 		title.setText(cartMedia.getMedia().getTitle());
-		price.setText(cartMedia.calculateTotal() + " VND");
+		price.setText(CurrencyFormatter.format(cartMedia.calculateTotal()));
 		File file = new File(cartMedia.getMedia().getImageURL());
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
@@ -97,24 +88,29 @@ public class CartItemScreen{
 	private void initializeSpinner(){
 		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartMedia.getQuantity());
 		spinner = new Spinner<Integer>(valueFactory);
-		spinner.setOnMouseClicked( e -> {
+		spinner.setOnMouseClicked( event -> {
 			int numOfProd = this.spinner.getValue();
+			int difference = numOfProd - cartMedia.getQuantity();
 			int remainQuantity = cartMedia.getMedia().getQuantity();
-			if (numOfProd > remainQuantity){
-				labelOutOfStock.setText("Sorry, Only " + remainQuantity + " remain in stock");
-				spinner.getValueFactory().setValue(remainQuantity);
-				numOfProd = remainQuantity;
-			}
-
-			// update quantity of cartMedia
-			cartMedia.setQuantity(numOfProd);
-
-			// update the total of mediaCart
-			price.setText(cartMedia.calculateTotal() + " VND");
-
-			// update subtotal and amount of Cart
-			cartScreen.updateCartCost();
-			
+			try {
+				if (difference > remainQuantity) throw new MediaUnavailableException("Not enough " + title.getText() + " in stock");
+				// update quantity of cartMedia
+				cartMedia.setQuantity(numOfProd);
+				//update avail quantity of media
+				cartMedia.getMedia().setQuantity(remainQuantity - difference);
+				// update the total of mediaCart
+				price.setText(CurrencyFormatter.format(cartMedia.calculateTotal()));
+				// update subtotal and amount of Cart
+				cartScreen.updateCartCost();
+			} catch (MediaUnavailableException e) {
+				
+	            try {
+	            	spinner.getValueFactory().setValue(cartMedia.getQuantity());;
+					PopupScreen.error(e.getMessage());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}                		
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);

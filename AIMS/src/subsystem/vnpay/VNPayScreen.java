@@ -46,7 +46,7 @@ public class VNPayScreen extends BaseScreen{
 				System.out.println("chuỗi uri " + uri);
 				System.out.println("chuỗi api" + query);
 				
-				((VNPayController)controller).processResponse(query);
+				ResponseResult.processResponse(query);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			} 		

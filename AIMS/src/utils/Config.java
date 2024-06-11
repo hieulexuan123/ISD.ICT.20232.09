@@ -8,6 +8,11 @@ public class Config {
 	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice_screen.fxml";
 	public static final String INVOICE_ITEM_SCREEN_PATH = "/views/fxml/invoice_item.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
+	public static final String HOME_SCREEN_PATH = "/views/fxml/home_screen.fxml";
+	public static final String HOME_ITEM_SCREEN_PATH = "/views/fxml/home_item.fxml";
+	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
+	public static final String SUCCESS_IMAGE_PATH = "assets/images/tickgreen.png";
+	public static final String FAILURE_IMAGE_PATH = "assets/images/tickerror.png";
 	
 	public static String[] PROVINCES = { "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
 			"Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình", "Lai Châu", "Sơn La",

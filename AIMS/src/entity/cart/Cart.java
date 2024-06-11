@@ -1,29 +1,31 @@
 package entity.cart;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dao.DAOFactory;
+import dao.IMediaDAO;
 import exception.MediaUnavailableException;
 import entity.media.Media;
 
-public class Cart {
-	
-	
+public class Cart {	
 	private List<CartMedia> cartMediaList;
 	private int costNoVAT;
 	private int costVAT;
 	
 	public static Cart createCart() {
 		Cart cart = new Cart();
-		Media book = new Media(1, "HarryPotter", 10000, 5);
-		Media cd = new Media(2, "BreakingBad", 20000, 3);
-		book.setImageURL("assets/images/book/harry_potter");
-		cd.setImageURL("assets/images/cd/breaking_bad");
-		book.setSupportRushShipping(true);
-		cd.setSupportRushShipping(true);
-		CartMedia bookCart = new CartMedia(book, 2);
-		CartMedia cdCart = new CartMedia(cd, 1);
-		cart.addCartMedia(bookCart);
-		cart.addCartMedia(cdCart);
+		IMediaDAO mediaDao = DAOFactory.getInstance().getMediaDAO();
+    	try {
+			for (Media media : mediaDao.getAllMedia()) {
+				CartMedia bookCart = new CartMedia(media, 2);
+				cart.addCartMedia(bookCart);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return cart;
 	}
 	
@@ -45,7 +47,6 @@ public class Cart {
     public List<CartMedia> getMediaList(){
         return cartMediaList;
     }
-    
     
     public int getCostNoVAT() {
 		return costNoVAT;
@@ -71,21 +72,19 @@ public class Cart {
     	cartMediaList.clear();
     }
     
-    
-    
     public void checkProductAvai() throws MediaUnavailableException{
-    	boolean allAvai = true;
-        for (CartMedia object : cartMediaList) {
-            //CartMedia cartMedia = (CartMedia) object;
-        	// get quantity of products needed in the cart
-            int requiredQuantity = object.getQuantity();
-            // get quantity of products available
-            int availQuantity = object.getMedia().getQuantity();
-            if (requiredQuantity > availQuantity) allAvai = false;
+        for (CartMedia cartMedia : cartMediaList) {
+            int availQuantity = cartMedia.getMedia().getQuantity();
+            if (availQuantity < 0) throw new MediaUnavailableException("Only " + availQuantity + " of " + cartMedia.getMedia().getTitle() + " available!");
         }
-        //if quantity is insufficient, throw exception
-        if (!allAvai) throw new MediaUnavailableException("Some media not available");
     }
+
+	public CartMedia checkMediaInCart(Media media) {
+		for (CartMedia cartMedia : cartMediaList) {
+			if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
+		}
+		return null;
+	}
 
 
 }

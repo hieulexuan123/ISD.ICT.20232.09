@@ -3,3 +3,10 @@ AIMS/bin
 AIMS/.classpath
 .classpath
 .project
+
+#Ignore .idea in all folder
+**/.idea
+
+#Ignore project setting in IntelliJ IDEA
+**/*.iml
+/bin
