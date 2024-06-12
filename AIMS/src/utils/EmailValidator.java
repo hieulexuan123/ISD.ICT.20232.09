@@ -12,6 +12,6 @@ public class EmailValidator {
             return false; // Null emails are not valid
         }
         Matcher matcher = EMAIL_PATTERN.matcher(email);
-        return matcher.matches();
+        return !matcher.matches();
     }
 }

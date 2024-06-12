@@ -39,12 +39,12 @@ public class UserCreateScreen extends BaseScreen {
     void handleSaveAction(ActionEvent event) throws IOException {
         try {
             String email = textEmail.getText();
-            if (!EmailValidator.isValidEmail(email))
+            if (EmailValidator.isValidEmail(email))
                 throw new InvalidEmailException("Invalid Email");
 
             String phone = textPhone.getText();
             if (!PhoneValidator.isValidPhoneNumber(phone))
-                throw new InvalidNumberException("");
+                throw new InvalidNumberException("Invalid Phone Number");
 
             String name = textName.getText();
 

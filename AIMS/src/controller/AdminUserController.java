@@ -5,7 +5,6 @@ import dao.IUserDAO;
 import entity.user.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableCell;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.admin.AdminMediaScreen;
@@ -76,6 +75,7 @@ public class AdminUserController extends BaseController {
     public void requestOrderScreen(BaseScreen prevScreen) {
         try {
             // TO DO implement when have admin manage order screen
+            System.out.println("Move to order Screen");
         }catch (Exception e){
             e.printStackTrace();
         }

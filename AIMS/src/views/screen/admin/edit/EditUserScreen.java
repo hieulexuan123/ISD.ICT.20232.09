@@ -41,7 +41,7 @@ public class EditUserScreen extends BaseScreen {
                 throw new UserNotFoundException("User Not Found!");
             int id = this.user.getId();
             String email = textEmail.getText();
-            if (!EmailValidator.isValidEmail(email))
+            if (EmailValidator.isValidEmail(email))
                 throw new InvalidEmailException("Invalid Email");
 
             String phone = textPhone.getText();
