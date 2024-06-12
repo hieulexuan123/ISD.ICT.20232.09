@@ -1,9 +1,10 @@
-package views.screen.admin.create;
+package views.screen.admin.edit;
 
 import controller.AdminUserController;
 import entity.user.User;
 import exception.InvalidEmailException;
 import exception.InvalidNumberException;
+import exception.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,9 +16,7 @@ import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
 
-
-public class UserCreateScreen extends BaseScreen {
-
+public class EditUserScreen extends BaseScreen {
     @FXML
     private Label formTitle;
 
@@ -38,6 +37,9 @@ public class UserCreateScreen extends BaseScreen {
     @FXML
     void handleSaveAction(ActionEvent event) throws IOException {
         try {
+            if(user == null)
+                throw new UserNotFoundException("User Not Found!");
+            int id = this.user.getId();
             String email = textEmail.getText();
             if (!EmailValidator.isValidEmail(email))
                 throw new InvalidEmailException("Invalid Email");
@@ -48,17 +50,42 @@ public class UserCreateScreen extends BaseScreen {
 
             String name = textName.getText();
 
-            getController().createUser(new User(name, email, phone));
+            getController().updateUser(new User(id, name, email, phone));
             homeScreen.show();
-        } catch (InvalidNumberException | InvalidEmailException e) {
+        } catch (InvalidNumberException | InvalidEmailException | UserNotFoundException e) {
             PopupScreen.error(e.getMessage());
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public UserCreateScreen(String screenPath) throws IOException {
+    private User user;
+
+    public EditUserScreen setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public EditUserScreen(String screenPath) throws IOException {
         super(screenPath);
+    }
+
+    public EditUserScreen initScreen() throws IOException {
+        try{
+            if(this.user == null)
+                throw new UserNotFoundException("Not found user");
+            formTitle.setText("ID: " + user.getId());
+            textName.setText(user.getName());
+            textEmail.setText(user.getEmail());
+            textPhone.setText(user.getPhone());
+            return this;
+        }catch (UserNotFoundException e){
+            PopupScreen.error(e.getMessage());
+            return this;
+        } catch (Exception e){
+            e.printStackTrace();
+            return this;
+        }
     }
 
     @Override

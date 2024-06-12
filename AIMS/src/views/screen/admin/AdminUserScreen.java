@@ -85,6 +85,10 @@ public class AdminUserScreen extends BaseScreen {
         return (AdminUserController) super.getController();
     }
 
+    private void handleEditUser(User user){
+        getController().requestEditUser(this, user);
+    }
+
     private void setUserInfo() {
         setController(new AdminUserController());
         colId.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
@@ -108,12 +112,20 @@ public class AdminUserScreen extends BaseScreen {
                 }
 
                 HBox buttonsHBox = new HBox(editButton, deleteButton);
+                buttonsHBox.setSpacing(12);
                 deleteButton.setOnAction(e -> {
                     try {
                         getController().deleteUser(user);
                         update();
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
+                    }
+                });
+                editButton.setOnAction(event -> {
+                    try {
+                       handleEditUser(user);
+                    }catch (Exception err){
+                        throw new RuntimeException(err);
                     }
                 });
                 setGraphic(buttonsHBox);

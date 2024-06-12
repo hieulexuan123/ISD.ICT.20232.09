@@ -3,10 +3,7 @@ package dao.sqlite;
 import dao.IUserDAO;
 import entity.user.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +74,25 @@ public class SqliteUserDao implements IUserDAO {
             preparedStatement.getGeneratedKeys();
             System.out.println("Update successfully");
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserById(User user) {
+        try{
+            String query = "UPDATE \"User\""
+                    + "SET email = ?, phone = ?, name = ? "
+                    + "WHERE id = ?;";
+            PreparedStatement stm = connection.prepareStatement(query,
+                    Statement.RETURN_GENERATED_KEYS);
+            stm.setString(1, user.getEmail());
+            stm.setString(2, user.getPhone());
+            stm.setString(3, user.getName());
+            stm.setInt(4, user.getId());
+            stm.executeUpdate();
+            stm.getGeneratedKeys();
         }catch (Exception e){
             e.printStackTrace();
         }
