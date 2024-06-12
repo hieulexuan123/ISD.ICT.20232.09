@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Config;
 import views.screen.BaseScreen;
+import views.screen.admin.AdminMediaScreen;
 import views.screen.admin.create.UserCreateScreen;
 
 public class AdminUserController extends BaseController {
@@ -37,5 +38,27 @@ public class AdminUserController extends BaseController {
             e.printStackTrace();
         }
 
+    }
+
+    public void requestMediaScreen(BaseScreen prevScreen) {
+        try{
+            AdminMediaScreen mediaScreen =
+                    new AdminMediaScreen(Config.ADMIN_MEDIA_SCREEN_PATH);
+            mediaScreen.setController(new AdminMediaController());
+            mediaScreen.setStage(prevScreen.getStage());
+            mediaScreen.setPrevScreen(prevScreen);
+            mediaScreen.setHomeScreen(prevScreen);
+            mediaScreen.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void requestOrderScreen(BaseScreen prevScreen) {
+        try {
+            // TO DO implement when have admin manage order screen
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

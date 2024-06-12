@@ -24,17 +24,6 @@ public class User {
         this.phone = phone;
     }
 
-    // override toString method
-    @Override
-    public String toString() {
-        return "{" +
-                "  username='" + name + "'" +
-                ", email='" + email + "'" +
-                ", phone='" + phone + "'" +
-                "}";
-    }
-
-
     // Getters
     public int getId(){
         return this.id;

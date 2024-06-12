@@ -55,6 +55,17 @@ public class AdminUserScreen extends BaseScreen {
     }
 
     @FXML
+    void handleShowMediaScreen() {
+        getController().requestMediaScreen(this);
+    }
+
+    @FXML
+    void handleShowOrderScreen() {
+        getController().requestOrderScreen(this);
+    }
+
+
+    @FXML
     void handleLogoutAction(ActionEvent event) {
         homeScreen.show();
     }

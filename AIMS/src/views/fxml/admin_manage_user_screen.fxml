@@ -20,17 +20,17 @@
                             <children>
                                 <VBox layoutY="315.0" prefHeight="238.0" prefWidth="228.0" spacing="12.0" style="-fx-padding: 8px;">
                                     <children>
-                                        <Button fx:id="mediaManage" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-cursor: hand;" text="Media">
+                                        <Button fx:id="mediaManage" mnemonicParsing="false" onAction="#handleShowMediaScreen" prefHeight="33.0" prefWidth="228.0" style="-fx-cursor: hand;" text="Media">
                                             <font>
                                                 <Font name="System Bold" size="16.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="orderManage" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="Order">
+                                        <Button fx:id="orderManage" mnemonicParsing="false" onAction="#handleShowOrderScreen" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="Order">
                                             <font>
                                                 <Font name="System Bold" size="16.0" />
                                             </font>
                                         </Button>
-                              <Button fx:id="userManage" layoutX="18.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="User">
+                              <Button fx:id="userManage" disable="true" layoutX="18.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="User">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
