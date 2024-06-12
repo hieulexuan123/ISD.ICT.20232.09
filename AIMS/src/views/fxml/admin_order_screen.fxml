@@ -20,12 +20,12 @@
                             <children>
                                 <VBox layoutY="315.0" prefHeight="238.0" prefWidth="228.0" style="-fx-padding: 8px;">
                                     <children>
-                                        <Button fx:id="mediaManage" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" style="-fx-cursor: hand;" text="Media">
+                                        <Button fx:id="mediaManage" mnemonicParsing="false" onAction="#handleShowMediaScreen" prefHeight="33.0" prefWidth="228.0" style="-fx-cursor: hand;" text="Media">
                                             <font>
                                                 <Font name="System Bold" size="16.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="orderManage" mnemonicParsing="false" onAction="#handleShowOrderScreen" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="Order">
+                                        <Button fx:id="orderManage" mnemonicParsing="false" prefHeight="33.0" prefWidth="228.0" snapToPixel="false" style="-fx-cursor: hand;" text="Order">
                                             <font>
                                                 <Font name="System Bold" size="16.0" />
                                             </font>
@@ -44,18 +44,17 @@
                 </VBox>
                 <VBox alignment="TOP_RIGHT" prefHeight="789.0" prefWidth="1110.0" style="-fx-padding: 24px;">
                     <children>
-                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#handleCreateMedia" text="Create" />
                         <TableView fx:id="mediaTableView" prefHeight="726.0" prefWidth="1050.0">
                             <columns>
                                 <TableColumn fx:id="idColumn" prefWidth="74.0" text="ID" />
-                                <TableColumn fx:id="titleColumn" prefWidth="155.0" text="Title" />
-                                <TableColumn fx:id="categoryColumn" prefWidth="109.0" text="Category" />
-                                <TableColumn fx:id="valueColumn" prefWidth="89.0" text="Value" />
-                                <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="77.0" text="Price" />
-                                <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="94.0" text="Quantity" />
-                                <TableColumn fx:id="isSupportRushColumn" minWidth="0.0" prefWidth="143.0" text="IsSupportRushShipping" />
-                                <TableColumn fx:id="imageColumn" minWidth="0.0" prefWidth="194.0" text="Image" />
-                                <TableColumn fx:id="actionsColumn" prefWidth="126.0" text="Actions" />
+                                <TableColumn fx:id="nameColumn" prefWidth="120.0" text="Name" />
+                                <TableColumn fx:id="phoneColumn" prefWidth="115.99996948242188" text="Phone" />
+                                <TableColumn fx:id="provinceColumn" prefWidth="95.20001220703125" text="Province" />
+                                <TableColumn fx:id="isRushColumn" minWidth="0.0" prefWidth="84.7999267578125" text="isRush" />
+                                <TableColumn fx:id="totalCostColumn" minWidth="0.0" prefWidth="112.0" text="TotalCost" />
+                                <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="115.2000732421875" text="Status" />
+                                <TableColumn fx:id="isPaidColumn" prefWidth="129.5999755859375" text="IsPaid" />
+                        <TableColumn fx:id="actionColumn" prefWidth="218.4000244140625" text="Action" />
                             </columns>
                         </TableView>
                     </children>

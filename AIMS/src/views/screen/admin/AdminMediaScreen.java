@@ -10,6 +10,7 @@ import entity.media.Media;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -126,5 +127,10 @@ public class AdminMediaScreen extends BaseScreen{
     @FXML
     private void handleLogoutAction() {
     	homeScreen.show();
+    }
+    
+    @FXML
+    void handleShowOrderScreen(ActionEvent event) {
+    	getController().requestOrderScreen(this);
     }
 }

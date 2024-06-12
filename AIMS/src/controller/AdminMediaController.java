@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.Config;
 import views.screen.BaseScreen;
+import views.screen.admin.AdminOrderScreen;
 import views.screen.admin.create.*;
 
 public class AdminMediaController extends BaseController{
@@ -67,5 +68,20 @@ public class AdminMediaController extends BaseController{
 		}
 		
 	}
+	
+	public void requestOrderScreen(BaseScreen prevScreen) {
+		try {
+			AdminOrderScreen adminOrderScreen = new AdminOrderScreen(Config.ADMIN_ORDER_SCREEN_PATH);
+			adminOrderScreen.setStage(prevScreen.getStage());
+			adminOrderScreen.setController(new AdminOrderController());
+			adminOrderScreen.setHomeScreen(prevScreen.getHomeScreen());
+			adminOrderScreen.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 }
