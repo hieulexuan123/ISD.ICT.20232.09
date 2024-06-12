@@ -8,4 +8,6 @@ import entity.media.Media;
 public interface IMediaDAO {
 	List<Media> getAllMedia() throws SQLException;
 	Media getMediaById(int id);
+	void deleteMediaById(int id) throws SQLException;
+	int createMedia(Media media) throws SQLException;
 }

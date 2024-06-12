@@ -1,6 +1,7 @@
 package dao.sqlite;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,6 +39,33 @@ public class SqliteMediaDAO implements IMediaDAO{
             mediaList.add(media);
 		}
 		return mediaList;
+	}
+	
+	@Override
+	public int createMedia(Media media) throws SQLException {
+		String sql = "INSERT INTO media (title, category, value, price, quantity, image_url, is_rush_support, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pstmt.setString(1, media.getTitle());
+        pstmt.setString(2, media.getCategory());
+        pstmt.setInt(3, media.getValue());
+        pstmt.setInt(4, media.getPrice());
+        pstmt.setInt(5, media.getQuantity());
+        pstmt.setString(6, media.getImageURL());
+        pstmt.setInt(7, media.getIsSupportRushShipping() ? 1 : 0);
+        pstmt.setInt(8, media.getWeight());
+        pstmt.executeUpdate();
+        ResultSet generatedKeys = pstmt.getGeneratedKeys();
+        int id = generatedKeys.getInt(1); 
+        System.out.println("Update successfully");
+        return id;
+	}
+	
+	@Override
+	public void deleteMediaById(int id) throws SQLException {
+		String query = "delete from media where id = ?";
+		PreparedStatement stmt = connection.prepareStatement(query);
+		stmt.setInt(1, id);
+		stmt.executeUpdate();
 	}
 
 	@Override

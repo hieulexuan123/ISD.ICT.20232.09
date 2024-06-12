@@ -53,7 +53,12 @@ public class HomeScreen extends BaseScreen{
         setController(new HomeController());
         initializeCategories();
         updateNumMediaInCart();
-        setHomeInfo();
+    }
+    
+    @Override
+    public void show() {
+    	setHomeInfo();
+    	super.show();
     }
     
     @Override
@@ -185,6 +190,10 @@ public class HomeScreen extends BaseScreen{
     @FXML
     private void handleCartRequest() {
     	getController().requestToCart(cart, this);
-    	
+    }
+    
+    @FXML
+    private void handleAdminRequest() {
+    	getController().requestToAdmin(this);
     }
 }
