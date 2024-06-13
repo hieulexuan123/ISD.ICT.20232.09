@@ -187,12 +187,12 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="20.0" layoutY="328.0" prefHeight="20.0" prefWidth="121.0" text="Total Cost: ">
+                              <Label layoutX="297.0" layoutY="287.0" prefHeight="20.0" prefWidth="121.0" text="Total Cost: ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="totalCost" layoutX="167.0" layoutY="328.0" text="dffdfdfdfd">
+                              <Label fx:id="totalCost" layoutX="419.0" layoutY="287.0" text="dffdfdfdfd">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -207,19 +207,9 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="297.0" layoutY="287.0" prefHeight="20.0" prefWidth="106.0" text="Payment Status: ">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="paymentStatus" layoutX="419.0" layoutY="287.0" text="dffdfdfdfd" textFill="#ff961e">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="cancelButton" layoutX="1005.0" layoutY="34.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="47.0" text="X">
+                        <Button fx:id="cancelButton" layoutX="1005.0" layoutY="34.0" mnemonicParsing="false" onAction="#handleRequestBack" prefHeight="44.0" prefWidth="47.0" text="X">
                            <font>
                               <Font size="20.0" />
                            </font>

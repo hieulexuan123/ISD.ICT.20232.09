@@ -1,22 +1,30 @@
 package views.screen.admin;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import controller.AdminMediaController;
+import controller.AdminOrderController;
+import entity.order.Order;
 import entity.order.OrderMedia;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import views.screen.BaseScreen;
 
 public class AdminOrderDetailScreen extends BaseScreen {
 
-    public AdminOrderDetailScreen(String screenPath) throws IOException {
+    public AdminOrderDetailScreen(String screenPath, Order order) throws IOException {
 		super(screenPath);
+		this.order = order;
+		System.out.println(order.toString());
 		// TODO Auto-generated constructor stub
 	}
+    private Order order;
 
 	@FXML
     private Label addressField;
@@ -69,8 +77,6 @@ public class AdminOrderDetailScreen extends BaseScreen {
     @FXML
     private Label orderStatus;
 
-    @FXML
-    private Label paymentStatus;
 
     @FXML
     private Label phoneField;
@@ -92,12 +98,55 @@ public class AdminOrderDetailScreen extends BaseScreen {
 
     @Override
 	public void show() {
-		setOrderMediaInfo();
+		setInfo();
 		super.show();
 	}
     
+    void setOrderMediaInfo() {
+    	orderMediaId.setCellValueFactory(new PropertyValueFactory<OrderMedia, Integer>("id"));
+        orderMediaTitle.setCellValueFactory(new PropertyValueFactory<OrderMedia, String>("title"));
+        orderMediaPrice.setCellValueFactory((new PropertyValueFactory<OrderMedia, Integer>("price")));
+        orderMediaQuantity.setCellValueFactory(new PropertyValueFactory<OrderMedia, Integer>("quantity"));
+        orderMediaIsRush.setCellValueFactory(new PropertyValueFactory<OrderMedia, Boolean>("isRush"));
+        orderMediaImage.setCellValueFactory(new PropertyValueFactory<OrderMedia, String >("imageURL"));
+
+    }
+    
+    void setInfo() {
+    	nameField.setText(order.getName());
+    	phoneField.setText(order.getPhone());
+    	addressField.setText(order.getAddress());
+    	provinceField.setText(order.getProvince());
+    	if (order.getIsRush()) {
+    	shipTypeField.setText("Rush");
+    	}
+    	else {
+    		shipTypeField.setText("Normal");
+    	}
+    	normalInstruction.setText(order.getInstruction());
+    	deliveryInstruction.setText(order.getRushInstruction());
+    	totalPrice.setText(Integer.toString(order.getCostVAT()));
+    	orderStatus.setText(order.getStatus());
+    	shippingFee.setText(Integer.toString(order.getShippingFee()));
+    	totalCost.setText(Integer.toString(order.getTotalCost()));
+    	setOrderMediaInfo();
+    	update();
+    }
+    
     @Override
-	public AdminOrderMediaController getController() {
-		return (AdminOrderMediaController)super.getController();
+	public AdminOrderController getController() {
+		return (AdminOrderController)super.getController();
 	}
+    private void update() {
+    	try {
+            orderMediaTable.setItems(getController().getAllOrderMedia(order.getId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    void handleRequestBack(ActionEvent event) {
+    	getController().requestOrderScreen(this);
+    }
 }

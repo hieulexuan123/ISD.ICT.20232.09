@@ -47,7 +47,7 @@ public class SqliteOrderDAO implements IOrderDAO{
             orderList.add(order);
             System.out.println(order.toString());
 		}
-		System.out.println("Hello");
+	
 		return orderList;
 	}
 
@@ -62,7 +62,7 @@ public class SqliteOrderDAO implements IOrderDAO{
 	}
 	
 	@Override
-	public List<OrderMedia> getOrderMediaByOrderId(int orderId){
+	public List<OrderMedia> getOrderMediaByOrderId(int orderId) throws SQLException{
 		String query = "SELECT OrderMedia.*, Media.title, Media.image_url, Media.is_rush_support "
 				+ "FROM OrderMedia JOIN Media ON OrderMedia.media_id = Media.id WHERE order_id = ?";
 		PreparedStatement stmt = connection.prepareStatement(query);
@@ -70,26 +70,18 @@ public class SqliteOrderDAO implements IOrderDAO{
 	    ResultSet res = stmt.executeQuery();
 		List<OrderMedia> orderMediaList = new ArrayList<>();
 		while (res.next()) {
-			int id = res.getInt("id");
-			String name = res.getString("name");
-			String phone = res.getString("phone");
-			String email = res.getString("email");
-			String province = res.getString("province");
-			String address = res.getString("address");
-			String instruction = res.getString("instruction");
-			int is_rush = res.getInt("is_rush");
-			String rush_instruction = res.getString("rush_instruction");
-			String delivery_time = res.getString("delivery_time");
-			int shipping_fee = res.getInt("shipping_fee");
-			int total_cost = res.getInt("total_cost");
-			String status = res.getString("status");
-			int is_paid = res.getInt("is_paid");
+			int id = res.getInt("media_id");
+			String title = res.getString("title");
+			int price = res.getInt("price");
+			
+			int quantity = res.getInt("quantity");
+			int isRush = res.getInt("is_rush_support");
+			String image = res.getString("image_url");
+			OrderMedia orderMedia = new OrderMedia(id,title,image,quantity,price,isRush==1);
+			orderMediaList.add(orderMedia);
 		}
+		return orderMediaList;
 	}
 
-	@Override
-	public Order getOrderDetail() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

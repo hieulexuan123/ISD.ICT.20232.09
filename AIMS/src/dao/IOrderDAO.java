@@ -5,9 +5,10 @@ import java.util.List;
 
 import entity.media.Media;
 import entity.order.Order;
+import entity.order.OrderMedia;
 
 public interface IOrderDAO {
 	List<Order> getAllOrder() throws SQLException;
 	void changeOrderStatusById(int id, String status) throws SQLException;
-	Order getOrderDetail() throws SQLException;
+	List<OrderMedia> getOrderMediaByOrderId (int id) throws SQLException;
 }

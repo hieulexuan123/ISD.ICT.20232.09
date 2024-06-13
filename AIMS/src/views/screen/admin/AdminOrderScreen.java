@@ -83,6 +83,9 @@ public class AdminOrderScreen extends BaseScreen{
     void handleShowMediaScreen(ActionEvent event) {
     	getController().requestMediaScreen(this);
     }
+    BaseScreen getSelf() {
+    	return this;
+    }
     
     private void setOrderInfo() {
         idColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("id"));
@@ -136,14 +139,11 @@ public class AdminOrderScreen extends BaseScreen{
                     }
                 });
                 
-//                viewButton.setOnAction(event -> {
-//                	try {
-//                        getController();
-//                        update(); // Refresh the table view to reflect changes
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                });
+                viewButton.setOnAction(event -> {
+                	
+                    getController().requestOrderDetailScreen(getSelf(), order);
+                    
+                });
 
                 setGraphic(container);
             }
