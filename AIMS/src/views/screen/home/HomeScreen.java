@@ -44,31 +44,45 @@ public class HomeScreen extends BaseScreen{
     private final int ITEMS_PER_PAGE = 12;
 
     private List<Media> mediaList;
-    private List<Media> filteredMediaList;
+    private static List<Media> filteredMediaList;
     private Cart cart;
 
-    public HomeScreen(String screenPath) throws IOException{
+    public HomeScreen(String screenPath, Cart cart) throws IOException{
         super(screenPath);
-        this.cart = new Cart();
         setController(new HomeController());
         initializeCategories();
+        if (cart == null) {
+        	this.cart = new Cart();
+        	setHomeInfo();
+        }
+        else {
+        	this.cart = cart;
+        	displayPage(currentPage);
+        }
+        
         updateNumMediaInCart();
-        setHomeInfo();
+        
+        
     }
+    
     
     @Override
     public HomeController getController() {
     	return (HomeController)super.getController();
     }
-
+   
     public void updateNumMediaInCart(){
     	numMediaInCart.setText(String.valueOf(cart.getMediaList().size()) + " media");
     }
     
+    public static List<Media> currentMediaList(){
+    	return filteredMediaList;
+    }
+    
     private void setHomeInfo() {
-    	try {
-			mediaList = getController().getAllMedia();
-			filteredMediaList = new ArrayList<>(mediaList);
+    	try {	
+    		mediaList = getController().getAllMedia();
+    		filteredMediaList = new ArrayList<>(mediaList);
 			displayPage(currentPage);
 		} catch (SQLException e) {
 			e.printStackTrace();

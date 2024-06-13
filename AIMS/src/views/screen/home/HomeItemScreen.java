@@ -8,13 +8,22 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
 import exception.MediaUnavailableException;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import utils.Config;
 import utils.CurrencyFormatter;
 import views.screen.FXMLScreen;
+import views.screen.item.ItemDetailScreen;
 import views.screen.popup.PopupScreen;
 
 public class HomeItemScreen extends FXMLScreen{
@@ -66,6 +75,23 @@ public class HomeItemScreen extends FXMLScreen{
             }
         });
         setMediaInfo();
+        
+        mediaImage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	public void handle(MouseEvent event) {
+                	ItemDetailScreen itemDetailScreen;
+					try {
+						itemDetailScreen = new ItemDetailScreen(Config.ITEM_DETAIL_SCREEN_PATH, media, cart);
+						Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	                	itemDetailScreen.setStage(stage);
+	                	itemDetailScreen.show();
+	                	
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                	    
+            }
+        });
     }
 
 

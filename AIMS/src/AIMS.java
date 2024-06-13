@@ -30,7 +30,7 @@ public class AIMS extends Application {
         	Cart cart = Cart.createCart();
             //BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
             //cartScreen.show();
-        	HomeScreen homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH);
+        	HomeScreen homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH, null);
         	homeScreen.setStage(stage);
         	homeScreen.show();
     	} catch (Exception e) {

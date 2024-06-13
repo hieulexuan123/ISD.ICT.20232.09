@@ -7,5 +7,6 @@ import entity.media.Media;
 
 public interface IMediaDAO {
 	List<Media> getAllMedia() throws SQLException;
+	
 	Media getMediaById(int id);
 }

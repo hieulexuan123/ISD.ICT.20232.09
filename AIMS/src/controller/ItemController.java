@@ -1,24 +1,24 @@
 package controller;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import javafx.event.ActionEvent;
+
 import dao.DAOFactory;
 import dao.IMediaDAO;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import javafx.event.ActionEvent;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.cart.CartScreen;
-
-public class HomeController extends BaseController{
+public class ItemController extends BaseController{
 	private IMediaDAO mediaDAO = DAOFactory.getInstance().getMediaDAO();
 	
-	public List<Media> getAllMedia() throws SQLException{
-		return mediaDAO.getAllMedia();
-    }
+	
+//	public void updateQuantity(Media m) throws SQLException {
+//		mediaDAO.updateMediaQuantity(m, 1);
+//	}
 
 	public void addMediaToCart(Cart cart, Media media) {
 		CartMedia cartMedia = cart.checkMediaInCart(media);
