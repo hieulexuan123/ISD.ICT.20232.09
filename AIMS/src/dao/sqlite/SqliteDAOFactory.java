@@ -3,15 +3,13 @@ package dao.sqlite;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import dao.IDAOFactory;
-import dao.IMediaDAO;
-import dao.IOrderDAO;
-import dao.ISpecificMediaDAO;
+import dao.*;
 
 public class SqliteDAOFactory implements IDAOFactory{
 	private IMediaDAO mediaDAO;
 	private IOrderDAO orderDAO;
 	private ISpecificMediaDAO bookDAO;
+	private IUserDAO userDAO;
 	private Connection connection;
 	
 	public SqliteDAOFactory() throws Exception{
@@ -46,5 +44,14 @@ public class SqliteDAOFactory implements IDAOFactory{
 		}
 		return bookDAO;
 	}
+
+	@Override
+	public IUserDAO getUserDAO() {
+		if(userDAO == null){
+			userDAO = new SqliteUserDao(connection);
+		}
+		return userDAO;
+	}
+
 
 }
