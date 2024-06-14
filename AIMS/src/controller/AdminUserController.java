@@ -10,6 +10,7 @@ import views.screen.BaseScreen;
 import views.screen.admin.AdminMediaScreen;
 import views.screen.admin.create.UserCreateScreen;
 import views.screen.admin.edit.EditUserScreen;
+import views.screen.admin.AdminOrderScreen;
 
 public class AdminUserController extends BaseController {
     IUserDAO userDAO = DAOFactory.getInstance().getUserDAO();
@@ -60,8 +61,7 @@ public class AdminUserController extends BaseController {
 
     public void requestMediaScreen(BaseScreen prevScreen) {
         try{
-            AdminMediaScreen mediaScreen =
-                    new AdminMediaScreen(Config.ADMIN_MEDIA_SCREEN_PATH);
+            AdminMediaScreen mediaScreen = new AdminMediaScreen(Config.ADMIN_MEDIA_SCREEN_PATH);
             mediaScreen.setController(new AdminMediaController());
             mediaScreen.setStage(prevScreen.getStage());
             mediaScreen.setPrevScreen(prevScreen);
@@ -74,8 +74,12 @@ public class AdminUserController extends BaseController {
 
     public void requestOrderScreen(BaseScreen prevScreen) {
         try {
-            // TO DO implement when have admin manage order screen
-            System.out.println("Move to order Screen");
+        	 AdminOrderScreen orderScreen = new AdminOrderScreen(Config.ADMIN_ORDER_SCREEN_PATH);
+        	 orderScreen.setController(new AdminOrderController());
+        	 orderScreen.setStage(prevScreen.getStage());
+        	 orderScreen.setPrevScreen(prevScreen);
+        	 orderScreen.setHomeScreen(prevScreen.getHomeScreen());
+        	 orderScreen.show();
         }catch (Exception e){
             e.printStackTrace();
         }

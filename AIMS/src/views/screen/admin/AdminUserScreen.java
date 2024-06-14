@@ -1,5 +1,7 @@
 package views.screen.admin;
 
+import java.io.IOException;
+
 import controller.AdminUserController;
 import entity.user.User;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -70,7 +72,7 @@ public class AdminUserScreen extends BaseScreen {
         homeScreen.show();
     }
 
-    public AdminUserScreen(String screenPath) throws Exception{
+    public AdminUserScreen(String screenPath) throws IOException{
         super(screenPath);
     }
 
