@@ -60,7 +60,6 @@ public class BookCreateScreen extends SpecificMediaCreateScreen {
 				e1.printStackTrace();
 			}
 		}
-		
 	}
 
 }

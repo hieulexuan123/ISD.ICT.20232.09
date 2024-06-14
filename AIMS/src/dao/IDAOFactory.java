@@ -6,4 +6,5 @@ public interface IDAOFactory {
 	ISpecificMediaDAO getBookDAO();
 	ISpecificMediaDAO getCDDAO();
 	ISpecificMediaDAO getDVDDAO();
+	IUserDAO getUserDAO();
 }

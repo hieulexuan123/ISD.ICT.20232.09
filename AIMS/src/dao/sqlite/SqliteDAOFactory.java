@@ -3,10 +3,7 @@ package dao.sqlite;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import dao.IDAOFactory;
-import dao.IMediaDAO;
-import dao.IOrderDAO;
-import dao.ISpecificMediaDAO;
+import dao.*;
 
 public class SqliteDAOFactory implements IDAOFactory{
 	private IMediaDAO mediaDAO;
@@ -14,6 +11,7 @@ public class SqliteDAOFactory implements IDAOFactory{
 	private ISpecificMediaDAO bookDAO;
 	private ISpecificMediaDAO cdDAO;
 	private ISpecificMediaDAO dvdDAO;
+	private IUserDAO userDAO;
 	private Connection connection;
 	
 	public SqliteDAOFactory() throws Exception{
@@ -64,5 +62,14 @@ public class SqliteDAOFactory implements IDAOFactory{
 		}
 		return dvdDAO;
 	}
+
+	@Override
+	public IUserDAO getUserDAO() {
+		if(userDAO == null){
+			userDAO = new SqliteUserDao(connection);
+		}
+		return userDAO;
+	}
+
 
 }
