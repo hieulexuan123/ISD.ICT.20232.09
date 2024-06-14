@@ -59,7 +59,6 @@ public class AdminMediaController extends BaseController{
 	public void createMedia(Media media) {
 		try {
 			int mediaId = mediaDAO.createMedia(media);
-			System.out.println(mediaId);
 			SpecificMedia specificMedia = media.getSpecificMedia();
 			specificMedia.setMediaId(mediaId);
 			specificMedia.getSpecificMediaDAO().create(specificMedia);

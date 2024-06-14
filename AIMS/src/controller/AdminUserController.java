@@ -65,7 +65,7 @@ public class AdminUserController extends BaseController {
             mediaScreen.setController(new AdminMediaController());
             mediaScreen.setStage(prevScreen.getStage());
             mediaScreen.setPrevScreen(prevScreen);
-            mediaScreen.setHomeScreen(prevScreen);
+            mediaScreen.setHomeScreen(prevScreen.getHomeScreen());
             mediaScreen.show();
         }catch (Exception e){
             e.printStackTrace();

@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import dao.DAOFactory;
 import dao.ISpecificMediaDAO;
 import exception.EmptyFieldsException;
+import exception.InvalidDateException;
 import utils.Config;
-import views.screen.BaseScreen;
 import views.screen.admin.create.BookCreateScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
 
@@ -25,7 +25,6 @@ public class Book extends SpecificMedia{
 
 	public Book(String author, String publisher, String coverType, LocalDate publicationDate, int pages, String genre,
 			String language) {
-		super();
 		this.author = author;
 		this.publisher = publisher;
 		this.coverType = coverType;
@@ -50,7 +49,6 @@ public class Book extends SpecificMedia{
 
 	@Override
 	public ISpecificMediaDAO getSpecificMediaDAO() {
-		// TODO Auto-generated method stub
 		return DAOFactory.getInstance().getBookDAO();
 	}
 	
@@ -90,13 +88,18 @@ public class Book extends SpecificMedia{
 		return language;
 	}
 
-	public void validateInfo() throws EmptyFieldsException {
+	public void validateInfo() throws EmptyFieldsException, InvalidDateException {
 		if (!validateEmptyFields()) throw new EmptyFieldsException("All fields, except pages, genre, language, must be filled!");
+		if (!validateDateField()) throw new InvalidDateException("Publication date must be before today");
 	}
 	
 	private boolean validateEmptyFields() {
 		if (author.isEmpty() || publisher.isEmpty() || coverType.isEmpty() || publicationDate==null) return false;
 		return true;
+	}
+	
+	private boolean validateDateField() {
+		return publicationDate.isBefore(LocalDate.now());
 	}
 
 	@Override

@@ -9,6 +9,8 @@ public class SqliteDAOFactory implements IDAOFactory{
 	private IMediaDAO mediaDAO;
 	private IOrderDAO orderDAO;
 	private ISpecificMediaDAO bookDAO;
+	private ISpecificMediaDAO cdDAO;
+	private ISpecificMediaDAO dvdDAO;
 	private IUserDAO userDAO;
 	private Connection connection;
 	
@@ -43,6 +45,22 @@ public class SqliteDAOFactory implements IDAOFactory{
 			bookDAO = new SqliteBookDAO(connection);
 		}
 		return bookDAO;
+	}
+	
+	@Override
+	public ISpecificMediaDAO getCDDAO() {
+		if (cdDAO==null) {
+			cdDAO = new SqliteCdDAO(connection);
+		}
+		return cdDAO;
+	}
+	
+	@Override
+	public ISpecificMediaDAO getDVDDAO() {
+		if (dvdDAO==null) {
+			dvdDAO = new SqliteDvdDAO(connection);
+		}
+		return dvdDAO;
 	}
 
 	@Override
