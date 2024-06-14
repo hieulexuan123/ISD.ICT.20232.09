@@ -1,18 +1,16 @@
 package views.screen.admin.create;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import controller.AdminMediaController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import views.screen.BaseScreen;
 import views.screen.popup.PopupScreen;
-import entity.media.Media;
 import entity.media.category.Book;
 import exception.EmptyFieldsException;
+import exception.InvalidDateException;
 
 public class BookCreateScreen extends SpecificMediaCreateScreen {
 	@FXML private TextField authorField;
@@ -55,14 +53,13 @@ public class BookCreateScreen extends SpecificMediaCreateScreen {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} catch (EmptyFieldsException e) {
+		} catch (EmptyFieldsException | InvalidDateException e) {
 			try {
 				PopupScreen.error(e.getMessage());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
-		
 	}
 
 }

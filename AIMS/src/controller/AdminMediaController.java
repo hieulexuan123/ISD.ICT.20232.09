@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.admin.AdminOrderScreen;
+import views.screen.admin.AdminUserScreen;
 import views.screen.admin.create.*;
 
 public class AdminMediaController extends BaseController{
@@ -59,7 +60,6 @@ public class AdminMediaController extends BaseController{
 	public void createMedia(Media media) {
 		try {
 			int mediaId = mediaDAO.createMedia(media);
-			System.out.println(mediaId);
 			SpecificMedia specificMedia = media.getSpecificMedia();
 			specificMedia.setMediaId(mediaId);
 			specificMedia.getSpecificMediaDAO().create(specificMedia);
@@ -77,11 +77,21 @@ public class AdminMediaController extends BaseController{
 			adminOrderScreen.setHomeScreen(prevScreen.getHomeScreen());
 			adminOrderScreen.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	
 
+    public void requestUserScreen(BaseScreen prevScreen) {
+		try {
+			AdminUserScreen userScreen = new AdminUserScreen(Config.ADMIN_USER_SCREEN_PATH);
+			userScreen.setController(new AdminUserController());
+			userScreen.setHomeScreen(prevScreen.getHomeScreen());
+			userScreen.setStage(prevScreen.getStage());
+			userScreen.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 }

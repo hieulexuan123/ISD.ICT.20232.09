@@ -3,7 +3,6 @@ package entity.media.category;
 import java.io.IOException;
 
 import dao.ISpecificMediaDAO;
-import views.screen.BaseScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
 
 public abstract class SpecificMedia {

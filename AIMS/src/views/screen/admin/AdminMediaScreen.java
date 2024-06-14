@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import utils.Config;
 import views.screen.BaseScreen;
 
 public class AdminMediaScreen extends BaseScreen{
@@ -128,9 +129,13 @@ public class AdminMediaScreen extends BaseScreen{
     private void handleLogoutAction() {
     	homeScreen.show();
     }
-    
     @FXML
     void handleShowOrderScreen(ActionEvent event) {
     	getController().requestOrderScreen(this);
+    }
+    	
+    @FXML
+    void handleShowUserScreen() {
+        getController().requestUserScreen(this);
     }
 }

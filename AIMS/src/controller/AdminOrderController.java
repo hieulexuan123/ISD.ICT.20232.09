@@ -15,6 +15,7 @@ import views.screen.BaseScreen;
 import views.screen.admin.AdminMediaScreen;
 import views.screen.admin.AdminOrderDetailScreen;
 import views.screen.admin.AdminOrderScreen;
+import views.screen.admin.AdminUserScreen;
 
 public class AdminOrderController extends BaseController{
 	private IOrderDAO orderDAO = DAOFactory.getInstance().getOrderDAO();
@@ -53,10 +54,9 @@ public class AdminOrderController extends BaseController{
 			AdminOrderDetailScreen adminOrderDetailScreen = new AdminOrderDetailScreen(Config.ADMIN_ORDER_DETAIL_SCREEN_PATH,order);
 			adminOrderDetailScreen.setStage(prevScreen.getStage());
 			adminOrderDetailScreen.setController(new AdminOrderController());
-			adminOrderDetailScreen.setHomeScreen(prevScreen.getHomeScreen());
+			adminOrderDetailScreen.setPrevScreen(prevScreen);
 			adminOrderDetailScreen.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -69,9 +69,20 @@ public class AdminOrderController extends BaseController{
 			adminOrderScreen.setHomeScreen(prevScreen.getHomeScreen());
 			adminOrderScreen.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	public void requestUserScreen(BaseScreen prevScreen) {
+		try {
+			AdminUserScreen userScreen = new AdminUserScreen(Config.ADMIN_USER_SCREEN_PATH);
+			userScreen.setController(new AdminUserController());
+			userScreen.setHomeScreen(prevScreen.getHomeScreen());
+			userScreen.setStage(prevScreen.getStage());
+			userScreen.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
 }

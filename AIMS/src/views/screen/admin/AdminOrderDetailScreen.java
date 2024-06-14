@@ -22,7 +22,6 @@ public class AdminOrderDetailScreen extends BaseScreen {
 		super(screenPath);
 		this.order = order;
 		System.out.println(order.toString());
-		// TODO Auto-generated constructor stub
 	}
     private Order order;
 
@@ -147,6 +146,6 @@ public class AdminOrderDetailScreen extends BaseScreen {
     
     @FXML
     void handleRequestBack(ActionEvent event) {
-    	getController().requestOrderScreen(this);
+    	prev.show();
     }
 }

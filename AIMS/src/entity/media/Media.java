@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import entity.media.category.Book;
+import entity.media.category.CD;
+import entity.media.category.DVD;
 import entity.media.category.SpecificMedia;
 import exception.EmptyFieldsException;
 
@@ -60,6 +62,13 @@ public class Media {
 		switch (this.category){
 			case "book": 
 				this.specificMedia = new Book();
+				break;
+			case "cd":
+				this.specificMedia = new CD();
+				break;
+			case "dvd":
+				this.specificMedia = new DVD();
+				break;
 		}
 	}
 	

@@ -83,6 +83,12 @@ public class AdminOrderScreen extends BaseScreen{
     void handleShowMediaScreen(ActionEvent event) {
     	getController().requestMediaScreen(this);
     }
+    
+    @FXML
+    void handleShowUserScreen() {
+    	getController().requestUserScreen(this);
+    }
+    
     BaseScreen getSelf() {
     	return this;
     }
