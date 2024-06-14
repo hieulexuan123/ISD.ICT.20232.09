@@ -3,7 +3,6 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import entity.media.category.Book;
 import entity.media.category.SpecificMedia;
 
 public interface ISpecificMediaDAO {

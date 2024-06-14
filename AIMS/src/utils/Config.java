@@ -17,6 +17,8 @@ public class Config {
 	public static final String ADMIN_MEDIA_SCREEN_PATH = "/views/fxml/admin_media_screen.fxml";
 	public static final String MEDIA_CREATE_SCREEN_PATH = "/views/fxml/media_create_screen.fxml";
 	public static final String BOOK_CREATE_SCREEN_PATH = "/views/fxml/book_create_screen.fxml";
+	public static final String CD_CREATE_SCREEN_PATH = "/views/fxml/cd_create_screen.fxml";
+	public static final String DVD_CREATE_SCREEN_PATH = "/views/fxml/dvd_create_screen.fxml";
 	
 	public static String[] PROVINCES = { "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
 			"Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình", "Lai Châu", "Sơn La",

@@ -55,7 +55,7 @@ public class SqliteBookDAO implements ISpecificMediaDAO{
 		Book book = (Book)specificMedia;
 		String sql = "INSERT INTO book (media_id, author, publisher, cover_type, publication_date, pages, genre, language) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setInt(1, 1);
+        pstmt.setInt(1, book.getMediaId());
         pstmt.setString(2, book.getAuthor());
         pstmt.setString(3, book.getPublisher());
         pstmt.setString(4, book.getCoverType());
@@ -64,7 +64,7 @@ public class SqliteBookDAO implements ISpecificMediaDAO{
         pstmt.setString(7, book.getGenre());
         pstmt.setString(8, book.getLanguage());
         pstmt.executeUpdate();
-        System.out.println("Update successfully");
+        System.out.println("Create successfully");
 	}
 
 	@Override
