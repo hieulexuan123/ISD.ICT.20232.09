@@ -17,12 +17,6 @@ public class SqliteCdDAO implements ISpecificMediaDAO {
 	}
 
 	@Override
-	public List<SpecificMedia> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public SpecificMedia getByMediaId(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;

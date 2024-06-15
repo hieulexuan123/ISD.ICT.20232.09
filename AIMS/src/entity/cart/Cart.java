@@ -1,11 +1,8 @@
 package entity.cart;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DAOFactory;
-import dao.IMediaDAO;
 import exception.MediaUnavailableException;
 import entity.media.Media;
 
@@ -25,6 +22,8 @@ public class Cart {
 
     public void removeCartMedia(CartMedia cm){
     	cartMediaList.remove(cm);
+    	int prevQty = cm.getMedia().getQuantity();
+    	cm.getMedia().setQuantity(prevQty + cm.getQuantity());
     	updateCost();
     }
 

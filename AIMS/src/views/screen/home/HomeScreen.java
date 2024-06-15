@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.cart.CartScreen;
-import views.screen.item.ItemDetailScreen;
+import views.screen.item.SpecificMediaDetailScreen;
 
 public class HomeScreen extends BaseScreen{
 	@FXML private Label numMediaInCart;
@@ -60,6 +60,13 @@ public class HomeScreen extends BaseScreen{
     @Override
     public void show() {
     	setHomeInfo();
+    	updateNumMediaInCart();
+    	super.show();
+    }
+    
+    public void showWithoutFetching() {
+    	setHomeInfoWithoutFetching();
+    	updateNumMediaInCart();
     	super.show();
     }
     
@@ -83,6 +90,11 @@ public class HomeScreen extends BaseScreen{
 		}  	    	    	
     }
     
+    private void setHomeInfoWithoutFetching() {
+		filteredMediaList = new ArrayList<>(mediaList);
+		displayPage(currentPage);   	    	
+    }
+    
     private void displayPage(int pageIndex) {
         clearMediaVBoxes();
 
@@ -91,17 +103,17 @@ public class HomeScreen extends BaseScreen{
 
         for (int i = start; i < end; i++) {
         	Media media = filteredMediaList.get(i);
-            HomeItemScreen itemScreen;
 			try {
-				itemScreen = new HomeItemScreen(Config.HOME_ITEM_SCREEN_PATH, media, this, cart);
+				HomeItemScreen itemScreen= new HomeItemScreen(Config.HOME_ITEM_SCREEN_PATH, media, this, cart);
 				itemScreen.setOnClick(event -> {
-					ItemDetailScreen itemDetailScreen;
 					try {
-						itemDetailScreen = new ItemDetailScreen(Config.ITEM_DETAIL_SCREEN_PATH, media, cart);
-						itemDetailScreen.setHomeScreen(this);
-	                	itemDetailScreen.setStage(this.stage);
-	                	itemDetailScreen.show();
-	                	
+						SpecificMediaDetailScreen detailScreen = media.getSpecificMedia().getDetailScreen();
+						detailScreen.setMedia(media);
+						detailScreen.setCart(cart);
+						detailScreen.setStage(this.stage);
+						detailScreen.setHomeScreen(this);
+						detailScreen.setController(this.getController());
+						detailScreen.show();	                	
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -110,7 +122,6 @@ public class HomeScreen extends BaseScreen{
 				VBox targetVBox = getVBoxForIndex(i - start);
 	            targetVBox.getChildren().add(itemScreen.getRoot());
 			} catch (SQLException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}   
         }

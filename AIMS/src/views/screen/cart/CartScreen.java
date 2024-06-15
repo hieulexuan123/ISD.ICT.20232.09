@@ -34,6 +34,7 @@ import javafx.stage.Stage;
 import utils.Config;
 import utils.CurrencyFormatter;
 import views.screen.BaseScreen;
+import views.screen.home.HomeScreen;
 import views.screen.shipping.ShippingScreen;
 
 public class CartScreen extends BaseScreen{
@@ -59,19 +60,10 @@ public class CartScreen extends BaseScreen{
 		this.cart = cart;
 		
 		updateCart();
-		
-		// on mouse clicked, we back to home
-		aimsImage.setOnMouseClicked(e -> {
-			homeScreen.show();
-		});
-
-		// on mouse clicked, we start processing place order usecase
-		btnPlaceOrder.setOnMouseClicked(e -> {
-			placeOrder();			
-		});
 	}
 	
-	private void placeOrder() {
+	@FXML
+	private void handlePlaceOrder() {
 		System.out.println("place order");
 		
 		PlaceOrderController placeOrderController = new PlaceOrderController();
@@ -112,7 +104,8 @@ public class CartScreen extends BaseScreen{
 	
 	@FXML
 	private void handleBackToHome() {
-		homeScreen.show();
+		System.out.println("Hello");
+		((HomeScreen)homeScreen).showWithoutFetching();
 	}
 	
 }

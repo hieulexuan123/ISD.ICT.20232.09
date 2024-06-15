@@ -21,7 +21,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <ImageView fitHeight="72.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="72.0" fitWidth="83.0" onMouseClicked="#handleCartRequest" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@..\..\..\assets\images\cart.png" />
                             </image>

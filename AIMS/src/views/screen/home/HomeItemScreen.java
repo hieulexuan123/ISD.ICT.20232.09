@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import utils.Config;
 import utils.CurrencyFormatter;
 import views.screen.FXMLScreen;
-import views.screen.item.ItemDetailScreen;
 import views.screen.popup.PopupScreen;
 
 public class HomeItemScreen extends FXMLScreen{
@@ -54,29 +53,27 @@ public class HomeItemScreen extends FXMLScreen{
         this.media = media;
         this.homeScreen = homeScreen;
         this.cart = cart;
-        
-        addToCartBtn.setOnMouseClicked(event -> {
-            try {
-            	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());
-                
-            	homeScreen.getController().addMediaToCart(cart, media);
-            	homeScreen.updateNumMediaInCart();
-                avail.setText(String.valueOf(media.getQuantity()));
-                //home.getNumMediaCartLabel().setText(String.valueOf(cart.getTotalMedia() + " media"));
-                PopupScreen.success("The media " + media.getTitle() + " added to Cart");
-            } catch (MediaUnavailableException e) {
-                try {
-					PopupScreen.error(e.getMessage());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         setMediaInfo();
     }
-
+    
+    @FXML
+    private void handleAddToCart() {
+    	try {
+        	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());                
+        	homeScreen.getController().addMediaToCart(cart, media);
+        	homeScreen.updateNumMediaInCart();
+            avail.setText(String.valueOf(media.getQuantity()));
+            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+        } catch (MediaUnavailableException e) {
+            try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void setMediaInfo(){
         File file = new File(media.getImageURL());
