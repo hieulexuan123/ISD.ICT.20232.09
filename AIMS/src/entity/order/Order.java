@@ -129,6 +129,15 @@ public class Order {
 		if (info.isRush()) shippingFee = calculateRushShippingFee(info.getProvince());
 		else shippingFee = calculateNormalShippingFee(info.getProvince());
 		totalCost = calculateTotal(shippingFee);
+		name = info.getName();
+		phone = info.getPhone();
+		email = info.getEmail();
+		province = info.getProvince();
+		address = info.getAddress();
+		instruction = info.getInstruction();
+		isRush = info.isRush();
+		rushTime = info.getRushTime();
+		rushInstruction = info.getRushInstruction();
 	}	
 
 	public boolean getIsPaid() {
