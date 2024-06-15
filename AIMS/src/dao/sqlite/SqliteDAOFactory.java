@@ -20,7 +20,7 @@ public class SqliteDAOFactory implements IDAOFactory{
 	
 	private Connection createConnection() throws Exception{
 		Class.forName("org.sqlite.JDBC");
-        return DriverManager.getConnection("jdbc:sqlite:assets/db/aims.db");
+        return DriverManager.getConnection("jdbc:sqlite:F:/clone/project/AIMS/assets/db/aims.db");
     }
 
 	@Override

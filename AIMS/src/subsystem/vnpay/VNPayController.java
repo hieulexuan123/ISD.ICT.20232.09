@@ -1,4 +1,6 @@
 package subsystem.vnpay;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -29,6 +31,8 @@ public class VNPayController extends BaseController implements IPayment{
 			vnpayScreen.setController(this);
 			vnpayScreen.show();
 			vnpayScreen.displayWeb();
+			//System.out.print("xu ly tại day");
+			 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
