@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import dao.IMediaDAO;
 import entity.media.Media;
+import entity.media.category.SpecificMedia;
 
 public class SqliteMediaDAO implements IMediaDAO{
 	private Connection connection;

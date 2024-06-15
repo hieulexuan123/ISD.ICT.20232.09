@@ -10,6 +10,8 @@ import exception.InvalidDateException;
 import utils.Config;
 import views.screen.admin.create.BookCreateScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
+import views.screen.item.BookDetailScreen;
+import views.screen.item.SpecificMediaDetailScreen;
 
 public class Book extends SpecificMedia{
 	private int id;
@@ -112,6 +114,11 @@ public class Book extends SpecificMedia{
 	@Override
 	public SpecificMediaCreateScreen getCreateScreen() throws IOException {
 		return new BookCreateScreen(Config.BOOK_CREATE_SCREEN_PATH);
+	}
+
+	@Override
+	public SpecificMediaDetailScreen getDetailScreen() throws IOException {
+		return new BookDetailScreen(Config.BOOK_DETAIL_SCREEN_PATH);
 	}
 	
 }

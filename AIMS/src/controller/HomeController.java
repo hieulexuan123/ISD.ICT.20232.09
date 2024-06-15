@@ -3,12 +3,13 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+import javafx.event.ActionEvent;
 import dao.DAOFactory;
 import dao.IMediaDAO;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import entity.media.category.SpecificMedia;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.admin.AdminLoginScreen;
@@ -19,7 +20,12 @@ public class HomeController extends BaseController{
 	private IMediaDAO mediaDAO = DAOFactory.getInstance().getMediaDAO();
 	
 	public List<Media> getAllMedia() throws SQLException{
-		return mediaDAO.getAllMedia();
+		List<Media> mediaList = mediaDAO.getAllMedia();
+		for (Media media : mediaList) {
+			SpecificMedia specificMedia = media.getSpecificMedia();
+			media.setSpecificMedia(specificMedia.getSpecificMediaDAO().getByMediaId(media.getId()));		
+		}
+		return mediaList;
     }
 
 	public void addMediaToCart(Cart cart, Media media) {
@@ -37,7 +43,7 @@ public class HomeController extends BaseController{
 		try {
 			CartScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
 			cartScreen.setStage(prevScreen.getStage());
-			cartScreen.setHomeScreen(prevScreen);
+			cartScreen.setHomeScreen(prevScreen.getHomeScreen());
 			cartScreen.show();
 		} catch (IOException e) {
 			e.printStackTrace();

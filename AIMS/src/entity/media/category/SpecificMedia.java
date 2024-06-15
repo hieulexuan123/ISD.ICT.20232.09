@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import dao.ISpecificMediaDAO;
 import views.screen.admin.create.SpecificMediaCreateScreen;
+import views.screen.item.SpecificMediaDetailScreen;
 
 public abstract class SpecificMedia {
 	protected int mediaId;
@@ -18,4 +19,5 @@ public abstract class SpecificMedia {
 	
 	public abstract ISpecificMediaDAO getSpecificMediaDAO();
 	public abstract SpecificMediaCreateScreen getCreateScreen() throws IOException;
+	public abstract SpecificMediaDetailScreen getDetailScreen() throws IOException;
 }

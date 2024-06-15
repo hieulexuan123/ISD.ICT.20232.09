@@ -1,11 +1,8 @@
 package entity.cart;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DAOFactory;
-import dao.IMediaDAO;
 import exception.MediaUnavailableException;
 import entity.media.Media;
 
@@ -13,23 +10,7 @@ public class Cart {
 	private List<CartMedia> cartMediaList;
 	private int costNoVAT;
 	private int costVAT;
-	
-	public static Cart createCart() {
-		Cart cart = new Cart();
-		IMediaDAO mediaDao = DAOFactory.getInstance().getMediaDAO();
-    	try {
-			for (Media media : mediaDao.getAllMedia()) {
-				CartMedia bookCart = new CartMedia(media, 2);
-				cart.addCartMedia(bookCart);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return cart;
-	}
-	
-	//constructor
+
 	public Cart() {
 		cartMediaList = new ArrayList<CartMedia>();
 	}
@@ -41,6 +22,8 @@ public class Cart {
 
     public void removeCartMedia(CartMedia cm){
     	cartMediaList.remove(cm);
+    	int prevQty = cm.getMedia().getQuantity();
+    	cm.getMedia().setQuantity(prevQty + cm.getQuantity());
     	updateCost();
     }
 
