@@ -75,23 +75,6 @@ public class HomeItemScreen extends FXMLScreen{
             }
         });
         setMediaInfo();
-        
-        mediaImage.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-        	public void handle(MouseEvent event) {
-                	ItemDetailScreen itemDetailScreen;
-					try {
-						itemDetailScreen = new ItemDetailScreen(Config.ITEM_DETAIL_SCREEN_PATH, media, cart);
-						Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	                	itemDetailScreen.setStage(stage);
-	                	itemDetailScreen.show();
-	                	
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                	    
-            }
-        });
     }
 
 
@@ -107,5 +90,9 @@ public class HomeItemScreen extends FXMLScreen{
         price.setText(CurrencyFormatter.format(media.getPrice()));
         category.setText(media.getCategory());
         avail.setText(String.valueOf(media.getQuantity()));
+    }
+    
+    public void setOnClick(EventHandler<MouseEvent> eventHandler) {
+        root.setOnMouseClicked(eventHandler);
     }
 }

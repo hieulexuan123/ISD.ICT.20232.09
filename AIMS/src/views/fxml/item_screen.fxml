@@ -97,7 +97,7 @@
                </children>
             </VBox>
          </children></HBox>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="112.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" text="Home">
+      <Button layoutX="14.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="45.0" prefWidth="90.0" text="Home">
          <font>
             <Font size="16.0" />
          </font></Button>

@@ -22,9 +22,11 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import utils.Config;
 import views.screen.BaseScreen;
 import views.screen.cart.CartScreen;
+import views.screen.item.ItemDetailScreen;
 
 public class HomeScreen extends BaseScreen{
 	@FXML private Label numMediaInCart;
@@ -44,25 +46,21 @@ public class HomeScreen extends BaseScreen{
     private final int ITEMS_PER_PAGE = 12;
 
     private List<Media> mediaList;
-    private static List<Media> filteredMediaList;
+    private List<Media> filteredMediaList;
     private Cart cart;
 
-    public HomeScreen(String screenPath, Cart cart) throws IOException{
-        super(screenPath);
+    public HomeScreen(String screenPath) throws IOException{
+    	super(screenPath);
+        this.cart = new Cart();
         setController(new HomeController());
         initializeCategories();
-        if (cart == null) {
-        	this.cart = new Cart();
-        	setHomeInfo();
-        }
-        else {
-        	this.cart = cart;
-        	displayPage(currentPage);
-        }
-        
         updateNumMediaInCart();
-        
-        
+    }
+    
+    @Override
+    public void show() {
+    	setHomeInfo();
+    	super.show();
     }
     
     
@@ -73,10 +71,6 @@ public class HomeScreen extends BaseScreen{
    
     public void updateNumMediaInCart(){
     	numMediaInCart.setText(String.valueOf(cart.getMediaList().size()) + " media");
-    }
-    
-    public static List<Media> currentMediaList(){
-    	return filteredMediaList;
     }
     
     private void setHomeInfo() {
@@ -100,6 +94,19 @@ public class HomeScreen extends BaseScreen{
             HomeItemScreen itemScreen;
 			try {
 				itemScreen = new HomeItemScreen(Config.HOME_ITEM_SCREEN_PATH, media, this, cart);
+				itemScreen.setOnClick(event -> {
+					ItemDetailScreen itemDetailScreen;
+					try {
+						itemDetailScreen = new ItemDetailScreen(Config.ITEM_DETAIL_SCREEN_PATH, media, cart);
+						itemDetailScreen.setHomeScreen(this);
+	                	itemDetailScreen.setStage(this.stage);
+	                	itemDetailScreen.show();
+	                	
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+	                System.out.println("Item clicked: " + media.getTitle());
+	            });
 				VBox targetVBox = getVBoxForIndex(i - start);
 	            targetVBox.getChildren().add(itemScreen.getRoot());
 			} catch (SQLException | IOException e) {
@@ -199,6 +206,10 @@ public class HomeScreen extends BaseScreen{
     @FXML
     private void handleCartRequest() {
     	getController().requestToCart(cart, this);
-    	
+    }
+    
+    @FXML
+    private void handleAdminRequest() {
+    	getController().requestToAdmin(this);
     }
 }

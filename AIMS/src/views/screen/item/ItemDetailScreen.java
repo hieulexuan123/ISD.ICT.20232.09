@@ -49,6 +49,7 @@ public class ItemDetailScreen extends BaseScreen{
     protected Button addToCartBtn;
 	@FXML
 	private Button backBtn;
+	
 	public ItemDetailScreen(String screenPath, Media media, Cart cart) throws IOException {
 		super(screenPath);
 		this.media = media;
@@ -57,27 +58,6 @@ public class ItemDetailScreen extends BaseScreen{
 		setController(new ItemController());
 		//set number in cart
 		setMediaNumberInCart();
-		//back to home scene
-		backBtn.setOnMouseClicked(event->{
-			
-			HomeScreen homeScreen;
-			try {
-				for (Media m: HomeScreen.currentMediaList()) {
-					if (m.getId() == media.getId()) {
-						m.setQuantity(media.getQuantity());
-					}
-				}
-				homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH, cart);
-				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            	homeScreen.setStage(stage);
-            	homeScreen.show();
-            	
-            	
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
 		
 		//add item to cart
 		addToCartBtn.setOnMouseClicked(event -> {
@@ -127,6 +107,11 @@ public class ItemDetailScreen extends BaseScreen{
 	private void setMediaNumberInCart() {
 		System.out.println("add to cart");
 		numMediaInCart.setText(String.valueOf(cart.getMediaList().size()) + " media");
+	}
+	
+	@FXML
+	private void handleBackToHome() {
+		homeScreen.show();
 	}
 
 }
