@@ -2,11 +2,14 @@ package dao.sqlite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.ISpecificMediaDAO;
 import entity.media.category.SpecificMedia;
+import entity.media.category.CD;
 import entity.media.category.DVD;
 
 public class SqliteDvdDAO implements ISpecificMediaDAO {
@@ -18,8 +21,27 @@ public class SqliteDvdDAO implements ISpecificMediaDAO {
 
 	@Override
 	public SpecificMedia getByMediaId(int media_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from dvd where media_id=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setInt(1, media_id);
+		ResultSet res = pstmt.executeQuery();
+		DVD dvd = new DVD();
+		if (res.next()) {
+			int id = res.getInt("id");
+			String discType = res.getString("disc_type");
+			String runtime = res.getString("runtime");
+			String studio = res.getString("studio");
+			String language = res.getString("language");
+			String subtitle = res.getString("subtitle");
+			String releaseDate = res.getString("release_date");
+			String genre = res.getString("genre");
+			
+			System.out.println("Date DVD: " + releaseDate);
+			
+			int runTime = Integer.parseInt(runtime);
+			dvd = new DVD(id, discType, runTime, studio, language, subtitle, LocalDate.parse(releaseDate), genre);
+		}
+		return dvd;
 	}
 
 	@Override

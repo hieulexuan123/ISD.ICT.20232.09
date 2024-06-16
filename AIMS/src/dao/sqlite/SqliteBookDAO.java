@@ -37,6 +37,7 @@ public class SqliteBookDAO implements ISpecificMediaDAO{
 			int pages = res.getInt("pages");
 			String genre = res.getString("genre");
 			String language = res.getString("language");
+			System.out.println("Date Book: " + publicationDate);
 			book = new Book(id, media_id, author, publisher, coverType, LocalDate.parse(publicationDate), pages, genre, language);
 		}
 		return book;

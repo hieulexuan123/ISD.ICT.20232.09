@@ -15,19 +15,22 @@ import views.screen.home.HomeScreen;
 import views.screen.popup.PopupScreen;
 
 public class BookDetailScreen extends SpecificMediaDetailScreen{
-	@FXML private Label author;
-    @FXML private Label avail;
-    @FXML private Label category;
+	
+//	@FXML private Label title;
+//    @FXML private Label avail;
+//    @FXML private Label category;
+//    @FXML private Label price;
+    
+    @FXML private Label author;
     @FXML private Label coverType;
     @FXML private Label genre;
     @FXML private Label language;
     @FXML private ImageView mediaImage;
-    @FXML private Label numMediaInCart;
+//    @FXML private Label numMediaInCart;
     @FXML private Label pages;
-    @FXML private Label price;
     @FXML private Label publicationDate;
     @FXML private Label publisher;
-    @FXML private Label title;
+  
     @FXML private Label updateNumMediaInCart;
     
     public BookDetailScreen(String screenPath) throws IOException {
@@ -60,43 +63,43 @@ public class BookDetailScreen extends SpecificMediaDetailScreen{
     	language.setText(book.getLanguage());
     	genre.setText(book.getGenre());
     	
-    	File file = new File(media.getImageURL());
+    	File file = new File("AIMS/" + media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setImage(image);
-        updateNumMediaInCart();
+        super.updateNumMediaInCart();
     }
 
-    @FXML
-    void handleAddToCart() {
-    	try {
-        	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());                
-        	getController().addMediaToCart(cart, media);
-        	avail.setText(String.valueOf(media.getQuantity()));
-        	updateNumMediaInCart();
-            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
-        } catch (MediaUnavailableException e) {
-            try {
-				PopupScreen.error(e.getMessage());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}                
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void handleBackToHome() {
-    	((HomeScreen)homeScreen).showWithoutFetching();
-    }
-    
-    @FXML
-    private void handleCartRequest() {
-    	getController().requestToCart(cart, this);
-    }
-
-    private void updateNumMediaInCart(){
-    	numMediaInCart.setText(String.valueOf(cart.getMediaList().size()) + " media");
-    }
+//    @FXML
+//    void handleAddToCart() {
+//    	try {
+//        	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());                
+//        	getController().addMediaToCart(cart, media);
+//        	avail.setText(String.valueOf(media.getQuantity()));
+//        	updateNumMediaInCart();
+//            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+//        } catch (MediaUnavailableException e) {
+//            try {
+//				PopupScreen.error(e.getMessage());
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}                
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @FXML
+//    void handleBackToHome() {
+//    	((HomeScreen)homeScreen).showWithoutFetching();
+//    }
+//    
+//    @FXML
+//    private void handleCartRequest() {
+//    	getController().requestToCart(cart, this);
+//    }
+//
+//    private void updateNumMediaInCart(){
+//    	numMediaInCart.setText(String.valueOf(cart.getMediaList().size()) + " media");
+//    }
 
 }
