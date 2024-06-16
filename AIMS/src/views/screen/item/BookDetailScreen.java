@@ -51,10 +51,11 @@ public class BookDetailScreen extends SpecificMediaDetailScreen{
     private void setMediaInfo() {
     	if (media==null) return;
     	Book book = (Book) media.getSpecificMedia();
-    	title.setText(media.getTitle());
+    	title.setText(media.getTitle()); 	
     	category.setText(media.getCategory());
     	avail.setText(String.valueOf(media.getQuantity()));
     	price.setText(CurrencyFormatter.format(media.getPrice()));
+    	
     	author.setText(book.getAuthor());
     	coverType.setText(book.getCoverType());
     	publisher.setText(book.getPublisher());

@@ -33,9 +33,8 @@ public class CD extends SpecificMedia{
 		this.releaseDate = releaseDate;
 	}
 
-	public CD(int id, int media_id, String artist, String recordLabel, String trackList, String genre, LocalDate releaseDate) {
+	public CD(int id, String artist, String recordLabel, String trackList, String genre, LocalDate releaseDate) {
 		super();
-		this.mediaId = media_id;
 		this.id = id;
 		this.artist = artist;
 		this.recordLabel = recordLabel;

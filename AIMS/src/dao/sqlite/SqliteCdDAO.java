@@ -33,9 +33,7 @@ public class SqliteCdDAO implements ISpecificMediaDAO {
 			String trackList = res.getString("trackList");
 			String releaseDate = res.getString("release_date");
 			String genre = res.getString("genre");
-			System.out.println("Genre CD: " + genre);
-			System.out.println("Date CD: " + releaseDate);
-			cd = new CD(id, media_id, artist, recordLabel, trackList, genre, LocalDate.parse(releaseDate));
+			cd = new CD(id, artist, recordLabel, trackList, genre, LocalDate.parse(releaseDate));
 		}
 		return cd;
 	}

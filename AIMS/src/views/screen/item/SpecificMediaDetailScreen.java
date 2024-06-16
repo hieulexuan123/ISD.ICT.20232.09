@@ -21,6 +21,7 @@ public class SpecificMediaDetailScreen extends BaseScreen{
     @FXML protected Label category;
     @FXML protected Label price;
     
+    
     @FXML private Label numMediaInCart;
 	
 	public SpecificMediaDetailScreen(String screenPath) throws IOException {
