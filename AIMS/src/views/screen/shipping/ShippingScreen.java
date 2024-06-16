@@ -214,19 +214,19 @@ public class ShippingScreen extends BaseScreen {
          PayOrderController payOrderController = new PayOrderController();
 	VNPayController vnpayController = new VNPayController(payOrderController); 
          vnpayController.payOrder(amount, content);
-//    	try {
-//			info.validateInfo();
-//			order.setInfo(info);
-//			//System.out.println(order.toString());
-//			((PlaceOrderController) controller).requestInvoice(order);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			try {
-//				PopupScreen.error(e.getMessage());
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}  
-//		}
+   	try {
+			info.validateInfo();
+			order.setInfo(info);
+			//System.out.println(order.toString());
+			((PlaceOrderController) controller).requestInvoice(order);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}  
+		}
     }
 }
