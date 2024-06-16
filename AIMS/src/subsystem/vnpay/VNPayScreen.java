@@ -46,9 +46,7 @@ public class VNPayScreen extends BaseScreen{
 				URI uri = new URI(newUrl);
 				String query = uri.getQuery();
 				
-				//System.out.println("chuỗi uri " + uri);
-				//System.out.println("chuỗi api" + query);
-				//sendEmailWithURI(uri.toString());
+				
 				sendEmailWithURI();
 				ResponseResult.processResponse(query);
 			} catch (URISyntaxException e) {
@@ -57,12 +55,9 @@ public class VNPayScreen extends BaseScreen{
 		}
 	}
 	void sendEmailWithURI() {
-		//System.out.println("Email sended!");
-			// Thông tin tài khoản email nguồn
+		
 			String senderEmail = "nguyenhieunolob@gmail.com";
 			String senderPassword = "ubzh pssi iduw hwgr";
-
-			// Thông tin tài khoản email đích
 			String recipientEmail = "nguyenhieunolo@gmail.com";
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
@@ -75,20 +70,19 @@ public class VNPayScreen extends BaseScreen{
 				}
 			});
 			Message message = new MimeMessage(session);
-			System.out.println("truoc ham try");
-			try {
-				// Tạo đối tượng Message
-				
+						try {
+			
 				message.setFrom(new InternetAddress(senderEmail));
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail , false));
 				message.setSubject("Payment successful!");
-
-				// Tạo nội dung email
-				String content = "\n\nThank you for choosing AIMS project from group 9!\n\n"
-						  + "Your order has been confirmed!" ;
-				message.setText(content);
-
-				// Gửi email
+				String htmlContent = "<h1>Order Confirmation</h1>"
+                        + "<p>Dear Customer,</p>"
+                        + "<p>Thank you for placing your order. Your order has been confirmed.</p>"
+                        + "<p>Best regards,</p>"
+                        + "<p>ITSS group 9 </p>"  
+						+ "<p><img src=\"https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-cam-on.jpg\" alt=\"Order Confirmation Image\" style=\"max-width: 100%; height: auto;\"></p>";
+				message.setContent(htmlContent, "text/html");
+				
 				Transport.send(message);
 
 				System.out.println("Email sended!");

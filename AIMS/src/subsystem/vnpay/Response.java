@@ -60,7 +60,7 @@ public class Response {
         
         switch (errorCode) {
             case "00":
-            	System.out.print("dathanh toan thanh cong");
+            	
                 BaseScreen resultScreen = new PaymentResultScreen( Config.PAYMENT_RESULT_SCREEN,"PAYMENT SUCCESSFUL!", "You had successfully paid the order");
 
             	resultScreen.show();
