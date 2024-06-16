@@ -9,7 +9,6 @@ import utils.Config;
 import views.screen.admin.create.CdCreateScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
 import views.screen.item.CdDetailScreen;
-import views.screen.item.DvdDetailScreen;
 import views.screen.item.SpecificMediaDetailScreen;
 import exception.EmptyFieldsException;
 import exception.InvalidDateException;

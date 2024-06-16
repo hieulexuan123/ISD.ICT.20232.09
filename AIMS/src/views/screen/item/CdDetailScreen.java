@@ -52,7 +52,7 @@ public class CdDetailScreen extends SpecificMediaDetailScreen{
     	genre.setText(cd.getGenre());
     	
     	
-    	File file = new File("AIMS/" + media.getImageURL());
+    	File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setImage(image);
         updateNumMediaInCart();

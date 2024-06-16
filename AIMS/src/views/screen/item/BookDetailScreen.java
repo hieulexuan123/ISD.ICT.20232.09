@@ -64,7 +64,7 @@ public class BookDetailScreen extends SpecificMediaDetailScreen{
     	language.setText(book.getLanguage());
     	genre.setText(book.getGenre());
     	
-    	File file = new File("AIMS/" + media.getImageURL());
+    	File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setImage(image);
         super.updateNumMediaInCart();

@@ -68,6 +68,15 @@ public class SqliteMediaDAO implements IMediaDAO{
 		stmt.setInt(1, id);
 		stmt.executeUpdate();
 	}
+	
+	@Override
+	public void updateMediaQuantity(int id, int quantity) throws SQLException {
+		String query = "UPDATE Media SET quantity = ? WHERE id = ?";
+	    PreparedStatement stmt = connection.prepareStatement(query);
+	    stmt.setInt(1, quantity);
+	    stmt.setInt(2, id);
+	    stmt.executeUpdate(); 
+	}
 
 	@Override
 	public Media getMediaById(int id) {

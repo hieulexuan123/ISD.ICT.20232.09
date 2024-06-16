@@ -57,7 +57,7 @@ public class DvdDetailScreen extends SpecificMediaDetailScreen {
     	language.setText(dvd.getLanguage());
     	genre.setText(dvd.getGenre());
     	
-    	File file = new File("AIMS/" + media.getImageURL());
+    	File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setImage(image);
         super.updateNumMediaInCart();

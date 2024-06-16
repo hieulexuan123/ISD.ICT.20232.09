@@ -35,7 +35,10 @@
          <left>
             <Pane onMouseClicked="#handleBackToHome" prefHeight="100.0" prefWidth="88.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="82.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../assets/images/logo.png" />
+                     </image></ImageView>
                   <Label layoutX="30.0" layoutY="74.0" text="AIMS">
                      <font>
                         <Font size="16.0" />

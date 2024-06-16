@@ -59,6 +59,10 @@ public class HomeScreen extends BaseScreen{
     
     @Override
     public void show() {
+    	//reset cart media
+    	if (cart!=null) {
+    		cart.emptyCart();
+    	}
     	setHomeInfo();
     	updateNumMediaInCart();
     	super.show();
