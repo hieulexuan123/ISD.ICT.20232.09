@@ -125,11 +125,5 @@ public class SqliteOrderDAO implements IOrderDAO{
         return order_id;
 	}
 
-	@Override
-	public int createOrder(Order order) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
 }

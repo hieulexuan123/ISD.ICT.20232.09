@@ -1,6 +1,8 @@
 package views.screen.invoice;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import views.screen.invoice.InvoiceItemScreen;
 import java.time.format.DateTimeFormatter;
 
@@ -114,7 +116,7 @@ public class InvoiceScreen extends BaseScreen{
         labelRushInstructionKey.setVisible(false);
     }
 	@FXML
-    void confirmInvoice(ActionEvent event) {
+    void confirmInvoice(ActionEvent event) throws SQLException {
 		PayOrderController payOrderController = new PayOrderController();
 		payOrderController.payOrder(order);
     }

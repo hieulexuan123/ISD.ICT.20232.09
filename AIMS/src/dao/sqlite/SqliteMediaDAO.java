@@ -84,10 +84,6 @@ public class SqliteMediaDAO implements IMediaDAO{
 		return null;
 	}
 
-	@Override
-	public void updateMediaQuantity(int id, int quantity) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

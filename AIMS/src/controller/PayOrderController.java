@@ -14,11 +14,7 @@ public class PayOrderController extends BaseController{
 	IPayment subsystem = new VNPayController(this);
 	public void payOrder(Order order) throws SQLException {
 		try {
-			int order_id = DAOFactory.getInstance().getOrderDAO().createOrder(order);
-			for (CartMedia cm : order.getMediaList()) {
-				int media_id = cm.getMedia().getId();
-				int quantity = cm.getMedia().getQuantity();
-				DAOFactory.getInstance().getMediaDAO().updateMediaQuantity(media_id, quantity);}
+			
 			int order_id = DAOFactory.getInstance().getOrderDAO().createOrder(order);
 			for (CartMedia cm : order.getMediaList()) {
 				int media_id = cm.getMedia().getId();
