@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.IOrderDAO;
+import entity.cart.CartMedia;
 import entity.media.Media;
 import entity.order.Order;
 import entity.order.OrderMedia;
@@ -42,8 +43,8 @@ public class SqliteOrderDAO implements IOrderDAO{
 			int total_cost = res.getInt("total_cost");
 			String status = res.getString("status");
 			int is_paid = res.getInt("is_paid");
-			Order order = new Order(id,email,name,phone,province,address,instruction,is_rush==1,LocalDate.parse(delivery_time)
-									,rush_instruction,shipping_fee,total_cost,status, is_paid==1);
+			Order order = new Order(id,email,name,phone,province,address,instruction,is_rush==1,delivery_time!=null ? LocalDate.parse(delivery_time) : null
+									,rush_instruction!=null ? rush_instruction : "",shipping_fee,total_cost,status, is_paid==1);
             orderList.add(order);
             System.out.println(order.toString());
 		}
@@ -81,6 +82,47 @@ public class SqliteOrderDAO implements IOrderDAO{
 			orderMediaList.add(orderMedia);
 		}
 		return orderMediaList;
+	}
+	
+	@Override
+	public int createOrder(Order order) throws SQLException {
+		String sql = "INSERT INTO [Order] (name, phone, email, province, address, instruction, is_rush, rush_instruction, delivery_time,"
+					+ "shipping_fee, total_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pstmt.setString(1, order.getName());
+        pstmt.setString(2, order.getPhone());
+        pstmt.setString(3, order.getEmail());
+        pstmt.setString(4, order.getProvince());
+        pstmt.setString(5, order.getAddress());
+        pstmt.setString(6, order.getInstruction());
+        pstmt.setInt(7, order.getIsRush() ? 1 : 0);
+        pstmt.setString(8, order.getRushInstruction());
+        if (order.getRushInstruction() != null) {
+            pstmt.setString(8, order.getRushInstruction());
+        } else {
+            pstmt.setNull(8, java.sql.Types.VARCHAR);
+        }
+
+        if (order.getRushTime() != null) {
+            pstmt.setString(9, order.getRushTime().toString());
+        } else {
+            pstmt.setNull(9, java.sql.Types.VARCHAR);
+        }
+        pstmt.setInt(10, order.getShippingFee());
+        pstmt.setInt(11, order.getTotalCost());
+        pstmt.executeUpdate();
+        ResultSet generatedKeys = pstmt.getGeneratedKeys();
+        int order_id = generatedKeys.getInt(1); 
+        for (CartMedia cm : order.getMediaList()) {
+        	sql = "INSERT INTO OrderMedia (order_id, media_id, quantity, price) VALUES (?, ?, ?, ?)";
+        	pstmt = connection.prepareStatement(sql);
+        	pstmt.setInt(1, order_id);
+        	pstmt.setInt(2, cm.getMedia().getId());
+        	pstmt.setInt(3, cm.getQuantity());
+        	pstmt.setInt(4, cm.getPrice());
+        	pstmt.executeUpdate();
+        }
+        return order_id;
 	}
 
 	@Override

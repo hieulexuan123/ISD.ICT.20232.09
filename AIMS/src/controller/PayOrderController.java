@@ -19,9 +19,16 @@ public class PayOrderController extends BaseController{
 				int media_id = cm.getMedia().getId();
 				int quantity = cm.getMedia().getQuantity();
 				DAOFactory.getInstance().getMediaDAO().updateMediaQuantity(media_id, quantity);}
+			int order_id = DAOFactory.getInstance().getOrderDAO().createOrder(order);
+			for (CartMedia cm : order.getMediaList()) {
+				int media_id = cm.getMedia().getId();
+				int quantity = cm.getMedia().getQuantity();
+				DAOFactory.getInstance().getMediaDAO().updateMediaQuantity(media_id, quantity);
+			}
 			subsystem.payOrder(order.getTotalCost(), "Pay AIMS invoice");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

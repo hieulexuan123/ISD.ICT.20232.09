@@ -17,22 +17,16 @@ public class SqliteDvdDAO implements ISpecificMediaDAO {
 	}
 
 	@Override
-	public List<SpecificMedia> getAll() throws SQLException {
+	public SpecificMedia getByMediaId(int media_id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public SpecificMedia getByMediaId(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteByMediaId(int id) throws SQLException {
+	public void deleteByMediaId(int media_id) throws SQLException {
 		String query = "delete from dvd where media_id = ?";
 		PreparedStatement stmt = connection.prepareStatement(query);
-		stmt.setInt(1, id);
+		stmt.setInt(1, media_id);
 		stmt.executeUpdate();
 	}
 

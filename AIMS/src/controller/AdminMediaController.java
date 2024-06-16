@@ -17,7 +17,6 @@ import views.screen.admin.create.*;
 
 public class AdminMediaController extends BaseController{
 	private IMediaDAO mediaDAO = DAOFactory.getInstance().getMediaDAO();
-	private Media createdMedia;
 
 	public ObservableList<Media> getAllMedia() throws SQLException {
 		return FXCollections.observableArrayList(mediaDAO.getAllMedia());

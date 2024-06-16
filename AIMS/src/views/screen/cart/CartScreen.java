@@ -15,6 +15,7 @@ import controller.PlaceOrderController;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
+import exception.EmptyCartException;
 import exception.MediaUnavailableException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,8 @@ import javafx.stage.Stage;
 import utils.Config;
 import utils.CurrencyFormatter;
 import views.screen.BaseScreen;
+import views.screen.home.HomeScreen;
+import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreen;
 
 public class CartScreen extends BaseScreen{
@@ -59,26 +62,22 @@ public class CartScreen extends BaseScreen{
 		this.cart = cart;
 		
 		updateCart();
-		
-		// on mouse clicked, we back to home
-		aimsImage.setOnMouseClicked(e -> {
-			homeScreen.show();
-		});
-
-		// on mouse clicked, we start processing place order usecase
-		btnPlaceOrder.setOnMouseClicked(e -> {
-			placeOrder();			
-		});
 	}
 	
-	private void placeOrder() {
+	@FXML
+	private void handlePlaceOrder() {
 		System.out.println("place order");
 		
 		PlaceOrderController placeOrderController = new PlaceOrderController();
 		try {
 			placeOrderController.placeOrder(this.cart, this);
-		} catch (MediaUnavailableException e) {
-			System.out.println(e.getMessage());
+		} catch (MediaUnavailableException | EmptyCartException e) {
+			try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -112,7 +111,8 @@ public class CartScreen extends BaseScreen{
 	
 	@FXML
 	private void handleBackToHome() {
-		homeScreen.show();
+		System.out.println("Hello");
+		((HomeScreen)homeScreen).showWithoutFetching();
 	}
 	
 }
