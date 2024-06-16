@@ -83,5 +83,11 @@ public class SqliteOrderDAO implements IOrderDAO{
 		return orderMediaList;
 	}
 
+	@Override
+	public int createOrder(Order order) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }
