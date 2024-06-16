@@ -4,12 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+//import javax.activation.*;
+
+import utils.Config;
+import views.screen.*;
+import views.screen.payment.PaymentResultScreen;
 import entity.payment.PaymentTransaction;
 
 public class Response {
 	public PaymentTransaction processResponse(String query) throws Exception{
 		Map<String, String> params = parseQueryString(query);
+		//
 		return handleErrorCode(params);
 	}
 	
@@ -33,7 +47,7 @@ public class Response {
         }
 
         // Create Payment transaction
-        String errorCode = params.get("vnp_TransactionStatus");
+        String errorCode = params.get("vnp_ResponseCode");
         String transactionId = params.get("vnp_TransactionNo");
         String transactionContent = params.get("vnp_OrderInfo");
         int amount = Integer.parseInt((String) params.get("vnp_Amount")) / 100;
@@ -41,13 +55,24 @@ public class Response {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
         Date date = dateFormat.parse(createdAt);
-        PaymentTransaction trans = new PaymentTransaction(transactionId, transactionContent, amount, 1, date);
+        PaymentTransaction trans = new PaymentTransaction(transactionId, errorCode,transactionContent, amount, 1, date);
+        
+        
         switch (errorCode) {
             case "00":
-                break;
+            	System.out.print("dathanh toan thanh cong");
+                BaseScreen resultScreen = new PaymentResultScreen( Config.PAYMENT_RESULT_SCREEN,"PAYMENT SUCCESSFUL!", "You had successfully paid the order");
+
+            	resultScreen.show();
+            	break;
             default:
+            	BaseScreen resultScreen1 = new PaymentResultScreen( Config.PAYMENT_RESULT_SCREEN,"PAYMENT FAILED!", "Please try again!");
+
+            	resultScreen1.show();
             	throw new Exception("Transaction failed");
         }
         return trans;
 	}
+	 
+		
 }

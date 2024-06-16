@@ -10,6 +10,7 @@ public class Config {
 	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice_screen.fxml";
 	public static final String INVOICE_ITEM_SCREEN_PATH = "/views/fxml/invoice_item.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
+	public static final String PAYMENT_RESULT_SCREEN = "/views/fxml/result.fxml";
 	public static final String HOME_SCREEN_PATH = "/views/fxml/home_screen.fxml";
 	public static final String HOME_ITEM_SCREEN_PATH = "/views/fxml/home_item.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";

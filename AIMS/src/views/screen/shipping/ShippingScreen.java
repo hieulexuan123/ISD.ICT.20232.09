@@ -1,10 +1,12 @@
 package views.screen.shipping;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import controller.PayOrderController;
 import controller.PlaceOrderController;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
@@ -33,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import subsystem.vnpay.VNPayController;
 import utils.Config;
 import utils.CurrencyFormatter;
 
@@ -158,7 +161,20 @@ public class ShippingScreen extends BaseScreen {
         time.setVisible(false);
         rushInstruction.setVisible(false);
     }
-    
+    private int getfee() {
+    	noVAT.setText(CurrencyFormatter.format(order.getCostNoVAT()));
+    	VAT.setText(CurrencyFormatter.format(order.getCostVAT()));
+    	int fee;
+    	if (chooseNormalShip.isSelected()) {
+    		fee = order.calculateNormalShippingFee(province.getValue());
+    	} else {
+    		fee = order.calculateRushShippingFee(province.getValue());
+    	}
+    	shippingFees.setText(CurrencyFormatter.format(fee));
+		int totalAmount = order.calculateTotal(fee);
+		total.setText(CurrencyFormatter.format(totalAmount));
+		return totalAmount*1000;
+    }
     private void updateOrderCost() {
     	noVAT.setText(CurrencyFormatter.format(order.getCostNoVAT()));
     	VAT.setText(CurrencyFormatter.format(order.getCostVAT()));
@@ -186,23 +202,31 @@ public class ShippingScreen extends BaseScreen {
     }
     
     @FXML
-    void confirmOrder(MouseEvent event) {
+    void confirmOrder(MouseEvent event) throws UnsupportedEncodingException {
     	DeliveryInfo info = new DeliveryInfo(email.getText(), name.getText(), phone.getText(), province.getValue(), address.getText(), 
     			instruction.getText(), !(chooseNormalShip.isSelected()), time.getValue(), rushInstruction.getText());
-    	//System.out.println(info.toString());
-    	try {
-			info.validateInfo();
-			order.setInfo(info);
-			//System.out.println(order.toString());
-			((PlaceOrderController) controller).requestInvoice(order);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				PopupScreen.error(e.getMessage());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}  
-		}
+    	//System.out.println(info.toString()+"da bam chuot");
+    	// sử lí 1 order
+    	int amount = getfee(); // Số tiền cần thanh toán
+         String content = "Mô tả đơn hàng"; // Nội dung đơn hàng
+         
+         // goị ra màn hình thanh toán vnpay
+         PayOrderController payOrderController = new PayOrderController();
+	VNPayController vnpayController = new VNPayController(payOrderController); 
+         vnpayController.payOrder(amount, content);
+//    	try {
+//			info.validateInfo();
+//			order.setInfo(info);
+//			//System.out.println(order.toString());
+//			((PlaceOrderController) controller).requestInvoice(order);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			try {
+//				PopupScreen.error(e.getMessage());
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}  
+//		}
     }
 }

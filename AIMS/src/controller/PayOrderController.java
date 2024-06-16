@@ -11,6 +11,7 @@ public class PayOrderController extends BaseController{
 	IPayment subsystem = new VNPayController(this);
 	public void payOrder(Order order) {
 		try {
+			
 			subsystem.payOrder(order.getTotalCost(), "Pay AIMS invoice");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
