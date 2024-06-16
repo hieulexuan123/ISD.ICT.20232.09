@@ -36,8 +36,6 @@ public class SqliteDvdDAO implements ISpecificMediaDAO {
 			String releaseDate = res.getString("release_date");
 			String genre = res.getString("genre");
 			
-			System.out.println("Date DVD: " + releaseDate);
-			
 			int runTime = Integer.parseInt(runtime);
 			dvd = new DVD(id, discType, runTime, studio, language, subtitle, LocalDate.parse(releaseDate), genre);
 		}
