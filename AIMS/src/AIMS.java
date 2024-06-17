@@ -7,9 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import utils.Config;
 import views.screen.home.HomeScreen;
-import views.screen.payment.PaymentResultScreen;
-import views.screen.cart.CartScreen;
-import views.screen.*;
+
 
 public class AIMS extends Application {
     public static void main(String[] args){
@@ -20,22 +18,12 @@ public class AIMS extends Application {
     public void start(Stage stage) throws Exception {
     	try {
         	DAOFactory.initialize(new SqliteDAOFactory());
-        	Cart cart = Cart.createCart();
-            BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
-            cartScreen.show();
-            
-            /////////////
-//        	HomeScreen homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH);
-//        	homeScreen.setStage(stage);
-//        	homeScreen.show();
-            
-            
-      
-            
-            
-            
-            
-            
+            //BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
+            //cartScreen.show();
+        	HomeScreen homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH);
+        	homeScreen.setHomeScreen(homeScreen);
+        	homeScreen.setStage(stage);
+        	homeScreen.show();
     	} catch (Exception e) {
     		e.printStackTrace();
     	}

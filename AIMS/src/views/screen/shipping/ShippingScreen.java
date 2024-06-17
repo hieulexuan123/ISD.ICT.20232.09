@@ -202,31 +202,21 @@ public class ShippingScreen extends BaseScreen {
     }
     
     @FXML
-    void confirmOrder(MouseEvent event) throws UnsupportedEncodingException {
+    void confirmOrder(MouseEvent event) {
     	DeliveryInfo info = new DeliveryInfo(email.getText(), name.getText(), phone.getText(), province.getValue(), address.getText(), 
     			instruction.getText(), !(chooseNormalShip.isSelected()), time.getValue(), rushInstruction.getText());
-    	//System.out.println(info.toString()+"da bam chuot");
-    	// sử lí 1 order
-    	int amount = getfee(); // Số tiền cần thanh toán
-         String content = "Mô tả đơn hàng"; // Nội dung đơn hàng
-         
-         // goị ra màn hình thanh toán vnpay
-         PayOrderController payOrderController = new PayOrderController();
-	VNPayController vnpayController = new VNPayController(payOrderController); 
-         vnpayController.payOrder(amount, content);
-//    	try {
-//			info.validateInfo();
-//			order.setInfo(info);
-//			//System.out.println(order.toString());
-//			((PlaceOrderController) controller).requestInvoice(order);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			try {
-//				PopupScreen.error(e.getMessage());
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}  
-//		}
+    	try {
+			info.validateInfo();
+			order.setInfo(info);
+			//System.out.println(order.toString());
+			((PlaceOrderController) controller).requestInvoice(order);
+			
+		} catch (Exception e) {
+			try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}  
+		}
     }
 }

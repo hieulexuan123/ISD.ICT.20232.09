@@ -10,6 +10,7 @@ import entity.shipping.DeliveryInfo;
 import exception.AddressNotSupportRushOrderException;
 import exception.MediaNotSupportRushOrderException;
 import exception.MediaUnavailableException;
+import exception.EmptyCartException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,17 +21,17 @@ import views.screen.invoice.InvoiceScreen;
 import views.screen.shipping.ShippingScreen;
 
 public class PlaceOrderController extends BaseController{
-	private Stage stage;
-	 public void placeOrder(Cart cart, BaseScreen prevScreen) throws MediaUnavailableException{
+	private BaseScreen homeScreen;
+	 public void placeOrder(Cart cart, BaseScreen prevScreen) throws MediaUnavailableException, EmptyCartException{
 	        
 	        cart.checkProductAvai();
-	        
+	        if (cart.getMediaList().isEmpty()) throw new EmptyCartException("Your cart is empty!");
 			try {
 				Order order = new Order(cart.getMediaList(), cart.getCostNoVAT(), cart.getCostVAT());
 				BaseScreen shippingScreen = new ShippingScreen(Config.SHIPPING_SCREEN_PATH, order);
 				shippingScreen.setPrevScreen(prevScreen);
-				stage = prevScreen.getStage();
-				shippingScreen.setStage(stage);
+				homeScreen = prevScreen.getHomeScreen();
+				shippingScreen.setStage(prevScreen.getStage());
 		        shippingScreen.setHomeScreen(prevScreen.getHomeScreen());
 		        shippingScreen.setScreenTitle("Shipping screen");
 		        shippingScreen.setController(this);
@@ -53,7 +54,8 @@ public class PlaceOrderController extends BaseController{
 	public void requestInvoice(Order order) {
         try {
             BaseScreen invoiceScreen = new InvoiceScreen(Config.INVOICE_SCREEN_PATH, order);
-            invoiceScreen.setStage(stage);
+            invoiceScreen.setStage(homeScreen.getStage());
+            invoiceScreen.setHomeScreen(homeScreen);
             invoiceScreen.setScreenTitle("Invoice screen");
 	        invoiceScreen.setController(this);
 	        invoiceScreen.show();

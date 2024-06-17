@@ -24,20 +24,12 @@ public class PaymentResultScreen extends BaseScreen {
 	
 	@FXML
 	private Label messageLabel;
-	private String result;
-	private String message;
 
 	public PaymentResultScreen( String screenPath, String result, String message) throws IOException {
 		super(screenPath);
 		resultLabel.setText(result);
 		messageLabel.setText(message);
-		System.out.println("payment screen hd");
-		
-		okButton.setOnMouseClicked(e -> {
-			homeScreen.show();
-		});
-
-		
+		System.out.println("payment screen hd");		
 	}
 	
 	@FXML

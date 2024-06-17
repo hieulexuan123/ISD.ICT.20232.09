@@ -22,32 +22,25 @@ public class SqliteBookDAO implements ISpecificMediaDAO{
 	}
 
 	@Override
-	public List<SpecificMedia> getAll() throws SQLException {
-		String query = "select * from Book";
-		Statement stmt = connection.createStatement();
-		ResultSet res = stmt.executeQuery(query);
-		List<SpecificMedia> bookList = new ArrayList<>();
-		while (res.next()) {
+	public SpecificMedia getByMediaId(int media_id) throws SQLException {
+		String sql = "select * from Book where media_id=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setInt(1, media_id);
+		ResultSet res = pstmt.executeQuery();
+		Book book = new Book();
+		if (res.next()) {
 			int id = res.getInt("id");
-			int mediaId = res.getInt("media_id");
-            String author = res.getString("author");
-            String publisher = res.getString("publisher");
-            String coverType = res.getString("cover_type");
-            String publicationDate = res.getString("publication_date");
-            int pages = res.getInt("pages");
-            String genre = res.getString("genre");
-            String language = res.getString("language");
-            
-            Book book = new Book(id, mediaId, author, publisher, coverType, LocalDate.parse(publicationDate), pages, genre, language);
-            bookList.add(book);
+			String author = res.getString("author");
+			String publisher = res.getString("publisher");
+			String coverType = res.getString("cover_type");
+			String publicationDate = res.getString("publication_date");
+			int pages = res.getInt("pages");
+			String genre = res.getString("genre");
+			String language = res.getString("language");
+			
+			book = new Book(id, media_id, author, publisher, coverType, LocalDate.parse(publicationDate), pages, genre, language);
 		}
-		return bookList;
-	}
-
-	@Override
-	public SpecificMedia getByMediaId(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return book;
 	}
 	
 	@Override
@@ -68,10 +61,10 @@ public class SqliteBookDAO implements ISpecificMediaDAO{
 	}
 
 	@Override
-	public void deleteByMediaId(int id) throws SQLException {
+	public void deleteByMediaId(int media_id) throws SQLException {
 		String query = "delete from Book where media_id = ?";
 		PreparedStatement stmt = connection.prepareStatement(query);
-		stmt.setInt(1, id);
+		stmt.setInt(1, media_id);
 		stmt.executeUpdate();
 	}
 

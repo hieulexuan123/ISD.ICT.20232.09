@@ -8,11 +8,12 @@ import dao.*;
 public class SqliteDAOFactory implements IDAOFactory{
 	private IMediaDAO mediaDAO;
 	private IOrderDAO orderDAO;
+	private Connection connection;
 	private ISpecificMediaDAO bookDAO;
 	private ISpecificMediaDAO cdDAO;
 	private ISpecificMediaDAO dvdDAO;
 	private IUserDAO userDAO;
-	private Connection connection;
+	private ITransactionDAO transDAO;
 	
 	public SqliteDAOFactory() throws Exception{
 		this.connection = createConnection();
@@ -20,7 +21,8 @@ public class SqliteDAOFactory implements IDAOFactory{
 	
 	private Connection createConnection() throws Exception{
 		Class.forName("org.sqlite.JDBC");
-        return DriverManager.getConnection("jdbc:sqlite:F:/clone/project/AIMS/assets/db/aims.db");
+		//delete AIMS in the link if error
+        return DriverManager.getConnection("jdbc:sqlite:assets/db/aims.db");
     }
 
 	@Override
@@ -69,6 +71,14 @@ public class SqliteDAOFactory implements IDAOFactory{
 			userDAO = new SqliteUserDao(connection);
 		}
 		return userDAO;
+	}
+	
+	@Override
+	public ITransactionDAO getTransDAO() {
+		if(transDAO == null){
+			transDAO = new SqliteTransactionDAO(connection);
+		}
+		return transDAO;
 	}
 
 

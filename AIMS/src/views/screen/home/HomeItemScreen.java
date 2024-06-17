@@ -8,11 +8,19 @@ import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.media.Media;
 import exception.MediaUnavailableException;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import utils.Config;
 import utils.CurrencyFormatter;
 import views.screen.FXMLScreen;
 import views.screen.popup.PopupScreen;
@@ -45,29 +53,27 @@ public class HomeItemScreen extends FXMLScreen{
         this.media = media;
         this.homeScreen = homeScreen;
         this.cart = cart;
-        
-        addToCartBtn.setOnMouseClicked(event -> {
-            try {
-            	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());
-                
-            	homeScreen.getController().addMediaToCart(cart, media);
-            	homeScreen.updateNumMediaInCart();
-                avail.setText(String.valueOf(media.getQuantity()));
-                //home.getNumMediaCartLabel().setText(String.valueOf(cart.getTotalMedia() + " media"));
-                PopupScreen.success("The media " + media.getTitle() + " added to Cart");
-            } catch (MediaUnavailableException e) {
-                try {
-					PopupScreen.error(e.getMessage());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
         setMediaInfo();
     }
-
+    
+    @FXML
+    private void handleAddToCart() {
+    	try {
+        	if (media.getQuantity() <= 0) throw new MediaUnavailableException("Not enough " + media.getTitle());                
+        	homeScreen.getController().addMediaToCart(cart, media);
+        	homeScreen.updateNumMediaInCart();
+            avail.setText(String.valueOf(media.getQuantity()));
+            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+        } catch (MediaUnavailableException e) {
+            try {
+				PopupScreen.error(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void setMediaInfo(){
         File file = new File(media.getImageURL());
@@ -76,10 +82,14 @@ public class HomeItemScreen extends FXMLScreen{
         mediaImage.setFitWidth(152);
         mediaImage.setImage(image);
         
-        System.out.println(media.toString());
+        //System.out.println(media.toString());
         title.setText(media.getTitle());
         price.setText(CurrencyFormatter.format(media.getPrice()));
         category.setText(media.getCategory());
         avail.setText(String.valueOf(media.getQuantity()));
+    }
+    
+    public void setOnClick(EventHandler<MouseEvent> eventHandler) {
+        root.setOnMouseClicked(eventHandler);
     }
 }

@@ -8,8 +8,11 @@ import dao.ISpecificMediaDAO;
 import exception.EmptyFieldsException;
 import exception.InvalidDateException;
 import utils.Config;
+import views.screen.admin.create.BookCreateScreen;
 import views.screen.admin.create.DvdCreateScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
+import views.screen.item.DvdDetailScreen;
+import views.screen.item.SpecificMediaDetailScreen;
 
 public class DVD extends SpecificMedia{
 	private int id;
@@ -103,4 +106,12 @@ public class DVD extends SpecificMedia{
 	private boolean validateDateField() {
 		return releaseDate.isBefore(LocalDate.now());
 	}
+
+	@Override
+	public SpecificMediaDetailScreen getDetailScreen() throws IOException {
+		// TODO Auto-generated method stub
+		return new DvdDetailScreen(Config.DVD_DETAIL_SCREEN_PATH);
+	}
+	
+
 }
