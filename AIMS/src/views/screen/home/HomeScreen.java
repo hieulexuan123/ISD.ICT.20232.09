@@ -59,6 +59,10 @@ public class HomeScreen extends BaseScreen{
     
     @Override
     public void show() {
+    	//reset cart media
+    	if (cart!=null) {
+    		cart.emptyCart();
+    	}
     	setHomeInfo();
     	updateNumMediaInCart();
     	super.show();
@@ -102,7 +106,9 @@ public class HomeScreen extends BaseScreen{
         int end = Math.min(start + ITEMS_PER_PAGE, filteredMediaList.size());
 
         for (int i = start; i < end; i++) {
+        	
         	Media media = filteredMediaList.get(i);
+        	System.out.println(media);
 			try {
 				HomeItemScreen itemScreen= new HomeItemScreen(Config.HOME_ITEM_SCREEN_PATH, media, this, cart);
 				itemScreen.setOnClick(event -> {

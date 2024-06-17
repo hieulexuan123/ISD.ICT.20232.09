@@ -8,6 +8,8 @@ import dao.ISpecificMediaDAO;
 import utils.Config;
 import views.screen.admin.create.CdCreateScreen;
 import views.screen.admin.create.SpecificMediaCreateScreen;
+import views.screen.item.CdDetailScreen;
+import views.screen.item.SpecificMediaDetailScreen;
 import exception.EmptyFieldsException;
 import exception.InvalidDateException;
 
@@ -86,5 +88,11 @@ public class CD extends SpecificMedia{
 	
 	private boolean validateDateField() {
 		return releaseDate.isBefore(LocalDate.now());
+	}
+
+	@Override
+	public SpecificMediaDetailScreen getDetailScreen() throws IOException {
+		// TODO Auto-generated method stub
+		return new CdDetailScreen(Config.CD_DETAIL_SCREEN_PATH);
 	}
 }

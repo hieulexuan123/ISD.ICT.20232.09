@@ -5,7 +5,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Map;
-
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -26,8 +28,19 @@ public class VNPayScreen extends BaseScreen{
 		super(screenPath);
 		this.payUrl = payUrl;
 	}
+	
+	@Override
+	public void show() {
+		super.show();
+		displayWeb();
+	}
+	
+	@Override 
+	public VNPayController getController() {
+		return (VNPayController)super.getController();
+	}
 
-	public void displayWeb() {
+	private void displayWeb() {
 		WebView paymentView = new WebView();
 		WebEngine webEngine = paymentView.getEngine();
 		webEngine.load(payUrl);
@@ -43,13 +56,13 @@ public class VNPayScreen extends BaseScreen{
 			try {
 				URI uri = new URI(newUrl);
 				String query = uri.getQuery();
-				System.out.println("chuỗi uri " + uri);
-				System.out.println("chuỗi api" + query);
+				getController().processResponse(query);
 				
-				ResponseResult.processResponse(query);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			} 		
 		}
 	}
+	
+	
 }

@@ -2,11 +2,14 @@ package dao.sqlite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.ISpecificMediaDAO;
 import entity.media.category.SpecificMedia;
+import entity.media.category.Book;
 import entity.media.category.CD;
 
 public class SqliteCdDAO implements ISpecificMediaDAO {
@@ -17,9 +20,22 @@ public class SqliteCdDAO implements ISpecificMediaDAO {
 	}
 
 	@Override
-	public SpecificMedia getByMediaId(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public SpecificMedia getByMediaId(int media_id) throws SQLException {
+		String sql = "select * from cd where media_id=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setInt(1, media_id);
+		ResultSet res = pstmt.executeQuery();
+		CD cd = new CD();
+		if (res.next()) {
+			int id = res.getInt("id");
+			String artist = res.getString("artist");
+			String recordLabel = res.getString("record_label");
+			String trackList = res.getString("trackList");
+			String releaseDate = res.getString("release_date");
+			String genre = res.getString("genre");
+			cd = new CD(id, artist, recordLabel, trackList, genre, LocalDate.parse(releaseDate));
+		}
+		return cd;
 	}
 
 	@Override
@@ -40,7 +56,7 @@ public class SqliteCdDAO implements ISpecificMediaDAO {
         pstmt.setString(3, cd.getRecordLabel());
         pstmt.setString(4, cd.getTrackList());
         pstmt.setString(5, cd.getGenre());
-        pstmt.setString(6, cd.getGenre().toString());
+        pstmt.setString(6, cd.getReleaseDate().toString());
         pstmt.executeUpdate();
         System.out.println("Create successfully");
 	}
