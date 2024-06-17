@@ -14,20 +14,7 @@ public class Cart {
 	private int costNoVAT;
 	private int costVAT;
 
-	public static Cart createCart() {
-		Cart cart = new Cart();
-		IMediaDAO mediaDao = DAOFactory.getInstance().getMediaDAO();
-    	try {
-			for (Media media : mediaDao.getAllMedia()) {
-				CartMedia bookCart = new CartMedia(media, 2);
-				cart.addCartMedia(bookCart);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return cart;
-	}
+	
 	public Cart() {
 		cartMediaList = new ArrayList<CartMedia>();
 	}
