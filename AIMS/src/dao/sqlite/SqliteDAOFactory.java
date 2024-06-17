@@ -13,6 +13,7 @@ public class SqliteDAOFactory implements IDAOFactory{
 	private ISpecificMediaDAO cdDAO;
 	private ISpecificMediaDAO dvdDAO;
 	private IUserDAO userDAO;
+	private ITransactionDAO transDAO;
 	
 	public SqliteDAOFactory() throws Exception{
 		this.connection = createConnection();
@@ -70,6 +71,14 @@ public class SqliteDAOFactory implements IDAOFactory{
 			userDAO = new SqliteUserDao(connection);
 		}
 		return userDAO;
+	}
+	
+	@Override
+	public ITransactionDAO getTransDAO() {
+		if(transDAO == null){
+			transDAO = new SqliteTransactionDAO(connection);
+		}
+		return transDAO;
 	}
 
 
