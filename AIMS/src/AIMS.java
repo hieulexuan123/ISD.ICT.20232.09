@@ -20,11 +20,7 @@ public class AIMS extends Application {
     public void start(Stage stage) throws Exception {
     	try {
         	DAOFactory.initialize(new SqliteDAOFactory());
-        	  PayOrderController payOrderController = new PayOrderController();
-        		VNPayController vnpayController = new VNPayController(payOrderController); 
-        	         int amount=1000*1000;
-					String content="kjgkdfjgkfjkgjf";
-					vnpayController.payOrder(amount, content);
+        	 
         	
 //			Cart cart = Cart.createCart();
 //            BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);

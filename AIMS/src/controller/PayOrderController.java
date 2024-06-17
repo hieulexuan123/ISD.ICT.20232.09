@@ -24,13 +24,6 @@ import views.screen.BaseScreen;
 import views.screen.payment.PaymentResultScreen;
 
 public class PayOrderController extends BaseController{
-<<<<<<< HEAD
-	IPayment subsystem = new VNPayController(this);
-	public void payOrder(Order order) throws SQLException {
-		try {
-			
-			int order_id = DAOFactory.getInstance().getOrderDAO().createOrder(order);
-=======
 	IPayment subsystem;
 	BaseScreen homeScreen;
 	int order_id;
@@ -39,7 +32,6 @@ public class PayOrderController extends BaseController{
 	public void payOrder(Order order, BaseScreen homeScreen) {
 		try {
 			order_id = DAOFactory.getInstance().getOrderDAO().createOrder(order);
->>>>>>> 763eb0b8a17e5e635d62051a4263814ff2d06870
 			for (CartMedia cm : order.getMediaList()) {
 				int media_id = cm.getMedia().getId();
 				int quantity = cm.getMedia().getQuantity();
