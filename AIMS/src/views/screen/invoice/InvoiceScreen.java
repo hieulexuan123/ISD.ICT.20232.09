@@ -118,7 +118,7 @@ public class InvoiceScreen extends BaseScreen{
 	@FXML
     void confirmInvoice(ActionEvent event) throws SQLException {
 		PayOrderController payOrderController = new PayOrderController();
-		payOrderController.payOrder(order);
+		payOrderController.payOrder(order, this.homeScreen);
     }
 
 }

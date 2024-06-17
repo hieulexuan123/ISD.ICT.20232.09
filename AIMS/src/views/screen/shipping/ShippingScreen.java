@@ -205,6 +205,7 @@ public class ShippingScreen extends BaseScreen {
     void confirmOrder(MouseEvent event) throws UnsupportedEncodingException {
     	DeliveryInfo info = new DeliveryInfo(email.getText(), name.getText(), phone.getText(), province.getValue(), address.getText(), 
     			instruction.getText(), !(chooseNormalShip.isSelected()), time.getValue(), rushInstruction.getText());
+<<<<<<< HEAD
     	//System.out.println(info.toString()+"da bam chuot");
     	// sử lí 1 order
     	int amount = getfee(); // Số tiền cần thanh toán
@@ -215,13 +216,15 @@ public class ShippingScreen extends BaseScreen {
 	VNPayController vnpayController = new VNPayController(payOrderController); 
          vnpayController.payOrder(amount, content);
    	try {
+=======
+    	try {
+>>>>>>> 763eb0b8a17e5e635d62051a4263814ff2d06870
 			info.validateInfo();
 			order.setInfo(info);
 			//System.out.println(order.toString());
 			((PlaceOrderController) controller).requestInvoice(order);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 			try {
 				PopupScreen.error(e.getMessage());
 			} catch (IOException e1) {

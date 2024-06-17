@@ -1,7 +1,7 @@
 package subsystem.vnpay;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -19,6 +19,7 @@ import utils.Config;
 import views.screen.*;
 import views.screen.payment.PaymentResultScreen;
 import entity.payment.PaymentTransaction;
+import exception.FailedTransactionException;
 
 public class Response {
 	public PaymentTransaction processResponse(String query) throws Exception{
@@ -41,35 +42,51 @@ public class Response {
         return params;
 	}
 	
-	private PaymentTransaction handleErrorCode(Map<String, String> params) throws Exception {
+	private PaymentTransaction handleErrorCode(Map<String, String> params) throws FailedTransactionException {
 		if (params == null) {
             return null;
         }
-
         // Create Payment transaction
         String errorCode = params.get("vnp_ResponseCode");
         String transactionId = params.get("vnp_TransactionNo");
         String transactionContent = params.get("vnp_OrderInfo");
-        int amount = Integer.parseInt((String) params.get("vnp_Amount")) / 100;
+        int amount = Integer.parseInt((String) params.get("vnp_Amount")) / 100000;
         String createdAt = params.get("vnp_PayDate");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-
-        Date date = dateFormat.parse(createdAt);
-        PaymentTransaction trans = new PaymentTransaction(transactionId, errorCode,transactionContent, amount, 1, date);
         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        PaymentTransaction trans;
         
+        System.out.print(errorCode);
         switch (errorCode) {
             case "00":
-            	
-                BaseScreen resultScreen = new PaymentResultScreen( Config.PAYMENT_RESULT_SCREEN,"PAYMENT SUCCESSFUL!", "You had successfully paid the order");
-
-            	resultScreen.show();
+            	System.out.println("da thanh toan thanh cong");
+            	System.out.println(createdAt);
+            	trans = new PaymentTransaction(transactionId, transactionContent, amount, LocalDateTime.parse(createdAt, formatter).toLocalDate());
             	break;
+            case "07":
+            	throw new FailedTransactionException("Suspicious transaction");
+            case "09":
+            	throw new FailedTransactionException("Have not registered Internet Banking");
+            case "10":
+            	throw new FailedTransactionException("Fail verification 3 times");
+            case "11":
+            	throw new FailedTransactionException("Payment deadline has expired");
+            case "12":
+            	throw new FailedTransactionException("Your account is locked");
+            case "13":
+            	throw new FailedTransactionException("Wrong OTP");
+            case "24":
+            	throw new FailedTransactionException("Transaction is canceled");
+            case "51":
+            	throw new FailedTransactionException("Not enough money in account");
+            case "65":
+            	throw new FailedTransactionException("Account exceeds the limit");
+            case "75":
+            	throw new FailedTransactionException("Bank is in maintenance");
+            case "79":
+            	throw new FailedTransactionException("Too many password trials");
             default:
-            	BaseScreen resultScreen1 = new PaymentResultScreen( Config.PAYMENT_RESULT_SCREEN,"PAYMENT FAILED!", "Please try again!");
-
-            	resultScreen1.show();
-            	throw new Exception("Transaction failed");
+            	throw new FailedTransactionException("Other reasons");
         }
         return trans;
 	}

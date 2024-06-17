@@ -12,4 +12,5 @@ public interface IOrderDAO {
 	void changeOrderStatusById(int id, String status) throws SQLException;
 	List<OrderMedia> getOrderMediaByOrderId (int id) throws SQLException;
 	int createOrder(Order order) throws SQLException;
+	void updateOrderIsPaidById(int id) throws SQLException;
 }

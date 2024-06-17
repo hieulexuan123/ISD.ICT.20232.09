@@ -48,15 +48,15 @@
             </Pane>
          </left>
       </BorderPane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="150.0" prefHeight="600.0" prefWidth="1326.0" vbarPolicy="ALWAYS">
+      <ScrollPane layoutY="176.0" prefHeight="612.0" prefWidth="1326.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1326.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1200.0" prefWidth="1326.0">
                <children>
-                    <HBox alignment="CENTER" layoutX="156.0" layoutY="6.0" prefHeight="576.0" prefWidth="1000.0" style="-fx-border-color: #33adff;">
+                    <HBox alignment="CENTER" layoutX="63.0" prefHeight="500.0" prefWidth="1200.0" style="-fx-border-color: #33adff;">
                         <children>
-                            <ImageView fx:id="mediaImage" fitHeight="500.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="mediaImage" fitHeight="500.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true">
                                 <HBox.margin>
-                                    <Insets left="40.0" right="40.0" />
+                                    <Insets left="60.0" right="60.0" />
                                 </HBox.margin>
                             </ImageView>
                             <VBox alignment="CENTER" prefHeight="600.0" prefWidth="370.0" spacing="10.0">
@@ -105,139 +105,92 @@
                                         </font>
                                     </Button>
                                 </children>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
                             </VBox>
                         </children>
                     </HBox>
-                  <VBox layoutX="155.0" layoutY="582.0" prefHeight="200.0" prefWidth="1000.0" style="-fx-border-color: #33adff;">
+                  <VBox layoutX="63.0" layoutY="500.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-border-color: #33adff;">
                      <children>
                         <Label text="Detail Information">
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="40.0" top="20.0" />
-                           </VBox.margin>
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
                         </Label>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Author: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Artist: ">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="author" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="artist" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
                                       </Label>
                                   </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="333.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Publisher: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Record Label:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="publisher" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="recordLabel" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
                                       </Label>
                                   </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Cover type: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Genre:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="coverType" alignment="CENTER" prefHeight="27.0" prefWidth="200.0">
+                                      <Label fx:id="genre" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
                                       </Label>
                                   </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Number of pages: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Release date:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="pages" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="releaseDate" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
                                       </Label>
                                   </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="25.0" prefWidth="370.0">
-                                  <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Publication date: ">
-                                          <font>
-                                              <Font name="System Italic" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <Label fx:id="publicationDate" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
-                                          <font>
-                                              <Font size="18.0" />
-                                          </font>
-                                      </Label>
-                                  </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="25.0" prefWidth="370.0">
-                                  <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Language: ">
-                                          <font>
-                                              <Font name="System Italic" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <Label fx:id="language" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
-                                          <font>
-                                              <Font size="18.0" />
-                                          </font>
-                                      </Label>
-                                  </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
-                              </HBox>
-                        <HBox layoutX="11.0" layoutY="147.0" prefHeight="25.0" prefWidth="370.0">
-                           <children>
-                              <Label prefHeight="27.0" prefWidth="170.0" text="Genre:">
-                                 <font>
-                                    <Font name="System Italic" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="genre" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
-                        </HBox>
+                        <Label text="Track List:">
+                           <font>
+                              <Font name="System Italic" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="trackList" text="Label">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
+                     <padding>
+                        <Insets left="100.0" top="30.0" />
+                     </padding>
                   </VBox>
                </children>
             </AnchorPane>

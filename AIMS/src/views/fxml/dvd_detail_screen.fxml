@@ -48,7 +48,7 @@
             </Pane>
          </left>
       </BorderPane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="150.0" prefHeight="600.0" prefWidth="1326.0" vbarPolicy="ALWAYS">
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="150.0" prefHeight="600.0" prefWidth="1326.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="1326.0">
                <children>
@@ -120,12 +120,12 @@
                         </Label>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Author: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Disc Type:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="author" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="discType" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
@@ -137,12 +137,12 @@
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="333.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Publisher: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Studio:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="publisher" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="studio" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
@@ -154,12 +154,12 @@
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Cover type: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Language:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="coverType" alignment="CENTER" prefHeight="27.0" prefWidth="200.0">
+                                      <Label fx:id="language" alignment="CENTER" prefHeight="27.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
@@ -171,12 +171,12 @@
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Number of pages: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Subtitle:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="pages" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="subtitle" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
@@ -188,29 +188,12 @@
                               </HBox>
                               <HBox prefHeight="25.0" prefWidth="370.0">
                                   <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Publication date: ">
+                                      <Label prefHeight="27.0" prefWidth="170.0" text="Release Date:">
                                           <font>
                                               <Font name="System Italic" size="18.0" />
                                           </font>
                                       </Label>
-                                      <Label fx:id="publicationDate" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
-                                          <font>
-                                              <Font size="18.0" />
-                                          </font>
-                                      </Label>
-                                  </children>
-                           <VBox.margin>
-                              <Insets left="40.0" />
-                           </VBox.margin>
-                              </HBox>
-                              <HBox prefHeight="25.0" prefWidth="370.0">
-                                  <children>
-                                      <Label prefHeight="27.0" prefWidth="170.0" text="Language: ">
-                                          <font>
-                                              <Font name="System Italic" size="18.0" />
-                                          </font>
-                                      </Label>
-                                      <Label fx:id="language" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+                                      <Label fx:id="releaseDate" alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
                                           <font>
                                               <Font size="18.0" />
                                           </font>
