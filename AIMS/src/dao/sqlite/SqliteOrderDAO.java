@@ -59,7 +59,14 @@ public class SqliteOrderDAO implements IOrderDAO{
 	    stmt.setString(1, status);
 	    stmt.setInt(2, id);
 	    stmt.executeUpdate();
-		
+	}
+	
+	@Override
+	public void updateOrderIsPaidById(int id) throws SQLException {
+		String query = "UPDATE [Order] SET is_paid=1 WHERE id = ?";
+	    PreparedStatement stmt = connection.prepareStatement(query);
+	    stmt.setInt(1, id);
+	    stmt.executeUpdate();
 	}
 	
 	@Override

@@ -118,7 +118,7 @@ public class DeliveryInfo {
     }
     
     private boolean validateEmail(String email) {
-    	return email.contains("@mail.com");
+    	return email.contains("@mail.com") || email.contains("@gmail.com");
     }
     
     private boolean validateTime(LocalDate time) {

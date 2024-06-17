@@ -7,4 +7,5 @@ public interface IDAOFactory {
 	ISpecificMediaDAO getCDDAO();
 	ISpecificMediaDAO getDVDDAO();
 	IUserDAO getUserDAO();
+	ITransactionDAO getTransDAO();
 }

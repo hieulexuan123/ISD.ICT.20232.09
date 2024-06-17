@@ -82,7 +82,7 @@ public class HomeItemScreen extends FXMLScreen{
         mediaImage.setFitWidth(152);
         mediaImage.setImage(image);
         
-        System.out.println(media.toString());
+        //System.out.println(media.toString());
         title.setText(media.getTitle());
         price.setText(CurrencyFormatter.format(media.getPrice()));
         category.setText(media.getCategory());

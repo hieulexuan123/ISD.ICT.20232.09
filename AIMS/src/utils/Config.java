@@ -10,6 +10,7 @@ public class Config {
 	public static final String INVOICE_SCREEN_PATH = "/views/fxml/invoice_screen.fxml";
 	public static final String INVOICE_ITEM_SCREEN_PATH = "/views/fxml/invoice_item.fxml";
 	public static final String PAYMENT_SCREEN_PATH = "/views/fxml/payment_screen.fxml";
+	public static final String PAYMENT_RESULT_SCREEN = "/views/fxml/result.fxml";
 	public static final String HOME_SCREEN_PATH = "/views/fxml/home_screen.fxml";
 	public static final String HOME_ITEM_SCREEN_PATH = "/views/fxml/home_item.fxml";
 	public static final String POPUP_PATH = "/views/fxml/popup.fxml";
@@ -26,6 +27,8 @@ public class Config {
 	public static final String ADMIN_USER_SCREEN_PATH = "/views/fxml/admin_manage_user_screen.fxml";
 	public static final String USER_CREATE_SCREEN_PATH = "/views/fxml/user_create_screen.fxml";
 	public static final String BOOK_DETAIL_SCREEN_PATH = "/views/fxml/book_detail_screen.fxml";
+	public static final String DVD_DETAIL_SCREEN_PATH = "/views/fxml/dvd_detail_screen.fxml";
+	public static final String CD_DETAIL_SCREEN_PATH = "/views/fxml/cd_detail_screen.fxml";
 
 	public static String[] PROVINCES = { "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
 			"Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình", "Lai Châu", "Sơn La",
