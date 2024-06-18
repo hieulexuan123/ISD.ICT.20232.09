@@ -18,8 +18,6 @@ public class AIMS extends Application {
     public void start(Stage stage) throws Exception {
     	try {
         	DAOFactory.initialize(new SqliteDAOFactory());
-            //BaseScreen cartScreen = new CartScreen(Config.CART_SCREEN_PATH, cart);
-            //cartScreen.show();
         	HomeScreen homeScreen = new HomeScreen(Config.HOME_SCREEN_PATH);
         	homeScreen.setHomeScreen(homeScreen);
         	homeScreen.setStage(stage);

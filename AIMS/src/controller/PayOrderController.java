@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import subsystem.IPayment;
 import subsystem.vnpay.VNPayController;
 import utils.Config;
+import utils.CurrencyFormatter;
 import views.screen.BaseScreen;
 import views.screen.payment.PaymentResultScreen;
 
@@ -27,7 +28,7 @@ public class PayOrderController extends BaseController{
 	IPayment subsystem;
 	BaseScreen homeScreen;
 	int order_id;
-	String email;
+	Order order;
 	
 	public void payOrder(Order order, BaseScreen homeScreen) {
 		try {
@@ -38,7 +39,7 @@ public class PayOrderController extends BaseController{
 				DAOFactory.getInstance().getMediaDAO().updateMediaQuantity(media_id, quantity);
 			}
 			this.homeScreen = homeScreen;
-			this.email = order.getEmail();
+			this.order = order;
 			subsystem = new VNPayController(this, homeScreen.getStage());
 			subsystem.payOrder(order.getTotalCost(), "Pay AIMS invoice");
 		} catch (UnsupportedEncodingException | SQLException e) {
@@ -87,7 +88,7 @@ public class PayOrderController extends BaseController{
 		String senderPassword = "ubzh pssi iduw hwgr";
 
 		// Thông tin tài khoản email đích
-		String recipientEmail = email;
+		String recipientEmail = order.getEmail();
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -99,17 +100,28 @@ public class PayOrderController extends BaseController{
 			}
 		});
 		Message message = new MimeMessage(session);
-		System.out.println("truoc ham try");
 		try {
 			// Tạo đối tượng Message
 			
 			message.setFrom(new InternetAddress(senderEmail));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail , false));
-			message.setSubject("Thanh toán thành công");
+			message.setSubject("Successfully paid for AIMS products");
 
 			// Tạo nội dung email
-			String content = "\n\nThank you for choosing AIMS project from group 9!\n\n"
-					  + "Your order has been confirmed!" ;
+			String content = "Thank you for choosing AIMS project from group 9!\n\n"
+					  + "Your order is included:\n\n" ;
+			
+			int i=1;
+			for (CartMedia cm : order.getMediaList()) {
+				content += (i + ". " + cm.getMedia().getTitle() + "   Qty: " + cm.getQuantity() + "\n");
+				i++;
+			}
+			content += "\nTotal cost: " + CurrencyFormatter.format(order.getTotalCost());
+			content += "\n\nYour delivery info:\n";
+			content += "Name: " + order.getName();
+			content += "\nPhone: " + order.getPhone();
+			content += "\nProvince: " + order.getProvince();
+			content += "\nAddress: " + order.getAddress();
 			message.setText(content);
 
 			// Gửi email
