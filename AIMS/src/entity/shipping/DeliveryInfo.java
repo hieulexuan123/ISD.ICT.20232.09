@@ -1,4 +1,5 @@
 package entity.shipping;
+import org.junit.Test;
 
 import java.time.LocalDate;
 
@@ -8,8 +9,9 @@ import exception.InvalidDateException;
 import exception.InvalidEmailException;
 import exception.InvalidNameException;
 import exception.InvalidNumberException;
+import junit.framework.TestCase;
 
-public class DeliveryInfo {
+public class DeliveryInfo extends TestCase {
 	private String email;
     private String name;
     private String phone;
@@ -96,7 +98,7 @@ public class DeliveryInfo {
 				+ rushTime + ", rushInstruction=" + rushInstruction + "]";
 	}
 
-	private boolean validateName(String name) {
+	boolean validateName(String name) {
     	if (name.length()<50) {
     		return true;
     	}
@@ -105,7 +107,7 @@ public class DeliveryInfo {
     	}
     }
     
-    private boolean validatePhone(String phone) {
+    boolean validatePhone(String phone) {
     	if (phone.length() == 10) {
     		for (char c: phone.toCharArray()) {
     			if (c<'0' || c>'9'){
@@ -117,15 +119,16 @@ public class DeliveryInfo {
     	return false;
     }
     
-    private boolean validateEmail(String email) {
+      boolean validateEmail(String email) {
     	return email.contains("@mail.com") || email.contains("@gmail.com");
     }
     
-    private boolean validateTime(LocalDate time) {
+   
+    boolean validateTime(LocalDate time) {
     	return time.isAfter(LocalDate.now());
     }
     
-    private boolean validateEmptyFields() {
+    boolean validateEmptyFields() {
     	if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || province==null || province.isEmpty() || address.isEmpty() || instruction.isEmpty()) return false;
     	if (isRush && (rushTime==null || rushInstruction.isEmpty())) return false;
     	return true;
@@ -137,4 +140,6 @@ public class DeliveryInfo {
     	if (province.toLowerCase().contains("hà nội") || province.toLowerCase().contains("hồ chí minh")) return true;
         return false;
     }
+
+    
 }
